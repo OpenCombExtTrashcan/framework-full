@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../common.php';
+require_once __DIR__.'/../../common.php';
 require_once 'lib.php/pattern/composite/CompositeObject.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 

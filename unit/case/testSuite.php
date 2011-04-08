@@ -19,6 +19,7 @@ class testSuite extends PHPUnit_Framework_TestSuite
     {
         $aSuite = new self();
         $aSuite->addTestFile(__DIR__.'/pattern/composite/CompositeObjectTest.php') ;
+        $aSuite->addTestFile(__DIR__.'/fs/FSOTest.php') ;
         
         return $aSuite ;
     }
