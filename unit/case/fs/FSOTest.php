@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/../common.php';
 
-require_once 'lib.php/fs/FSO.php';
+require_once 'framework/src/lib.php/fs/FSO.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 use jc\fs\FSO ;
