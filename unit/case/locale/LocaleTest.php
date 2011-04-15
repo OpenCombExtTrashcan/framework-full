@@ -1,5 +1,7 @@
 <?php
 require_once 'framework/src/lib.php/locale/Locale.php';
+use jc\locale\Locale;
+
 /**
  * Locale test case.
  */
