@@ -19,17 +19,27 @@ function ob_func_3($in,$status)
 return $in.'3' ;
 }
 
-
+class aaa
+{
+	function fun($s)
+	{
+		
+	}
+}
 
 ob_start("ob_func_1") ;
 ob_start("ob_func_2") ;
 ob_start("ob_func_3") ;
+ob_start(array(new aaa(),'fun')) ;
 
-$h = fopen('php://stdout', "w");
-fwrite($h,"yyy") ;
+$arr = ob_list_handlers() ;
+$b = is_string($arr[3]) ;
+//$h = fopen('php://stdout', "w");
+//fwrite($h,"yyy") ;
 
 
 //echo "xxx" ;
 
+exit() ;
 
 ?>
