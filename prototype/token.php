@@ -1,10 +1,10 @@
 <?php
+$s = "\\\$" ;
+$s2 = "\\\\\$" ;
+echo $t = substr("\\\$",1,-1) ;
+
 $source = <<<STRING
-ddd
-<x aaa="xx\\"dd'ss\\<?php ?>dddss">
-ddd
-</x>
-sss
+"\\\$dddd-xxxx" ;
 STRING;
 
 $arr = token_get_all("<?php ".$source."?>") ;
