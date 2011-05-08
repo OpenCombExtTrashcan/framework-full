@@ -1,8 +1,4 @@
 <?php
-$s = "\\\$" ;
-$s2 = "\\\\\$" ;
-echo $t = substr("\\\$",1,-1) ;
-
 $source = <<<STRING
 "\\\$dddd-xxxx" ;
 STRING;
