@@ -13,5 +13,6 @@ $aUI = UIFactory::singleton()->create() ;
 $aUI->display("zengarden.template.html") ;
 
 
-echo microtime(true) - $t ;
+echo microtime(true) - $t, "\r\n" ;
+echo (memory_get_peak_usage()/1024/1024), "mb\r\n" ;
 ?>

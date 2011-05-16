@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__.'/../../common.php';
-require_once 'framework/src/lib.php/pattern/composite/CompositeObject.php';
+require_once 'framework/src/lib.php/pattern/composite/Composite.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 use jc\pattern\composite\CompositeObject ;
@@ -22,7 +22,7 @@ class CompositeObjectTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
         
-        $this->CompositeObject = new CompositeObject(/* parameters */);
+        $this->CompositeObject = new Composite(/* parameters */);
     }
     /**
      * Cleans up the environment after running a test.
@@ -45,7 +45,7 @@ class CompositeObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testType ()
     {
-		$this->assertEquals(CompositeObject::type(), "jc\\pattern\\composite\\ContainedableObject") ;
+		$this->assertEquals(Composite::type(), "jc\\pattern\\composite\\ContainedableObject") ;
     }
     /**
      * Tests CompositeObject->setChildTypes()
