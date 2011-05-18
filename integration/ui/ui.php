@@ -1,7 +1,6 @@
 <?php 
 namespace jc\test\integration\ui ;
 
-// 
 use jc\ui\xhtml\Factory as UIFactory ;
 
 $t = microtime(true) ;
