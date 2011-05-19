@@ -9,6 +9,7 @@ require_once dirname(__DIR__).'/jcat_init.php' ;
 UIFactory::singleton()->sourceFileManager()->addFolder(dirname(__DIR__).'/templates') ;
 
 $aUI = UIFactory::singleton()->create() ;
+$aUI->variables()->set('GLOBAL',$GLOBALS) ;
 $aUI->display("zengarden.template.html") ;
 
 
