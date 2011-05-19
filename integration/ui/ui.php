@@ -9,9 +9,8 @@ require_once dirname(__DIR__).'/jcat_init.php' ;
 UIFactory::singleton()->sourceFileManager()->addFolder(dirname(__DIR__).'/templates') ;
 
 $aUI = UIFactory::singleton()->create() ;
-$aUI->variables()->set('GLOBAL',$GLOBALS) ;
+$aUI->variables()->set('key','GFDAF') ;
 $aUI->display("zengarden.template.html") ;
-
 
 echo microtime(true) - $t, "\r\n" ;
 echo (memory_get_peak_usage()/1024/1024), "mb\r\n" ;
