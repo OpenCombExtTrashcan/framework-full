@@ -7,10 +7,11 @@ use jc\ui\xhtml\Factory as UIFactory ;
 
 $t = microtime(true) ;
 
-require_once dirname(__DIR__).'/jcat_init.php' ;
-UIFactory::singleton()->sourceFileManager()->addFolder(dirname(__DIR__).'/templates') ;
+$aApp = require_once dirname(__DIR__).'/jcat_init.php' ;
+$aApp->singletonInstance('jc\\ui\\xhtml\\Factory')->sourceFileManager()->addFolder(dirname(__DIR__).'/templates') ;
 
-$aUI = UIFactory::singleton()->create() ;
+$aUI = $aApp->singletonInstance('jc\\ui\\xhtml\\Factory')->create() ;
+$aUI->variables()->set('GLOBAL',array(1,2,3,4,7,array(4,1,2,4,5))) ;
 $aUI->variables()->set('GLOBAL',array(1,2,3,4,7,array(4,1,2,4,5))) ;
 $aUI->display("zengarden.template.html") ;
 

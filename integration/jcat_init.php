@@ -6,9 +6,5 @@ use jc\system\Application;
 
 include __DIR__."/../../framework/inc.entrance.php" ;
 
-$aApp = Application::singleton() ;
-
-
-return $aApp ;
-
+return new Application() ;
 ?>

@@ -8,8 +8,8 @@ use jc\ui\xhtml\Factory as UIFactory ;
 
 $t = microtime(true) ;
 
-require_once dirname(__DIR__).'/jcat_init.php' ;
-UIFactory::singleton()->sourceFileManager()->addFolder(dirname(__DIR__).'/templates') ;
+$aApp = require_once dirname(__DIR__).'/jcat_init.php' ;
+$aApp->singletonInstance('jc\\ui\\xhtml\\Factory')->sourceFileManager()->addFolder(dirname(__DIR__).'/templates') ;
 
 
 class MyChildController extends Controller
