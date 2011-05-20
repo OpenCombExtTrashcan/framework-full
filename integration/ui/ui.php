@@ -12,7 +12,6 @@ $aApp->singletonInstance('jc\\ui\\xhtml\\Factory')->sourceFileManager()->addFold
 
 $aUI = $aApp->singletonInstance('jc\\ui\\xhtml\\Factory')->create() ;
 $aUI->variables()->set('GLOBAL',array(1,2,3,4,7,array(4,1,2,4,5))) ;
-$aUI->variables()->set('GLOBAL',array(1,2,3,4,7,array(4,1,2,4,5))) ;
 $aUI->display("zengarden.template.html") ;
 
 echo microtime(true) - $t, "\r\n" ;
