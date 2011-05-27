@@ -3,7 +3,7 @@ namespace jc\test\integration ;
 
 // 初始化 jcat 框架
 use jc\db\DB;
-use jc\db\DriverPDO;
+use jc\db\PDODriver;
 use jc\ui\xhtml\Factory as UIFactory ;
 use jc\system\Application;
 
@@ -17,7 +17,7 @@ Application::setSingleton($aApp) ;
 UIFactory::singleton()->sourceFileManager()->addFolder(__DIR__.'/templates') ;
 
 // 数据库
-DB::singleton()->setDriver( new DriverPDO("mysql:host=127.0.0.1;dbname=openfire",'root','1') ) ;
+DB::singleton()->setDriver( new PDODriver("mysql:host=127.0.0.1;dbname=openfire",'root','1') ) ;
 
 return $aApp ;
 ?>

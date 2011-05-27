@@ -1,8 +1,7 @@
 <?php 
 namespace jc\test\model ;
 
-$t = microtime(true) ;
-
+use jc\mvc\model\db\Model;
 use jc\db\DB;
 use jc\mvc\model\db\orm\operators\Selecter;
 use jc\mvc\model\db\orm\ModelPrototype;
@@ -10,21 +9,60 @@ use jc\mvc\model\db\orm\ModelPrototype;
 
 $aApp = require_once dirname(__DIR__).'/jcat_init.php' ;
 
-/*
-{
-	name: 'book' ,
-	keys: 'bid' ,
-	table: 'book' ,
-	
-	belongsTo: [
-		{
-			prop:author
+$aModel = new Model(array(
+		'name' => 'book' ,
+		'keys' => 'bid' ,
+		'table' => 'book' ,
+
+		'belongsTo' => array(
+
+			array(
+				'prop' => 'author' ,
+				'fromk' => 'author_uid' ,
+				'tok' => 'uid' ,
+				'model' => array(
+					'name' => 'user' ,
+					'keys' => 'uid' ,
+					'table' => 'user' ,
 			
-		}
-	]
-}
-*/
-$aPrototype = ModelPrototype::createFromCnf(array(
+					'belongsTo' => array(
+					) ,
+				) ,
+			) ,
+			
+			array(
+				'prop' => 'publishing' ,
+				'fromk' => 'publishing_cid' ,
+				'tok' => 'cid' ,
+				'model' => array(
+					'name' => 'company' ,
+					'keys' => 'cid' ,
+					'table' => 'company' ,
+			
+					
+					'hasOne' => array(
+						array(
+							'prop' => 'manager' ,
+							'fromk' => 'manager_uid' ,
+							'tok' => 'uid' ,
+							'model' => array(
+								'name' => 'user' ,
+								'keys' => 'uid' ,
+								'table' => 'user' ,
+							) ,
+						) ,
+					),
+				) ,
+			) ,
+			
+		) ,
+)) ;
+
+$aModel->load() ;
+
+
+
+$aModel = new Model(array(
 		'name' => 'book' ,
 		'keys' => 'bid' ,
 		'table' => 'book' ,
@@ -75,39 +113,8 @@ $aPrototype = ModelPrototype::createFromCnf(array(
 
 
 
-$aSelecter = new Selecter() ;
-$aSelecter->execute(
-	$aApp->singletonInstance('jc\\db\\DB',true)
-	, null, $aPrototype
-) ;
-
-
-
-
-$aPrototype = ModelPrototype::createFromCnf(array(
-		'name' => 'book' ,
-		'keys' => 'bid' ,
-		'table' => 'book' ,
-
-		'belongsTo' => array(
-			array(
-				'prop' => 'author' ,
-				'fromk' => 'author_uid' ,
-				'tok' => 'uid' ,
-				'model' => array(
-					'name' => 'user' ,
-					'keys' => 'uid' ,
-					'table' => 'user' ,
-				) ,
-			) ,
-		) ,
-)) ;
-
-$aSelecter = new Selecter() ;
-$aSelecter->execute(
-	$aApp->singletonInstance('jc\\db\\DB',true)
-	, null, $aPrototype
-) ;
+$t = microtime(true) ;
+$aModel->load() ;
 
 echo microtime(true) - $t ;
 ?>
