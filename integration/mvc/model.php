@@ -100,5 +100,5 @@ $aModel->load() ;
 echo "2nd run: ", microtime(true) - $t, "<br />\r\n" ;
 ?>
 <pre>
-<?php print_r( DB::singleton()->executeLog() ) ; ?>
+<?php //print_r( DB::singleton()->executeLog() ) ; ?>
 </pre>
