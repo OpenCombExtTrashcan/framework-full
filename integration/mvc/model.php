@@ -7,54 +7,98 @@ use jc\mvc\model\db\orm\operators\Selecter;
 use jc\mvc\model\db\orm\ModelPrototype;
 
 
+$t = microtime(true) ;
+
 $aApp = require_once dirname(__DIR__).'/jcat_init.php' ;
 
-$aModel = new Model(array(
-		'name' => 'feed' ,
-		'keys' => 'feedid' ,
-		'table' => 'myspace_feed' ,
 
-		'belongsTo' => array(
-			array(
-				'prop' => 'user' ,
-				'fromk' => 'uid' ,
-				'tok' => 'uid' ,
-				'model' => array(
-					'name' => 'user' ,
-					'keys' => 'uid' ,
-					'table' => 'myspace_space' ,
-				) ,
-			) ,
-		) ,
-)) ;
-
-$aModel->load() ;
-
-
-
-$aModel = new Model(array(
-		'name' => 'feed' ,
-		'keys' => 'feedid' ,
-		'table' => 'myspace_feed' ,
-
-		'belongsTo' => array(
-			array(
-				'prop' => 'user' ,
-				'fromk' => 'uid' ,
-				'tok' => 'uid' ,
-				'model' => array(
-					'name' => 'user' ,
-					'keys' => 'uid' ,
-					'table' => 'myspace_space' ,
-				) ,
-			) ,
-		) ,
-)) ;
-
-
-
+echo "init framework: ", microtime(true) - $t, "<br />\r\n" ;
 $t = microtime(true) ;
+
+$aModel = new Model(array(
+		'name' => 'feed' ,
+		'keys' => 'feedid' ,
+		'table' => 'myspace_feed' ,
+
+		'belongsTo' => array(
+			array(
+				'prop' => 'user' ,
+				'fromk' => 'uid' ,
+				'tok' => 'uid' ,
+				'model' => array(
+					'name' => 'user' ,
+					'keys' => 'uid' ,
+					'table' => 'myspace_space' ,
+				) ,
+			) ,
+		) ,
+		
+		'hasAndBelongsMany' => array(
+			array(
+				'prop' => 'buffs' ,
+				'fromk' => 'uid' ,
+				'btok' => 'uid' ,	
+				'bfromk' => 'buffid' ,
+				'tok' => 'id' ,
+				'bridge' => 'myspace_mbuff' ,
+			
+				'model' => array(
+					'name' => 'buff' ,
+					'keys' => 'id' ,
+					'table' => 'myspace_buff' ,
+				) ,
+			)
+		),
+),true) ;
+
 $aModel->load() ;
 
-echo microtime(true) - $t ;
+
+echo "1st run: ", microtime(true) - $t, "<br />\r\n" ;
+$t = microtime(true) ;
+
+$aModel = new Model(array(
+		'name' => 'feed' ,
+		'keys' => 'feedid' ,
+		'table' => 'myspace_feed' ,
+
+		'belongsTo' => array(
+			array(
+				'prop' => 'user' ,
+				'fromk' => 'uid' ,
+				'tok' => 'uid' ,
+				'model' => array(
+					'name' => 'user' ,
+					'keys' => 'uid' ,
+					'table' => 'myspace_space' ,
+				) ,
+			) ,
+		) ,
+		
+		'hasAndBelongsMany' => array(
+			array(
+				'prop' => 'buffs' ,
+				'fromk' => 'uid' ,
+				'btok' => 'uid' ,	
+				'bfromk' => 'buffid' ,
+				'tok' => 'id' ,
+				'bridge' => 'myspace_mbuff' ,
+			
+				'model' => array(
+					'name' => 'buff' ,
+					'keys' => 'id' ,
+					'table' => 'myspace_buff' ,
+				) ,
+			)
+		),
+),true) ;
+
+
+
+$aModel->load() ;
+
+echo "2nd run: ", microtime(true) - $t, "<br />\r\n" ;
 ?>
+<pre>
+<?php print_r( DB::singleton()->executeLog() ) ; ?>
+</pre>
