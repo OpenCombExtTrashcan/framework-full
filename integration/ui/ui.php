@@ -11,8 +11,6 @@ $t = microtime(true) ;
 $aApp = require_once dirname(__DIR__).'/jcat_init.php' ;
 
 $aUI = $aApp->singletonInstance('jc\\ui\\xhtml\\Factory')->create() ;
-$aUI->variables()->set('aaa' , 1) ;
-$aUI->variables()->set('bbb' , 10) ;
 $aUI->display("zengarden.template.html") ;
 
 echo microtime(true) - $t, "\r\n" ;

@@ -33,7 +33,13 @@
 -->
 
 <body id="css-zen-garden">
-{?= $key}
+
+<loop start='1' end = '3' step = '1' var='key1'>
+	{? echo $key1 }
+	<loop start='1' end = '3' step = '1' var = 'key2'>
+	{? echo $key2 }
+	</loop>
+</loop>
 
 <div id="container">
 	<div id="intro">
