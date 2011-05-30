@@ -55,7 +55,7 @@ $aModel = new Model(array(
 $aModel->load() ;
 
 
-echo "1st run: ", microtime(true) - $t, "<br />\r\n" ;
+echo "1st run: ", microtime(true) - $t, "<br />\r\n" ;/*
 $t = microtime(true) ;
 
 $aModel = new Model(array(
@@ -98,7 +98,7 @@ $aModel = new Model(array(
 
 $aModel->load() ;
 
-echo "2nd run: ", microtime(true) - $t, "<br />\r\n" ;
+echo "2nd run: ", microtime(true) - $t, "<br />\r\n" ;*/
 echo "total: ", microtime(true) - $start, "<br />\r\n" ;
 ?>
 <pre>
