@@ -7,6 +7,7 @@ use jc\mvc\model\db\orm\operators\Selecter;
 use jc\mvc\model\db\orm\ModelPrototype;
 
 
+$start = microtime(true) ;
 $t = microtime(true) ;
 
 $aApp = require_once dirname(__DIR__).'/jcat_init.php' ;
@@ -98,6 +99,7 @@ $aModel = new Model(array(
 $aModel->load() ;
 
 echo "2nd run: ", microtime(true) - $t, "<br />\r\n" ;
+echo "total: ", microtime(true) - $start, "<br />\r\n" ;
 ?>
 <pre>
 <?php //print_r( DB::singleton()->executeLog() ) ; ?>
