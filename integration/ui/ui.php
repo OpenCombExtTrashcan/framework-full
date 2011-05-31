@@ -5,7 +5,6 @@ use jc\lang\Object;
 
 use jc\ui\xhtml\Factory as UIFactory ;
 
-
 $t = microtime(true) ;
 
 $aApp = require_once dirname(__DIR__).'/jcat_init.php' ;

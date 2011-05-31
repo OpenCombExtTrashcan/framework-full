@@ -17,7 +17,7 @@ Application::setSingleton($aApp) ;
 UIFactory::singleton()->sourceFileManager()->addFolder(__DIR__.'/templates') ;
 
 // 数据库
-DB::singleton()->setDriver( new PDODriver("mysql:host=127.0.0.1;dbname=nvwa",'root','123456') ) ;
+//DB::singleton()->setDriver( new PDODriver("mysql:host=127.0.0.1;dbname=nvwa",'root','123456') ) ;
 
 return $aApp ;
 ?>
