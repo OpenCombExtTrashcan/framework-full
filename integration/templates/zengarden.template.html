@@ -21,17 +21,10 @@
 
 <body id="css-zen-garden">
 
-<loop start='0' end = '3' step = '1' var='key1'>
-	{? echo $key1.'wai' }
-	<loop start='0' end = '3' step = '1' var = 'key2'>
-		{? echo $key2.'li' }
-		<if $key1 == 2>
-			{? echo 'break' }
-			<break 2/>
-		</if>
-		{? echo 'did not break' }
-	</loop>
-</loop>
+<foreach for='$foreacha' >
+	fdsafsdss
+</foreach>
+
 
 <div id="container">
 	<div id="intro">
