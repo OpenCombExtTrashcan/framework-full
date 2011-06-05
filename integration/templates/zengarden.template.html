@@ -23,18 +23,9 @@
 
 <foreach for='array(1,2,4)' key ="key1" item = "item1" item.ref = "true"/>
 	{=$key1},{=$item1}
-	<foreach for='array(1,2,4)' key ="key2" item = "item2" item.ref = "true"/>
-		{=$key2},{=$item2}
-		<foreach for='array(1,2,4)' key ="key3" item = "item3" item.ref = "true"/>
-			{=$key3},{=$item3}
-			<foreach for='array(1,2,4)' key ="key4" item = "item4" item.ref = "true"/>
-				{=$key4},{=$item4}
-				<foreach for='array(1,2,4)' key ="key5" item = "item5" item.ref = "true"/>
-				{=$key5},{=$item5}
-				<foreach:end/>
-			<foreach:end/>
-		<foreach:end/>
-	<foreach:end/>
+	<if true>
+		fdsf
+	</if>
 <foreach:end/>
 
 <div id="container">
