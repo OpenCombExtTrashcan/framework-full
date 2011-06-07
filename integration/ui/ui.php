@@ -10,7 +10,7 @@ $t = microtime(true) ;
 $aApp = require_once dirname(__DIR__).'/jcat_init.php' ;
 
 $aUI = $aApp->singletonInstance('jc\\ui\\xhtml\\Factory')->create() ;
-$aUI->variables()->set('foreacha' , 'far' ) ;
+$aUI->variables()->set('test' , 1 ) ;
 $aUI->display("zengarden.template.html") ;
 echo microtime(true) - $t, "\r\n" ;
 echo (memory_get_peak_usage()/1024/1024), " MB\r\n" ;
