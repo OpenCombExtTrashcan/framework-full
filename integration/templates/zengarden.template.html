@@ -21,9 +21,9 @@
 
 <body id="css-zen-garden">
 
-<foreach for="array(1,2,3,45,5)" idx='index'>
-{=$index}z
-</foreach>
+<do "$test <= 5" idx="index">
+{=$test++},{=$index}|
+</do>
 
 <div id="container">
 	<div id="intro">
