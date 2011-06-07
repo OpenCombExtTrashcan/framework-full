@@ -1,32 +1,11 @@
 <p ss>
-	当前视图name：<foreach for="$theView->namesIterator()" item="sName">{=$sName}</foreach>
+	当前视图name：{=$theView->name()}
 </p>
-<widget id="username" />
 
-<if>
+<form id="theform">
+	<widget id="username" />
+	<input type="submit" value="submit" />
+</form>
 
-
-</if>
-
-foreach:end
-
-do
-while
-
-end
-
-
-<if "xxxxxxxxx" "yyyyyyy" />
-<head>
-
-<if:else />
-
-<if:end />
-
-</head>
-
-<view />
+<views />
 <p>当前视图hash：{=spl_object_hash($theView)}</p>
-
-ssssssssss
-
