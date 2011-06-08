@@ -17,9 +17,10 @@ class MyController extends Controller
 	protected function init()
 	{
 		$this->createView("view","simple-text.template.html",'jc\\mvc\\view\\FormView') ;
-		$this->view->addWidget(new Text('username'))->dataVerifiers()->add(
-			new Length(1, 2)
-		) ;
+		
+		$this->view->addWidget(new Text('username' , Text::TEXT))->dataVerifiers()->add(
+			new Length(6, 20)
+		);
 	}
 	
 	public function process()
