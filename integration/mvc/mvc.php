@@ -2,6 +2,8 @@
 namespace jc\test\integration\mvc ;
 
 // 
+use jc\mvc\view\widget\CheckBtn;
+
 use jc\verifier\Length;
 use jc\mvc\view\widget\Text;
 use jc\mvc\controller\Controller;
@@ -18,9 +20,40 @@ class MyController extends Controller
 	{
 		$this->createView("view","simple-text.template.html",'jc\\mvc\\view\\FormView') ;
 		
-		$this->view->addWidget(new Text('username' , Text::TEXT))->dataVerifiers()->add(
+		$checkbox1 = new CheckBtn('radio1','编辑区域',CheckBtn::RADIO ,CheckBtn::CHEACKED);
+		$this->view->addWidget($checkbox1)->dataVerifiers()->add(
 			new Length(6, 20)
 		);
+		$checkbox1->setValueFromString("fdfsfds1");
+		$checkbox1->setFormName('name');
+		
+		$checkbox2 = new CheckBtn('radio2','编辑区域',CheckBtn::RADIO ,CheckBtn::CHEACKED);
+		$this->view->addWidget($checkbox2)->dataVerifiers()->add(
+			new Length(6, 20)
+		);
+		$checkbox2->setValueFromString("fdfsfds2");
+		$checkbox2->setFormName('name');
+		
+		$checkbox3 = new CheckBtn('radio3','编辑区域',CheckBtn::RADIO ,CheckBtn::CHEACKED);
+		$this->view->addWidget($checkbox3)->dataVerifiers()->add(
+			new Length(6, 20)
+		);
+		$checkbox3->setValueFromString("fdfsfds3");
+		$checkbox3->setFormName('name');
+		
+		$checkbox4 = new CheckBtn('radio4','编辑区域',CheckBtn::RADIO ,CheckBtn::CHEACKED);
+		$this->view->addWidget($checkbox4)->dataVerifiers()->add(
+			new Length(6, 20)
+		);
+		$checkbox4->setValueFromString("fdfsfds4");
+		$checkbox4->setFormName('name');
+		
+		$checkbox5 = new CheckBtn('radio5','编辑区域',CheckBtn::RADIO ,CheckBtn::CHEACKED);
+		$this->view->addWidget($checkbox5)->dataVerifiers()->add(
+			new Length(6, 20)
+		);
+		$checkbox5->setValueFromString("fdfsfds5");
+		$checkbox5->setFormName('name');
 	}
 	
 	public function process()
