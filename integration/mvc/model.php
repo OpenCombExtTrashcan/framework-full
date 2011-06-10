@@ -16,6 +16,7 @@ $aApp = require_once dirname(__DIR__).'/jcat_init.php' ;
 echo "init framework: ", microtime(true) - $t, "<br />\r\n" ;
 $t = microtime(true) ;
 
+
 $aModel = new Model(array(
 		'name' => 'feed' ,
 		'keys' => 'feedid' ,
@@ -52,7 +53,7 @@ $aModel = new Model(array(
 		),
 ),true) ;
 
-$aModel->load() ;
+$aModel->delete() ;
 
 
 echo "1st run: ", microtime(true) - $t, "<br />\r\n" ;

@@ -2,7 +2,6 @@
 namespace jc\test\integration\ui ;
 
 use jc\lang\Object;
-
 use jc\ui\xhtml\Factory as UIFactory ;
 
 $t = microtime(true) ;
