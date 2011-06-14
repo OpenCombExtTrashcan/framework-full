@@ -170,6 +170,7 @@ class MyController extends Controller
 		{
 			$this->view->render() ;
 		}
+
 	}
 } 
 
