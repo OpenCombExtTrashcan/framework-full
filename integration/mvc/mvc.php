@@ -24,67 +24,71 @@ class MyController extends Controller
 	{
 		$this->createView("view","simple-text.template.html",'jc\\mvc\\view\\FormView') ;
 		
-		$radio1 = new CheckBtn('radio1' , 'radiotest1' , CheckBtn::RADIO);
-		$this->view->addWidget ( $radio1 );
-		$radio1->setValue('radio1');
-		
-		$radio2 = new CheckBtn('radio2' , 'radiotest2' , CheckBtn::RADIO);
-		$this->view->addWidget ( $radio2 );
-		$radio2->setValue('radio2');
-		
-		
-		$radio3 = new CheckBtn('radio3' , 'radiotest3' , CheckBtn::RADIO);
-		$this->view->addWidget ( $radio3 );
-		$radio3->setValue('radio3');
-		$radio3->setChecked(CheckBtn::CHEACKED);
-		
-		$radio4 = new CheckBtn('radio4' , 'radiotest4' , CheckBtn::RADIO);
-		$this->view->addWidget ( $radio4 );
-		$radio4->setValue('radio4');
-		
-		$group = new RadioGroup('fdsaklds' , 'testGroup');
-		$this->view->addWidget ( $group );
-		$group->addWidget($radio1);
-		$group->addWidget($radio2);
-		$group->addWidget($radio3);
-		$group->addWidget($radio4);
-		$group->setChecked('radio2');
-		var_dump($group->checkedValue());
-		exit();
-
-		
-//		$checkbox = new CheckBtn('checkbox' , 'radiotest' , CheckBtn::CHECKBOX);
-//		$this->view->addWidget ( $checkbox );
-//		$checkbox->setValue('checkboxValue');
+//		$radio1 = new CheckBtn('radio1' , 'radiotest1' , CheckBtn::RADIO);
+//		$this->view->addWidget ( $radio1 );
+//		$radio1->setValue('radio1');
 //		
-//		$select = new Select ( 'select', '选择国家' );
-//		$this->view->addWidget ( $select );
-//		$select->addOption('a', 1);
-//		$select->addOption('b', 2);
-//		$select->addOption('c', 3);
-//		$select->addOption('d', 4);
-//		$select->setSize(4);
-//		$select->setValueFromString ( "selectValueTest" );
+//		$radio2 = new CheckBtn('radio2' , 'radiotest2' , CheckBtn::RADIO);
+//		$this->view->addWidget ( $radio2 );
+//		$radio2->setValue('radio2');
 //		
-//		$group = new Group('group' , 'testGroup');
+//		
+//		$radio3 = new CheckBtn('radio3' , 'radiotest3' , CheckBtn::RADIO);
+//		$this->view->addWidget ( $radio3 );
+//		$radio3->setValue('radio3');
+//		$radio3->setChecked(CheckBtn::CHEACKED);
+//		
+//		$radio4 = new CheckBtn('radio4' , 'radiotest4' , CheckBtn::RADIO);
+//		$this->view->addWidget ( $radio4 );
+//		$radio4->setValue('radio4');
+//		
+//		$group = new RadioGroup('fdsaklds' , 'testGroup');
 //		$this->view->addWidget ( $group );
-//		$group->addWidget($radio);
-//		$group->addWidget($checkbox);
-//		$group->addWidget($select);
-//		
-//		$checkbox2 = new CheckBtn('checkbox2' , 'radiotest' , CheckBtn::CHECKBOX);
-//		$this->view->addWidget ( $checkbox2 );
-//		$checkbox2->setValue('4dsafd');
-//		
-//		$group2 = new Group('group2' , 'testGroup');
-//		$this->view->addWidget ( $group2 );
-//		$group2->addWidget($checkbox2);
-//		$group2->addWidget($group);
-//		$values = $group2->valueToString();
-//		
-//		
-//		
-//		$group2->setValueFromString($values);
+//		$group->addWidget($radio1);
+//		$group->addWidget($radio2);
+//		$group->addWidget($radio3);
+//		$group->addWidget($radio4);
+//		$group->setChecked('radio2');
+//		var_dump($group->checkedValue());
+//		exit();
+
+		$radio = new CheckBtn('radio' , 'radiotest' , CheckBtn::RADIO);
+		$this->view->addWidget ( $radio );
+		$radio->setValue('radiovalue');
+		$checkbox = new CheckBtn('checkbox' , 'radiotest' , CheckBtn::CHECKBOX);
+		$this->view->addWidget ( $checkbox );
+		$checkbox->setValue('checkboxValue');
+		
+		$select = new Select ( 'select', '选择国家' );
+		$this->view->addWidget ( $select );
+		$select->addOption('a', 1);
+		$select->addOption('b', 2);
+		$select->addOption('c', 3);
+		$select->addOption('d', 4);
+		$select->setSize(4);
+		$select->setValueFromString ( "selectValueTest" );
+		
+		$group = new Group('group' , 'testGroup');
+		$this->view->addWidget ( $group );
+		$group->addWidget($radio);
+		$group->addWidget($checkbox);
+		$group->addWidget($select);
+		
+		$checkbox2 = new CheckBtn('checkbox2' , 'radiotest' , CheckBtn::CHECKBOX);
+		$this->view->addWidget ( $checkbox2 );
+		$checkbox2->setValue('4dsafd');
+		
+		$group2 = new Group('group2' , 'testGroup');
+		$this->view->addWidget ( $group2 );
+		$group2->addWidget($checkbox2);
+		$group2->addWidget($group);
+		$values = $group2->valueToString();  //正常
+		var_dump($group2->valueToString());
+		var_dump($group2->valueToString());
+		var_dump($group2->valueToString());
+		exit();
+		
+		$group2->setValueFromString($values);
 		
 	// TODO 2次以上valueToString结果为什么不同?			
 		
