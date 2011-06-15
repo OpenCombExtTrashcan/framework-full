@@ -9,8 +9,9 @@ use jc\system\Application;
 
 // ini_set('display_errors', 1);
 
-$aApp = include __DIR__."/../../framework/inc.entrance.php" ;
+include __DIR__."/../../framework/inc.entrance.php" ;
 
+$aApp = Application::singleton(true) ;
 
 // UI
 UIFactory::singleton()->sourceFileManager()->addFolder(__DIR__.'/templates') ;
