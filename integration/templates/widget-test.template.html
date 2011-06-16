@@ -1,0 +1,14 @@
+<p ss>
+	当前视图name：{=$theView->name()}
+</p>
+
+<form id="theform">
+	<label for="username">username</label><widget id="username"/> <msgqueue for="$theView->widget('username')->messageQueue()" /><br />
+	<label for="email">email</label><widget id="email"/> <msgqueue for="$theView->widget('email')->messageQueue()" /><br />
+	<label for="password1">password1</label><widget id="password1"/> <msgqueue for="$theView->widget('passwordGroup')->messageQueue()" /> <msgqueue for="$theView->widget('password1')->messageQueue()" /><br />
+	<label for="password2">password2</label><widget id="password2"/> <msgqueue for="$theView->widget('password2')->messageQueue()" /><br />
+	<input type="submit" value="submit" />
+</form>
+
+<views />
+<p>当前视图hash：{=spl_object_hash($theView)}</p>
