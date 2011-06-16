@@ -24,123 +24,42 @@ class MyController extends Controller
 	{
 		$this->createView("view","simple-text.template.html",'jc\\mvc\\view\\FormView') ;
 
+		$this->aModel = new Model(array(
+				'name' => 'feed' ,
+				'keys' => 'feedid' ,
+				'table' => 'myspace_feed' ,
 		
-		//测试radiogroup
-		$radio1 = new CheckBtn('radio1' , 'radiotest1' ,  CheckBtn::RADIO , 'value1');
-		$this->view->addWidget ( $radio1 );
-		
-		$radio2 = new CheckBtn('radio2' , 'radiotest2' , CheckBtn::RADIO , 'value2');
-		$this->view->addWidget ( $radio2 );
-		$radio2->setChecked();
-		
-		$radio3 = new CheckBtn('radio3' , 'radiotest3' , CheckBtn::RADIO ,'value3');
-		$this->view->addWidget ( $radio3 );
-		
-		$radio4 = new CheckBtn('radio4' , 'radiotest4' , CheckBtn::RADIO ,'value4');
-		$this->view->addWidget ( $radio4 );
-		
-		$group = new RadioGroup('fdsaklds' , 'testGroup');
-		$this->view->addWidget ( $group );
-		$group->addWidget($radio1);
-		$group->addWidget($radio2);
-		$group->addWidget($radio3);
-		$group->addWidget($radio4);
-		$group->setChecked('radio3');
-
-		///测试group代码
-//		$radio = new CheckBtn('radio' , 'radiotest' , CheckBtn::RADIO);
-//		$this->view->addWidget ( $radio );
-//		$radio->setValue('radiovalue');
-//		
-//		$checkbox = new CheckBtn('checkbox' , 'radiotest' , CheckBtn::CHECKBOX);
-//		$this->view->addWidget ( $checkbox );
-//		$checkbox->setValue('checkboxValue');
-//		
-//		$select = new Select ( 'select', '选择国家' );
-//		$this->view->addWidget ( $select );
-//		$select->addOption('a', 1);
-//		$select->addOption('b', 2);
-//		$select->addOption('c', 3);
-//		$select->addOption('d', 4);
-//		$select->setSize(4);
-//		$select->setValueFromString ( "selectValueTest" );
-//		
-//		$group = new Group('group' , 'testGroup');
-//		$this->view->addWidget ( $group );
-//		$group->addWidget($radio);
-//		$group->addWidget($checkbox);
-//		$group->addWidget($select);
-//		
-//		$checkbox2 = new CheckBtn('checkbox2' , 'radiotest' , CheckBtn::CHECKBOX);
-//		$this->view->addWidget ( $checkbox2 );
-//		$checkbox2->setValue('4dsafd');
-//		
-//		$group2 = new Group('group2' , 'testGroup');
-//		$this->view->addWidget ( $group2 );
-//		$group2->addWidget($checkbox2);
-//		$group2->addWidget($group);
-//		$values = $group2->valueToString(); 
-////		var_dump($group2->valueToString());
-////		var_dump($group2->valueToString());
-////		var_dump($group2->valueToString());
-////		var_dump($group2->valueToString());
-////		var_dump($group2->valueToString());
-//
-//		$group2->setValueFromString($values);
-//		
-// 		var_dump($group2->valueToString());
-// 		var_dump($group2->valueToString());
-// 		var_dump($group2->valueToString());
-//		exit();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		
-//		$this->aModel = new Model(array(
-//				'name' => 'feed' ,
-//				'keys' => 'feedid' ,
-//				'table' => 'myspace_feed' ,
-//		
-//				'belongsTo' => array(
-//					array(
-//						'prop' => 'user' ,
-//						'fromk' => 'uid' ,
-//						'tok' => 'uid' ,
-//						'model' => array(
-//							'name' => 'user' ,
-//							'keys' => 'uid' ,
-//							'table' => 'myspace_space' ,
-//						) ,
-//					) ,
-//				) ,
-//				
-//				'hasAndBelongsMany' => array(
-//					array(
-//						'prop' => 'buffs' ,
-//						'fromk' => 'uid' ,
-//						'btok' => 'uid' ,	
-//						'bfromk' => 'buffid' ,
-//						'tok' => 'id' ,
-//						'bridge' => 'myspace_mbuff' ,
-//					
-//						'model' => array(
-//							'name' => 'buff' ,
-//							'keys' => 'id' ,
-//							'table' => 'myspace_buff' ,
-//						) ,
-//					)
-//				),
-//		),true) ;
-//		$this->view->setModel($this->aModel) ;
-		
-		
+				'belongsTo' => array(
+					array(
+						'prop' => 'user' ,
+						'fromk' => 'uid' ,
+						'tok' => 'uid' ,
+						'model' => array(
+							'name' => 'user' ,
+							'keys' => 'uid' ,
+							'table' => 'myspace_space' ,
+						) ,
+					) ,
+				) ,
+				
+				'hasAndBelongsMany' => array(
+					array(
+						'prop' => 'buffs' ,
+						'fromk' => 'uid' ,
+						'btok' => 'uid' ,	
+						'bfromk' => 'buffid' ,
+						'tok' => 'id' ,
+						'bridge' => 'myspace_mbuff' ,
+					
+						'model' => array(
+							'name' => 'buff' ,
+							'keys' => 'id' ,
+							'table' => 'myspace_buff' ,
+						) ,
+					)
+				),
+		),true) ;
+		$this->view->setModel($this->aModel) ;
 	}
 	
 	public function process()

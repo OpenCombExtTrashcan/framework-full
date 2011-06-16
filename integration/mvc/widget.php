@@ -5,7 +5,7 @@ use jc\mvc\view\DataExchanger;
 use jc\mvc\model\db\Model;
 use jc\message\Message;
 use jc\verifier\Length;
-use jc\verifier\ConsistenceEqualCheck;
+use jc\verifier\Same;
 use jc\verifier\Email;
 use jc\mvc\view\widget\CheckBtn;
 use jc\mvc\view\widget\Select;
@@ -26,7 +26,7 @@ class WidgetController extends Controller
 	{
 		$this->createView("widgetTestView","widget-test.template.html",'jc\\mvc\\view\\FormView') ;
 		
-		///测试group代码 , password 核对
+		///测试group代码 , 模拟用户注册
 		$username = new Text('username' , '用户名' ,Text::TEXT);
 		$this->widgetTestView->addWidget ( $username )->dataVerifiers()->add(
 			Length::flyweight(2 , 3)
@@ -34,10 +34,12 @@ class WidgetController extends Controller
 		$email = new Text('email' , '邮件' ,Text::TEXT);
 		$this->widgetTestView->addWidget ( $email )->dataVerifiers()->add(
 			Length::flyweight(6 , 13)
+		)->add(
+			Email::singleton()
 		);
 		$password1 = new Text('password1' , '确认密码1' ,Text::PASSWORD);
 		$this->widgetTestView->addWidget ( $password1 )->dataVerifiers()->add(
-			Length::flyweight(6,8)
+			Length::flyweight(6,8) 
 		);
 		$password2 = new Text('password2' , '确认密码2' ,Text::PASSWORD);
 		$this->widgetTestView->addWidget ( $password2 )->dataVerifiers()->add(
@@ -47,8 +49,10 @@ class WidgetController extends Controller
 		$group->addWidget($password1);
 		$group->addWidget($password2);
 		$this->widgetTestView->addWidget ( $group )->dataVerifiers()->add(
-			ConsistenceEqualCheck::singleton()
+			Same::singleton(), "密码"
 		);
+		
+		
 		
 		//测试radiogroup
 //		$radio1 = new CheckBtn('radio1' , 'radiotest1' ,  CheckBtn::RADIO , 'radio1');
