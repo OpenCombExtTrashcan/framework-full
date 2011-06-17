@@ -49,35 +49,19 @@ class WidgetController extends Controller
 		$group->addWidget($password1);
 		$group->addWidget($password2);
 		$this->widgetTestView->addWidget ( $group )->dataVerifiers()->add(
-			Same::singleton(), "密码"
+			Same::singleton(), "两次输入的密码不相等"
 		);
 		
+		$select = new Select('select' , '选择居住地' ,1,false);
+		$this->widgetTestView->addWidget ( $select )->dataVerifiers()->add(
+			NotNull::singleton(), "请选择居住地"
+		);
 		
+		$checkbox1 = new CheckBtn('checkbox1', '电影' , CheckBtn::CHECKBOX , 'movie');
+		$this->widgetTestView->addWidget ( $checkbox1 );
 		
-		//测试radiogroup
-//		$radio1 = new CheckBtn('radio1' , 'radiotest1' ,  CheckBtn::RADIO , 'radio1');
-//		$this->widgetTestView->addWidget ( $radio1 );
-//		
-//		$radio2 = new CheckBtn('radio2' , 'radiotest2' , CheckBtn::RADIO , 'radio2');
-//		$this->widgetTestView->addWidget ( $radio2 );
-//		$radio2->setChecked();
-//		
-//		$radio3 = new CheckBtn('radio3' , 'radiotest3' , CheckBtn::RADIO ,'radio3');
-//		$this->widgetTestView->addWidget ( $radio3 );
-//		
-//		$radio4 = new CheckBtn('radio4' , 'radiotest4' , CheckBtn::RADIO ,'radio4');
-//		$this->widgetTestView->addWidget ( $radio4 );
-//		
-//		$group = new RadioGroup('radioGroup' , 'testGroup');
-//		$this->widgetTestView->addWidget ( $group );
-//		$group->addWidget($radio1);
-//		$group->addWidget($radio2);
-//		$group->addWidget($radio3);
-//		$group->addWidget($radio4);
-//		$group->setChecked('radio3');
-//		echo $group->valueToString();
-
-		
+		$checkbox2 = new CheckBtn('checkbox2', '足球' , CheckBtn::CHECKBOX , 'football');
+		$this->widgetTestView->addWidget ( $checkbox1 );
 	}
 	
 public function process()
