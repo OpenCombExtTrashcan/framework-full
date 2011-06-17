@@ -7,6 +7,10 @@
 	<label for="email">email</label><widget id="email"/> <widget:msgqueue id="email" /><br />
 	<label for="password1">password1</label><widget id="password1"/> <widget:msgqueue id="passwordGroup" />  <msgqueue for="$theView->widget('passwordGroup')->messageQueue()" /> <msgqueue for="$theView->widget('password1')" /><br />
 	<label for="password2">password2</label><widget id="password2"/> <widget:msgqueue id="password2" /><br />
+	<label for="select">select</label><widget id="select"/> <msgqueue for="$theView->widget('select')->messageQueue()" /><br />
+	<label for="selectlist">selectlist</label><widget id="selectlist"/> <msgqueue for="$theView->widget('selectlist')->messageQueue()" /><br />
+	<label for="checkbox1">checkbox1</label><widget id="checkbox1"/> <msgqueue for="$theView->widget('checkbox1')->messageQueue()" /><br />
+	<label for="checkbox2">checkbox2</label><widget id="checkbox2"/> <msgqueue for="$theView->widget('checkbox2')->messageQueue()" /><br />
 	<input type="submit" value="submit" />
 </form>
 
