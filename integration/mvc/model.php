@@ -6,7 +6,6 @@ use jc\db\DB;
 use jc\mvc\model\db\orm\operators\Selecter;
 use jc\mvc\model\db\orm\ModelPrototype;
 
-
 $start = microtime(true) ;
 $t = microtime(true) ;
 

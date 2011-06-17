@@ -3,10 +3,10 @@
 </p>
 
 <form id="theform">
-	<label for="username">username</label><widget id="username"/> <msgqueue for="$theView->widget('username')" /><br />
-	<label for="email">email</label><widget id="email"/> <msgqueue for="$theView->widget('email')" /><br />
-	<label for="password1">password1</label><widget id="password1"/> <msgqueue for="$theView->widget('passwordGroup')" /> <msgqueue for="$theView->widget('password1')" /><br />
-	<label for="password2">password2</label><widget id="password2"/> <msgqueue for="$theView->widget('password2')" /><br />
+	<label for="username">username</label><widget id="username"/> <widget:msgqueue id="username" /><br />
+	<label for="email">email</label><widget id="email"/> <widget:msgqueue id="email" /><br />
+	<label for="password1">password1</label><widget id="password1"/> <widget:msgqueue id="passwordGroup" />  <msgqueue for="$theView->widget('passwordGroup')->messageQueue()" /> <msgqueue for="$theView->widget('password1')" /><br />
+	<label for="password2">password2</label><widget id="password2"/> <widget:msgqueue id="password2" /><br />
 	<input type="submit" value="submit" />
 </form>
 
