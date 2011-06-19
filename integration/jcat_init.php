@@ -18,7 +18,7 @@ UIFactory::singleton()->sourceFileManager()->addFolder(__DIR__.'/templates') ;
 //UIFactory::singleton()->sourceFileManager()->setForceCompile(true) ;
 
 // 数据库
-DB::singleton()->setDriver( new PDODriver("mysql:host=127.0.0.1;dbname=www",'root','1') ) ;
+DB::singleton()->setDriver( new PDODriver("mysql:host=127.0.0.1;dbname=jc-example",'root','111111',array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'")) ) ;
 
 return $aApp ;
 ?>
