@@ -33,7 +33,7 @@ $aAssocMap->addOrm(
 				'model' => 'user',
 			) ,
 			array(
-				'prop' => 'equb' ,
+				'prop' => 'equbs' ,
 				'fromk' => 'uid' ,
 				'tok' => 'uid' ,
 				'btok' => 'eid' ,	
@@ -70,15 +70,15 @@ $aAssocMap->addOrm(
 		'table' => 'epub' ,
 		'belongsTo' => array(
 			array(
-				'prop' => 'categories' ,
+				'prop' => 'category' ,
 				'fromk' => 'cid' ,
 				'tok' => 'cid' ,
-				'model' => 'epubcategories'
+				'model' => 'category'
 			),
 		),
 		'hasAndBelongsToMany' => array(
 			array(
-				'prop' => 'author' ,
+				'prop' => 'authors' ,
 			
 				'fromk' => 'eid' ,
 				'btok' => 'eid' ,	
@@ -87,6 +87,7 @@ $aAssocMap->addOrm(
 				'tok' => 'uid' ,
 			
 				'bridge' => 'epubauthor' ,
+			
 				'model' => 'user',
 			) ,
 		),
@@ -95,7 +96,7 @@ $aAssocMap->addOrm(
 
 $aAssocMap->addOrm(
 	array(
-		'name' => 'epubcategories' ,
+		'name' => 'category' ,
 		'keys' => 'cid' ,
 		'table' => 'epubcategories' ,
 		'belongsTo' => array(

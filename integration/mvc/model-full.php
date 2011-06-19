@@ -27,8 +27,8 @@ require_once __DIR__.'/model-orm-cnf.php' ;
 $aAssocMap = ModelAssociationMap::singleton() ;
 $aFragment = $aAssocMap->fragment('epub',
 		array(
-			'categories' ,
-			'author'=>array(
+			'category' ,
+			'authors'=>array(
 				'friends'
 			) ,
 		)
@@ -44,10 +44,10 @@ $aEBook->epub_name = '架构之美' ;
 $aEBook->epub_content = '本书围绕5个主题领域来组织本书的内容：概述、企业应用、系统、最终用户应用和编程语言。本书让最优秀的设计师和架构师来描述他们选择的软件架构，剥开架构的各层，展示他们如何让软件做到实现功能、可靠、易用、高效率、可维护、可移植和优雅。' ;
 $aEBook->update_time = date('Y-m-d G:i:s') ;
 
-$aEBook['categories.category_name'] = '软件工程' ;
-$aEBook['categories.update_time'] = date('Y-m-d G:i:s') ;
+$aEBook['category.category_name'] = '软件工程' ;
+$aEBook['category.update_time'] = date('Y-m-d G:i:s') ;
 
-$aAuthor1 = $aEBook->child('author')->createChild() ;
+$aAuthor1 = $aEBook->child('authors')->createChild() ;
 $aAuthor1->user_loginId = 'Till Adam' ;
 $aAuthor1->user_register_time = time() ;
 $aAuthor1->update_time = date('Y-m-d G:i:s') ;
@@ -78,9 +78,9 @@ if( !$aEBook->load('架构之美','epub_name') )
 // 修改/保存模型
 $aEBook->setData('epub_name','架构之美(中译版)') ;
 
-$aEBook["categories.update_time"] = date('Y-m-d G:i:s') ;
+$aEBook["category.update_time"] = date('Y-m-d G:i:s') ;
 
-$aAuthor = $aEBook->child('author')->child(0) ;
+$aAuthor = $aEBook->child('authors')->child(0) ;
 $aAuthor->user_passwd = '111111' ;
 
 if( !$aEBook->save() )
