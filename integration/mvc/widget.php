@@ -52,13 +52,13 @@ class WidgetController extends Controller {
 		$this->widgetTestView->addWidget ( $select )->dataVerifiers ()->add ( NotNull::singleton (), "请选择省" );
 		
 		$selectlist = new SelectList ( 'selectlist', '选择城市', 6 );
-		$selectlist->addOption ( "fda", "342" );
-		$selectlist->addOption ( "asf", "fdsa" );
-		$selectlist->addOption ( "selectlistvalue", "selectlistvalue");
-		$selectlist->addOption ( "fda", "543" );
-		$selectlist->addOption ( "fda", "fdsa" );
-		$selectlist->addOption ( "5434", "fvfvasf" );
-		$selectlist->addOption ( "fdafadsf", "fda" );
+		$selectlist->addOption ( "fda1", "342" );
+		$selectlist->addOption ( "asf2", "fdsa" );
+		$selectlist->addOption ( "selectlistvalue3", "selectlistvalue");
+		$selectlist->addOption ( "fda4", "543" );
+		$selectlist->addOption ( "fda5", "fdsa" );
+		$selectlist->addOption ( "543a6", "fvfvasf" );
+		$selectlist->addOption ( "fdafadsf7", "fda" );
 		$this->widgetTestView->addWidget ( $selectlist )->dataVerifiers ()->add ( NotNull::singleton (), "请选择城市" );
 		
 		$checkbox1 = new CheckBtn ( 'checkbox1', '电影', CheckBtn::CHECKBOX, 'movie' );
