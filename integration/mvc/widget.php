@@ -14,6 +14,7 @@ use jc\mvc\view\widget\SelectList;
 use jc\mvc\view\widget\Group;
 use jc\mvc\view\widget\RadioGroup;
 use jc\mvc\view\widget\Text;
+use jc\mvc\view\widget\FileUpdate;
 use jc\mvc\controller\Controller;
 use jc\mvc\view\View;
 use jc\ui\xhtml\Factory as UIFactory;
@@ -66,6 +67,9 @@ class WidgetController extends Controller {
 		
 		$checkbox2 = new CheckBtn ( 'checkbox2', '足球', CheckBtn::CHECKBOX, 'football' );
 		$this->widgetTestView->addWidget ( $checkbox2 );
+		
+		$fileupdate = new FileUpdate ( 'fileupdate', '文件上传' );
+		$this->widgetTestView->addWidget ( $fileupdate );
 	}
 	
 	public function process() {
