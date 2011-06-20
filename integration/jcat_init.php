@@ -2,6 +2,10 @@
 namespace jc\test\integration ;
 
 // 初始化 jcat 框架
+use jc\session\OriginalSession;
+
+use jc\session\Session;
+
 use jc\db\DB;
 use jc\db\PDODriver;
 use jc\ui\xhtml\Factory as UIFactory ;
@@ -19,6 +23,12 @@ UIFactory::singleton()->sourceFileManager()->addFolder(__DIR__.'/templates') ;
 
 // 数据库
 DB::singleton()->setDriver( new PDODriver("mysql:host=127.0.0.1;dbname=jc-example",'root','111111',array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'")) ) ;
+
+// 会话
+$aSession = new OriginalSession() ;
+$aSession->start() ;
+Session::setSingleton($aSession) ;
+
 
 return $aApp ;
 ?>
