@@ -67,7 +67,9 @@ class WidgetController extends Controller {
 //		$this->widgetTestView->addWidget ( $checkbox1 );
 //		
 		$radioGroup = new RadioGroup('radiogroup','选择喜欢的球类');
-		$radioGroup->createRadio( "篮球", "basketball")->createRadio( "足球", "football")->createRadio( "网球", "tennis");
+		$radioGroup->createRadio( "篮球", "basketball")
+					->createRadio( "足球", "football")
+					->createRadio( "网球", "tennis");
 		$this->widgetTestView->addWidget($radioGroup);
 		
 //		
