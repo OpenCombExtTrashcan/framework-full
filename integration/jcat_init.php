@@ -3,12 +3,10 @@ namespace jc\test\integration ;
 
 // 初始化 jcat 框架
 use jc\session\OriginalSession;
-
 use jc\session\Session;
-
 use jc\db\DB;
 use jc\db\PDODriver;
-use jc\ui\xhtml\Factory as UIFactory ;
+use jc\ui\xhtml\UIFactory ;
 use jc\system\Application;
 
 // ini_set('display_errors', 1);
