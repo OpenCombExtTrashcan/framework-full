@@ -29,7 +29,7 @@ class WidgetController extends Controller {
 		$this->createView ( "widgetTestView", "widget-test.template.html", 'jc\\mvc\\view\\FormView' );
 		
 		///测试group代码 , 模拟用户注册
-		$username = new Text('username');
+		$username = new Text('username','用户名','',TEXT::single);
 		$this->widgetTestView->addWidget ( $username )->dataVerifiers ()->add ( Length::flyweight ( 2, 5 ) )->add ( Number::flyweight ( false ) );
 //		$email = new Text ( 'email', '邮件', Text::TEXT );
 //		$this->widgetTestView->addWidget ( $email )->dataVerifiers ()->add ( Length::flyweight ( 6, 13 ) )->add ( Email::singleton () );
@@ -42,35 +42,36 @@ class WidgetController extends Controller {
 //		$group->addWidget ( $password2 );
 //		$this->widgetTestView->addWidget ( $group )->dataVerifiers ()->add ( Same::singleton (), "两次输入的密码不相等" );
 //		
-//		$select = new Select ( 'select', '选择省', 1 );
-//		$select->addOption ( null, "请选择...", true );
-//		$select->addOption ( "fda", "342" );
-//		$select->addOption ( "asf", "fdsa" );
-//		$select->addOption ( "fda", "543" );
-//		$select->addOption ( "fdffa", "fdsa" );
-//		$select->addOption ( "selectvalue", "selectvalue" );
-//		$select->addOption ( "5434", "fvfvasf" );
-//		$select->addOption ( "fdasf", "fda" );
-//		$this->widgetTestView->addWidget ( $select )->dataVerifiers ()->add ( NotEmpty::singleton (), "请选择省" );
-//		
-//		$selectlist = new SelectList ( 'selectlist', '选择城市', 6 );
-//		$selectlist->addOption ( "fda1", "342" );
-//		$selectlist->addOption ( "asf2", "fdsa" );
-//		$selectlist->addOption ( "selectlistvalue3", "selectlistvalue");
-//		$selectlist->addOption ( "fda4", "543" );
-//		$selectlist->addOption ( "fda5", "fdsa" );
-//		$selectlist->addOption ( "543a6", "fvfvasf" );
-//		$selectlist->addOption ( "fdafadsf7", "fda" );
-//		$this->widgetTestView->addWidget ( $selectlist )->dataVerifiers ()->add ( NotEmpty::singleton (), "请选择城市" );
+		$select = new Select ( 'select', '选择省' );
+		$select->addOption ( null, "请选择...", true );
+		$select->addOption ( "fda", "342" );
+		$select->addOption ( "asf", "fdsa" );
+		$select->addOption ( "fda", "543" );
+		$select->addOption ( "fdffa", "fdsa" );
+		$select->addOption ( "selectvalue", "selectvalue" );
+		$select->addOption ( "5434", "fvfvasf" );
+		$select->addOption ( "fdasf", "fda" );
+		$this->widgetTestView->addWidget ( $select )->dataVerifiers ()->add ( NotEmpty::singleton (), "请选择省" );
+		
+		$selectlist = new SelectList ( 'selectlist', '选择城市' );
+		$selectlist->addOption ( "fda1", "342" );
+		$selectlist->addOption ( "asf2", "fdsa" );
+		$selectlist->addOption ( "selectlistvalue3", "selectlistvalue");
+		$selectlist->addOption ( "fda4", "543" );
+		$selectlist->addOption ( "fda5", "fdsa" );
+		$selectlist->addOption ( "543a6", "fvfvasf" );
+		$selectlist->addOption ( "fdafadsf7", "fda" );
+		$this->widgetTestView->addWidget ( $selectlist )->dataVerifiers ()->add ( NotEmpty::singleton (), "请选择城市" );
 //		
 //		$checkbox1 = new CheckBtn ( 'checkbox1', '电影', CheckBtn::CHECKBOX, 'movie' );
 //		$this->widgetTestView->addWidget ( $checkbox1 );
 //		
 		$radioGroup = new RadioGroup('radiogroup','选择喜欢的球类');
 		$radioGroup->createRadio( "篮球", "basketball")
-					->createRadio( "足球", "football")
+					->createRadio( "足球", "football",true )
 					->createRadio( "网球", "tennis");
 		$this->widgetTestView->addWidget($radioGroup);
+		
 		
 //		
 //		$fileupdate = new FileUpdate ( 'fileupdate', '文件上传' );
@@ -84,7 +85,6 @@ class WidgetController extends Controller {
 				
 				if (! $this->widgetTestView->verifyWidgets ()) {
 					$aMsgQueue = $this->messageQueue ();
-					$this->widgetTestView->render ();
 					return;
 				}
 				
@@ -96,7 +96,6 @@ class WidgetController extends Controller {
 		} 
 
 		else {
-			$this->widgetTestView->render ();
 		}
 	
 	}
