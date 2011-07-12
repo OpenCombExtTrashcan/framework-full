@@ -30,20 +30,20 @@ class WidgetController extends Controller {
 		
 		///测试group代码 , 模拟用户注册
 		$username = new Text('username','用户名','',TEXT::single);
-		$this->widgetTestView->addWidget ( $username )->dataVerifiers ()->add ( Length::flyweight ( 2, 5 ) )->add ( Number::flyweight ( false ) );
+		$this->widgetTestView->addWidget ( $username )->dataVerifiers ()->add ( Length::flyweight ( array(2, 5) ) )->add ( Number::flyweight ( false ) );
 //		$email = new Text ( 'email', '邮件', Text::TEXT );
-//		$this->widgetTestView->addWidget ( $email )->dataVerifiers ()->add ( Length::flyweight ( 6, 13 ) )->add ( Email::singleton () );
+//		$this->widgetTestView->addWidget ( $email )->dataVerifiers ()->add ( Length::flyweight (array( 6, 13 )) )->add ( Email::singleton () );
 //		$password1 = new Text ( 'password1', '确认密码1', Text::PASSWORD );
-//		$this->widgetTestView->addWidget ( $password1 )->dataVerifiers ()->add ( Length::flyweight ( 6, 8 ) );
+//		$this->widgetTestView->addWidget ( $password1 )->dataVerifiers ()->add ( Length::flyweight (array( 6, 13 ) ) );
 //		$password2 = new Text ( 'password2', '确认密码2', Text::PASSWORD );
-//		$this->widgetTestView->addWidget ( $password2 )->dataVerifiers ()->add ( Length::flyweight ( 6, 8 ) );
+//		$this->widgetTestView->addWidget ( $password2 )->dataVerifiers ()->add ( Length::flyweight ( array( 6, 13 ) ) );
 //		$group = new Group ( 'passwordGroup', '密码核对' );
 //		$group->addWidget ( $password1 );
 //		$group->addWidget ( $password2 );
 //		$this->widgetTestView->addWidget ( $group )->dataVerifiers ()->add ( Same::singleton (), "两次输入的密码不相等" );
 //		
 		$select = new Select ( 'select', '选择省' );
-		$select->addOption ( null, "请选择...", true );
+		$select->addOption ( '请选择...', 0 , true );
 		$select->addOption ( "fda", "342" );
 		$select->addOption ( "asf", "fdsa" );
 		$select->addOption ( "fda", "543" );
@@ -53,7 +53,7 @@ class WidgetController extends Controller {
 		$select->addOption ( "fdasf", "fda" );
 		$this->widgetTestView->addWidget ( $select )->dataVerifiers ()->add ( NotEmpty::singleton (), "请选择省" );
 		
-		$selectlist = new SelectList ( 'selectlist', '选择城市' );
+		$selectlist = new SelectList ( 'selectlist', '选择城市' ,5,true);
 		$selectlist->addOption ( "fda1", "342" );
 		$selectlist->addOption ( "asf2", "fdsa" );
 		$selectlist->addOption ( "selectlistvalue3", "selectlistvalue");
