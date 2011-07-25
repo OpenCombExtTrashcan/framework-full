@@ -34,7 +34,7 @@ $aUser = new Model(
 				)
 			)
 		) ,
-		'hasAndBelongsToMany' => array(
+		'/' => array(
 			array(
 				'prop' => 'friends' ,
 				'fromk' => 'uid' ,
@@ -213,7 +213,8 @@ $aModel->delete() ;
 echo "1st run: ", microtime(true) - $t, "<br />\r\n" ;
 $t = microtime(true) ;
 
-$aModel = new Model(array(
+$aModel = new Model(
+	array(
 		'name' => 'feed' ,
 		'keys' => 'feedid' ,
 		'table' => 'myspace_feed' ,
