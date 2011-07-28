@@ -7,13 +7,13 @@ use jc\session\Session;
 use jc\db\DB;
 use jc\db\driver\PDODriver;
 use jc\ui\xhtml\UIFactory ;
-use jc\system\Application;
+use jc\system\AppFactory;
 
 // ini_set('display_errors', 1);
 
 include __DIR__."/../../framework/inc.entrance.php" ;
 
-$aApp = Application::singleton(true) ;
+$aApp = AppFactory::createFactory()->create(__DIR__) ;
 
 // UI
 UIFactory::singleton()->sourceFileManager()->addFolder(__DIR__.'/templates') ;
