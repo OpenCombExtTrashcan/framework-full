@@ -16,7 +16,7 @@ use jc\mvc\view\widget\SelectList;
 use jc\mvc\view\widget\Group;
 use jc\mvc\view\widget\RadioGroup;
 use jc\mvc\view\widget\Text;
-use jc\mvc\view\widget\FileUpdate;
+use jc\mvc\view\widget\File;
 use jc\mvc\controller\Controller;
 use jc\mvc\view\View;
 use jc\ui\xhtml\Factory as UIFactory;
@@ -77,7 +77,7 @@ class WidgetController extends Controller {
 //		$this->widgetTestView->addWidget($radioGroup);
 		
 		$uploadForlder = $this->application()->fileSystem()->findFolder('/data/widget');
-		$fileupdate = new FileUpdate ( 'fileupdate', '文件上传',$uploadForlder );
+		$fileupdate = new File ( 'fileupdate', '文件上传',$uploadForlder );
 //		$fileupdate->dataVerifiers ()->add(FileSize::flyweight(array(200000)));
 		$this->fileUpdate = $fileupdate ;
 		$this->viewWidgetTest->addWidget ( $fileupdate );
@@ -92,7 +92,7 @@ class WidgetController extends Controller {
 					$aMsgQueue = $this->messageQueue ();
 					return;
 				}
-				$this->fileUpdate->file();
+				$this->fileUpdate->valueToString();
 				$this->viewWidgetTest->exchangeData ( DataExchanger::WIDGET_TO_MODEL );
 				new Message ( Message::success, "表单提交完成" );
 			} while ( 0 );
