@@ -19,6 +19,9 @@ use jc\mvc\view\widget\FileUpdate;
 use jc\mvc\controller\Controller;
 use jc\mvc\view\View;
 use jc\ui\xhtml\Factory as UIFactory;
+use jc\fs\FileSystem;
+use jc\fs\FSO;
+use js\fs\archive\DateAchiveStrategy;
 
 $t = microtime ( true );
 
@@ -30,7 +33,7 @@ class WidgetController extends Controller {
 		
 		///测试group代码 , 模拟用户注册
 //		$username = new Text('username','用户名','',TEXT::single);
-//		$this->widgetTestView->addWidget ( $username )->dataVerifiers ()->add ( Length::flyweight ( array(2, 5) ) )->add ( Number::flyweight ( false ) );
+//		$this->viewWidgetTest->addWidget ( $username )->dataVerifiers ()->add ( Length::flyweight ( array(2, 5) ) )->add ( Number::flyweight ( false ) );
 //		$email = new Text ( 'email', '邮件', Text::TEXT );
 //		$this->widgetTestView->addWidget ( $email )->dataVerifiers ()->add ( Length::flyweight (array( 6, 13 )) )->add ( Email::singleton () );
 //		$password1 = new Text ( 'password1', '确认密码1', Text::PASSWORD );
@@ -72,7 +75,8 @@ class WidgetController extends Controller {
 //					->createRadio( "网球", "tennis");
 //		$this->widgetTestView->addWidget($radioGroup);
 		
-		$fileupdate = new FileUpdate ( 'fileupdate', '文件上传', 300 );
+		$uploadForlder = $this->application()->fileSystem()->findFolder('/data/widget');
+		$fileupdate = new FileUpdate ( 'fileupdate', '文件上传',$uploadForlder );
 		$this->viewWidgetTest->addWidget ( $fileupdate );
 	}
 	
@@ -85,22 +89,23 @@ class WidgetController extends Controller {
 					$aMsgQueue = $this->messageQueue ();
 					return;
 				}
-				
 				$this->viewWidgetTest->exchangeData ( DataExchanger::WIDGET_TO_MODEL );
-				
 				new Message ( Message::success, "表单提交完成" );
-			
 			} while ( 0 );
 		} 
 
 		else {
 		}
-	
 	}
 }
 
-$aController = new WidgetController ();
-$aController->mainRun ( $aApp->request () );
+$aController = new WidgetController ($aApp->request () );
+$aController->mainRun ( );
+
+
+
+
+
 echo microtime ( true ) - $t, "\r\n";
 echo (memory_get_peak_usage () / 1024 / 1024), "mb\r\n";
 

@@ -1,9 +1,10 @@
 <p ss>
 	当前视图name：{=$theView->name()}
 </p>
-
-<form id="theform">
-	<widget id="fileupdate"/> 
+<msgqueue for="$theView" />
+<form id="theform" enctype="multipart/form-data" method='post'>
+	<widget id="fileupdate"/>
+	<input type='submit'/>
 </form>
 
 <views />
