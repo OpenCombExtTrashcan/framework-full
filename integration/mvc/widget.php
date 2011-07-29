@@ -9,6 +9,7 @@ use jc\verifier\Same;
 use jc\verifier\Email;
 use jc\verifier\NotEmpty;
 use jc\verifier\Number;
+use jc\verifier\FileSize;
 use jc\mvc\view\widget\CheckBtn;
 use jc\mvc\view\widget\Select;
 use jc\mvc\view\widget\SelectList;
@@ -77,6 +78,8 @@ class WidgetController extends Controller {
 		
 		$uploadForlder = $this->application()->fileSystem()->findFolder('/data/widget');
 		$fileupdate = new FileUpdate ( 'fileupdate', '文件上传',$uploadForlder );
+		$fileupdate->dataVerifiers ()->add(FileSize::flyweight(array(200000)));
+		$this->fileUpdate = $fileupdate ;
 		$this->viewWidgetTest->addWidget ( $fileupdate );
 	}
 	
@@ -89,10 +92,11 @@ class WidgetController extends Controller {
 					$aMsgQueue = $this->messageQueue ();
 					return;
 				}
+				$this->fileUpdate->file();
 				$this->viewWidgetTest->exchangeData ( DataExchanger::WIDGET_TO_MODEL );
 				new Message ( Message::success, "表单提交完成" );
 			} while ( 0 );
-		} 
+		}
 
 		else {
 		}
@@ -101,10 +105,6 @@ class WidgetController extends Controller {
 
 $aController = new WidgetController ($aApp->request () );
 $aController->mainRun ( );
-
-
-
-
 
 echo microtime ( true ) - $t, "\r\n";
 echo (memory_get_peak_usage () / 1024 / 1024), "mb\r\n";
