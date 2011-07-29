@@ -78,7 +78,7 @@ class WidgetController extends Controller {
 		
 		$uploadForlder = $this->application()->fileSystem()->findFolder('/data/widget');
 		$fileupdate = new FileUpdate ( 'fileupdate', '文件上传',$uploadForlder );
-		$fileupdate->dataVerifiers ()->add(FileSize::flyweight(array(200000)));
+//		$fileupdate->dataVerifiers ()->add(FileSize::flyweight(array(200000)));
 		$this->fileUpdate = $fileupdate ;
 		$this->viewWidgetTest->addWidget ( $fileupdate );
 	}
