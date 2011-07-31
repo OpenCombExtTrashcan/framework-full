@@ -10,6 +10,7 @@ use jc\verifier\Email;
 use jc\verifier\NotEmpty;
 use jc\verifier\Number;
 use jc\verifier\FileSize;
+use jc\verifier\FileExt;
 use jc\mvc\view\widget\CheckBtn;
 use jc\mvc\view\widget\Select;
 use jc\mvc\view\widget\SelectList;
@@ -78,8 +79,10 @@ class WidgetController extends Controller {
 		
 		$uploadForlder = $this->application()->fileSystem()->findFolder('/data/widget');
 		$fileupdate = new File ( 'fileupdate', '文件上传',$uploadForlder );
-//		$fileupdate->dataVerifiers ()->add(FileSize::flyweight(array(200000)));
+		$fileupdate->addVerifier(FileSize::flyweight(array(-1,-1)));
+		$fileupdate->addVerifier(FileExt::flyweight(array(array('jpg','png','bmp'),false)));
 		$this->fileUpdate = $fileupdate ;
+//		$this->fileUpdate->setValueFromString('/data/widget/11/7/30/hashe63173f534a48172c04987f799e91122.bookmarks_11-7-28.html');
 		$this->viewWidgetTest->addWidget ( $fileupdate );
 	}
 	
@@ -87,7 +90,7 @@ class WidgetController extends Controller {
 		if ($this->viewWidgetTest->isSubmit ( $this->aParams )) {
 			do {
 				$this->viewWidgetTest->loadWidgets ( $this->aParams );
-				
+//				$this->fileUpdate->setValueFromString('/data/widget/11/7/30/hashe63173f534a48172c04987f799e91122.bookmarks_11-7-28.html');
 				if (! $this->viewWidgetTest->verifyWidgets ()) {
 					$aMsgQueue = $this->messageQueue ();
 					return;
