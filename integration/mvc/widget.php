@@ -79,28 +79,30 @@ class WidgetController extends Controller {
 		
 		$uploadForlder = $this->application()->fileSystem()->findFolder('/data/widget');
 		$fileupdate = new File ( 'fileupdate', '文件上传',$uploadForlder );
-		$fileupdate->addVerifier(FileSize::flyweight(array(-1,-1)));
-		$fileupdate->addVerifier(FileExt::flyweight(array(array('jpg','png','bmp'),false)));
+		$fileupdate->addVerifier(FileSize::flyweight(array(200,200000)));
+		$fileupdate->addVerifier(FileExt::flyweight(array(array('jpg','png','bmp'),true)));
 		$this->fileUpdate = $fileupdate ;
-//		$this->fileUpdate->setValueFromString('/data/widget/11/7/30/hashe63173f534a48172c04987f799e91122.bookmarks_11-7-28.html');
 		$this->viewWidgetTest->addWidget ( $fileupdate );
 	}
 	
 	public function process() {
+//		//文件删除测试用
+//		$this->application()->fileSystem()->findFile('/data/widget/11/8/1/hash9b8014b62a6e2ffc085b53b43d6a1706.hs_err_pid2230.log')->copy('/data/widget/11/8/1/hash9b8014b62a6e2ffc085b53b43d6a1706.hs_err_pid22301.log');
+//		$this->fileUpdate->setValueFromString('11/8/1/hash9b8014b62a6e2ffc085b53b43d6a1706.hs_err_pid22301.log');
+				
 		if ($this->viewWidgetTest->isSubmit ( $this->aParams )) {
 			do {
 				$this->viewWidgetTest->loadWidgets ( $this->aParams );
-//				$this->fileUpdate->setValueFromString('/data/widget/11/7/30/hashe63173f534a48172c04987f799e91122.bookmarks_11-7-28.html');
 				if (! $this->viewWidgetTest->verifyWidgets ()) {
 					$aMsgQueue = $this->messageQueue ();
 					return;
 				}
-				$this->fileUpdate->valueToString();
+				//文件上传测试用
+//				$this->fileUpdate->valueToString();
 				$this->viewWidgetTest->exchangeData ( DataExchanger::WIDGET_TO_MODEL );
 				new Message ( Message::success, "表单提交完成" );
 			} while ( 0 );
 		}
-
 		else {
 		}
 	}
