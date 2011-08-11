@@ -1,13 +1,24 @@
-#! /usr/bin/php5
 <?php
 namespace jc\test\unit ;
 
+use jc\fs\imp\LocalFile;
+
+use jc\system\ClassLoader;
+
+use jc\system\Application;
+
 include __DIR__.'/inc.init.php' ;
 
+
+// mock
+// -------------
 /*
 $_SERVER['argv'][1] = '--skeleton-test' ;
-$_SERVER['argv'][2] = "jc\\system\\Application" ;
+$_SERVER['argv'][2] = "jc\\fs\\FileSystem" ;
 */
+// $_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\fs\\FileSystem" ;
+
+
 
 if( !empty($_SERVER['argv'][1]) )
 {
@@ -41,8 +52,21 @@ if( !empty($_SERVER['argv'][1]) )
 		
 		$_SERVER['argc'] = 6 ;
 	}
+	
+	
+	// 执行测试
+	if( !preg_match('/^\-\-/',$_SERVER['argv'][1]) )
+	{
+		// 反射class的路径
+		if( $aClassFile=Application::singleton()->classLoader()->searchClass($_SERVER['argv'][1]) and ($aClassFile instanceof LocalFile) )
+		{
+			$_SERVER['argv'][2] = $aClassFile->localPath() ;
+		}
+	}
 }
 
 
 include PATH_PEAR_ROOT.'/bin/phpunit' ;
+
+
 ?>

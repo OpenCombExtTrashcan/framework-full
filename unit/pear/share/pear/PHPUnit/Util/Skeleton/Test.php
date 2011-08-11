@@ -338,11 +338,12 @@ class PHPUnit_Util_Skeleton_Test extends PHPUnit_Util_Skeleton
         );
 
         if ($this->inSourceFile != '<internal>') {
-            $requireClassFile = sprintf(
+        	// dont generate "require" for jecat class
+            /*$requireClassFile = sprintf(
               "\n\nrequire_once '%s';",
 
               $this->inSourceFile
-            );
+            );*/
         } else {
             $requireClassFile = '';
         }
