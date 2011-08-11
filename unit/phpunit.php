@@ -16,7 +16,7 @@ include __DIR__.'/inc.init.php' ;
 $_SERVER['argv'][1] = '--skeleton-test' ;
 $_SERVER['argv'][2] = "jc\\fs\\FileSystem" ;
 */
-// $_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\fs\\FileSystem" ;
+$_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\fs\\FileSystem" ;
 
 
 
@@ -49,13 +49,18 @@ if( !empty($_SERVER['argv'][1]) )
 			}
 			$_SERVER['argv'][5] = $sDir . '/' . $sClassBasename . '.php' ;
 		}
+		if( file_exists($_SERVER['argv'][5]) )
+		{
+			echo Application::singleton()->response()->output("file: ".$_SERVER['argv'][5]." exists already !") ;
+			exit() ;
+		}
 		
 		$_SERVER['argc'] = 6 ;
 	}
 	
 	
 	// 执行测试
-	if( !preg_match('/^\-\-/',$_SERVER['argv'][1]) )
+	else if( !preg_match('/^\-\-/',$_SERVER['argv'][1]) )
 	{
 		// 反射class的路径
 		if( $aClassFile=Application::singleton()->classLoader()->searchClass($_SERVER['argv'][1]) and ($aClassFile instanceof LocalFile) )

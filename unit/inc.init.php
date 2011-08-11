@@ -18,4 +18,6 @@ $aApp = ApplicationFactory::singleton()->create(__DIR__) ;
 
 $aApp->fileSystem()->mount('/unitcase',new LocalFileSystem(__DIR__.'/case')) ;
 $aApp->classLoader()->addPackage('jc\\test\\unit\\testcase\\jc',null,'/unitcase/jc') ;
+
+return $aApp ;
 ?>
