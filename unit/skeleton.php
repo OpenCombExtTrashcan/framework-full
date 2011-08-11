@@ -1,7 +1,8 @@
+#! /usr/bin/php5
 <?php
 namespace jc\test\unit ;
 
-include __DIR__.'/init.inc.php' ;
+include __DIR__.'/inc.init.php' ;
 
 /*
 $_SERVER['argv'][1] = '--skeleton-test' ;
