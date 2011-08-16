@@ -287,6 +287,16 @@ class JointPoint extends \PHPUnit_Framework_TestCase
         	\jc\aop\JointPoint::transRegexp("ClassNameAAA::\$PropertyNameAAA *")
         	, "`ClassNameAAA\:\:\\\$PropertyNameAAA .*`is"
         ) ;
+        
+        // 测试正则效果
+        $this->assertRegExp(
+        	\jc\aop\JointPoint::transRegexp("ClassNameAAA::\$PropertyNameAAA *")
+        	, "ClassNameAAA::\$PropertyNameAAA set"
+        ) ;
+        $this->assertRegExp(
+        	\jc\aop\JointPoint::transRegexp("ClassName*::FuncName*()")
+        	, "ClassNameAAA::FuncNameAAA()"
+        ) ;
     }
 }
 
