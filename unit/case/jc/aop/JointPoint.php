@@ -11,7 +11,7 @@ class JointPoint extends \PHPUnit_Framework_TestCase
     /**
      * @var JointPoint
      */
-    protected $object;
+    protected $aJointPoint ;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
