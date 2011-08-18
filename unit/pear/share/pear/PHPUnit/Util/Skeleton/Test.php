@@ -359,6 +359,7 @@ class PHPUnit_Util_Skeleton_Test extends PHPUnit_Util_Skeleton
           array(
             'namespace'          => $namespace,
             'namespaceSeparator' => !empty($namespace) ? '\\' : '',
+            'fullClassName'      => $class->getName(),
             'className'          => $this->inClassName['className'],
             'testClassName'      => $this->outClassName['className'],
             'requireClassFile'   => $requireClassFile,

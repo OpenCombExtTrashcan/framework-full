@@ -7,9 +7,9 @@
 class {testClassName} extends {namespaceSeparator}PHPUnit_Framework_TestCase
 {
     /**
-     * @var {className}
+     * @var {fullClassName}
      */
-    protected $object;
+    protected $a{className};
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class {testClassName} extends {namespaceSeparator}PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new {className};
+        $this->a{className} = new \{fullClassName};
     }
 
     /**
