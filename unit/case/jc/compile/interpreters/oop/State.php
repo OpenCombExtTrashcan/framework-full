@@ -30,6 +30,48 @@ class State extends \PHPUnit_Framework_TestCase
     {
     }
 
+    public function testIsPHPCode()
+    {
+    	// false
+    	$this->assertFalse($this->aState->isPHPCode()) ;
+    	
+    	// 设置一个状态
+    	$this->aState->setPHPCode(true) ;
+    	$this->assertTrue($this->aState->isPHPCode()) ;
+    	
+    	$this->aState->setPHPCode(1) ;
+    	$this->assertTrue($this->aState->isPHPCode()) ;
+    	
+    	$this->aState->setPHPCode('some string') ;
+    	$this->assertTrue($this->aState->isPHPCode()) ;
+    	
+    	$this->aState->setPHPCode('false') ;	// <<-- is true
+    	$this->assertTrue($this->aState->isPHPCode()) ;
+    	
+    	$this->aState->setPHPCode(false) ;
+    	$this->assertFalse($this->aState->isPHPCode()) ;
+    	
+    	$this->aState->setPHPCode(0) ;
+    	$this->assertFalse($this->aState->isPHPCode()) ;
+    	
+    	$this->aState->setPHPCode('0') ;
+    	$this->assertFalse($this->aState->isPHPCode()) ;
+    	
+    	$this->aState->setPHPCode('') ;
+    	$this->assertFalse($this->aState->isPHPCode()) ;
+    	
+    	$this->aState->setPHPCode(null) ;
+    	$this->assertFalse($this->aState->isPHPCode()) ;
+    }
+
+    /**
+     * @see self::testIsPHPCode()
+     */
+    public function testSetPHPCode()
+    {
+    	$this->testIsPHPCode() ;
+    }
+
     /**
      * @todo Implement testCurrentNamespace().
      */
