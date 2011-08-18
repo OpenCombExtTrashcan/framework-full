@@ -9,7 +9,6 @@ use jc\system\Application;
 
 include __DIR__.'/inc.init.php' ;
 
-
 // mock
 // -------------
 /*
