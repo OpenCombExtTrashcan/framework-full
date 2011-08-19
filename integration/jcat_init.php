@@ -2,6 +2,7 @@
 namespace jc\test\integration ;
 
 // 初始化 jcat 框架
+use jc\system\ApplicationFactory;
 use jc\session\OriginalSession;
 use jc\session\Session;
 use jc\db\DB;
@@ -13,10 +14,10 @@ use jc\system\AppFactory;
 
 include __DIR__."/../../framework/inc.entrance.php" ;
 
-$aApp = AppFactory::createFactory()->create(__DIR__) ;
+$aApp = ApplicationFactory::singleton()->create(__DIR__) ;
 
 // UI
-UIFactory::singleton()->sourceFileManager()->addFolder(__DIR__.'/templates') ;
+UIFactory::singleton()->sourceFileManager()->addFolder($aApp->fileSystem()->findFolder('/templates')) ;
 //UIFactory::singleton()->sourceFileManager()->setForceCompile(true) ;
 
 // 数据库
