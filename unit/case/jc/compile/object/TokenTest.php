@@ -213,7 +213,7 @@ class TokenTest extends \PHPUnit_Framework_TestCase
     	
     	// 设置类名
     	$aClassDefine = new ClassDefine(new Token(T_CLASS, 'class', 100)) ;
-    	$aFunctionDefine->setNameToken(new Token(T_STRING, 'ClassNameAbc', 100)) ;
+    	$aClassDefine->setNameToken(new Token(T_STRING, 'ClassNameAbc', 100)) ;
     	$aToken->setBelongsClass($aClassDefine) ;
     	$this->assertEquals($aToken->belongsSignature(),"[package\\name\\abc\\ClassNameAbc::functionNameAbc()]") ;
     	
