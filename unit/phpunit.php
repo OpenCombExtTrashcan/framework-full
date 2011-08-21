@@ -35,7 +35,7 @@ if( !empty($_SERVER['argv'][1]) )
 		// test class name
 		if( empty($_SERVER['argv'][4]) )
 		{
-			$_SERVER['argv'][4] = 'jc\\test\\unit\\testcase\\' . $sClassNamespace . '\\' . $sClassBasename ;
+			$_SERVER['argv'][4] = 'jc\\test\\unit\\testcase\\' . $sClassNamespace . '\\' . $sClassBasename .'Test' ;
 		} 
 		
 		// test class path
@@ -46,7 +46,7 @@ if( !empty($_SERVER['argv'][1]) )
 			{
 				mkdir($sDir,0755,true) ;
 			}
-			$_SERVER['argv'][5] = $sDir . '/' . $sClassBasename . '.php' ;
+			$_SERVER['argv'][5] = $sDir . '/' . $sClassBasename . 'Test.php' ;
 		}
 		if( file_exists($_SERVER['argv'][5]) )
 		{
@@ -61,6 +61,12 @@ if( !empty($_SERVER['argv'][1]) )
 	// 执行测试
 	else if( !preg_match('/^\-\-/',$_SERVER['argv'][1]) )
 	{
+		// 通过原类名来测试
+		if( !preg_match('|^jc\\\\test\\\\unit\\\\testcase\\\\|', $_SERVER['argv'][1]) and Application::singleton()->classLoader()->searchClass($_SERVER['argv'][1]) )
+		{
+			$_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\" . $_SERVER['argv'][1] . 'Test' ;
+		}
+		
 		// 反射class的路径
 		if( $aClassFile=Application::singleton()->classLoader()->searchClass($_SERVER['argv'][1]) and ($aClassFile instanceof LocalFile) )
 		{
