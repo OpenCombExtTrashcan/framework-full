@@ -44,11 +44,11 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     	$aTokenPool = new TokenPool() ;
     	
     	// 添加一些mock token数据
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
     	$aTokenPool->add(new Token(T_OPEN_TAG,'<?',4)) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;			// position: 4
+    	$aTokenPool->add(new MockAnyTypeToken()) ;			// position: 4
     	
     	$aTokenPool->add(new Token(T_NAMESPACE, 'namespace', 0)) ;					// <<--- namespace declare start,  position: 5
     	$aTokenPool->add(new Token(T_WHITESPACE, ' ', 0)) ;
@@ -60,15 +60,15 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     	$aTokenPool->add(new Token(T_WHITESPACE, ' ', 0)) ;
     	$aTokenPool->add(new Token(Token::T_SEMICOLON, ';', 0)) ;					// <<--- namespace declare end, 	position: 13
     	
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;			// position: 14
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;    	
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;			// position: 22
+    	$aTokenPool->add(new MockAnyTypeToken()) ;			// position: 14
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;    	
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;			// position: 22
     	
     	$aTokenPool->add(new Token(T_NAMESPACE, 'namespace', 0)) ;					// <<--- namespace declare start, 	position: 23
     	$aTokenPool->add(new Token(T_WHITESPACE, ' ', 0)) ;
@@ -80,19 +80,19 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     	$aTokenPool->add(new Token(T_WHITESPACE, ' ', 0)) ;
     	$aTokenPool->add(new Token(Token::T_SEMICOLON, ';', 0)) ;					// <<--- namespace declare end,		position: 31
     	
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;			// position: 32
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;    	
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;			// position: 40
+    	$aTokenPool->add(new MockAnyTypeToken()) ;			// position: 32
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;    	
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;			// position: 40
     	
     	$aTokenPool->add(new Token(T_CLOSE_TAG,'?>',11)) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;
-    	$aTokenPool->add(new MockAnyTypeTokenForNamespaceParserTest()) ;			// position: 43
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;			// position: 43
     	
     	
     	// --------------------
@@ -150,10 +150,5 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class MockAnyTypeTokenForNamespaceParserTest extends Token
-{
-	public function __construct()
-	{}
-}
 
 ?>

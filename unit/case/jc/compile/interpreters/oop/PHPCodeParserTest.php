@@ -96,10 +96,4 @@ class PHPCodeParserTest extends \PHPUnit_Framework_TestCase
     	}
     }
 }
-
-class MockAnyTypeToken extends Token
-{
-	public function __construct()
-	{}
-}
 ?>
