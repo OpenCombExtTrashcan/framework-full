@@ -56,6 +56,11 @@ class ClassNameA{
 	
 	abstract public function methodNameB() ;
 }
+
+$fnCallback = function($arrArgv=array())
+{
+	...
+}
 */
     	// class body
     	$aClassBodyStart = new ClosureToken(new Token(Token::T_BRACE_OPEN, '{', 0)) ;
@@ -94,6 +99,16 @@ class ClassNameA{
     	$aAnonymousFunctionArgvListStart = new ClosureToken(new Token(T_STRING,'(', 0)) ;
     	$aAnonymousFunctionArgvListEnd = new ClosureToken(new Token(T_STRING, ')', 0)) ;
     	$aAnonymousFunctionArgvListStart->setTheOther($aAnonymousFunctionArgvListEnd) ;
+    	
+    	// 匿名函数B body
+    	$aAnonymousFunctionBBodyStart = new ClosureToken(new Token(Token::T_BRACE_OPEN, '{', 0)) ;
+    	$aAnonymousFunctionBBodyEnd = new ClosureToken(new Token(Token::T_BRACE_CLOSE, '}', 0)) ;
+    	$aAnonymousFunctionBBodyStart->setTheOther($aAnonymousFunctionBBodyEnd) ;
+    	
+    	// 匿名函数B argv list
+    	$aAnonymousFunctionBArgvListStart = new ClosureToken(new Token(T_STRING,'(', 0)) ;
+    	$aAnonymousFunctionBArgvListEnd = new ClosureToken(new Token(T_STRING, ')', 0)) ;
+    	$aAnonymousFunctionBArgvListStart->setTheOther($aAnonymousFunctionBArgvListEnd) ;
     	
     	
     	// globalFunctionNameA() body
@@ -189,6 +204,36 @@ class ClassNameA{
     	$aTokenPool->add(new Token(T_WHITESPACE, "\r\n", 0)) ;	
     	
     	$aTokenPool->add($aClassBodyEnd) ;
+    	$aTokenPool->add(new Token(T_WHITESPACE, "\r\n\r\n", 0)) ;
+    	
+    	$aTokenPool->add(new Token(T_VARIABLE,'$fnCallback',0)) ;
+    	$aTokenPool->add(new Token(T_WHITESPACE, " ", 0)) ;	
+    	$aTokenPool->add(new Token(T_STRING, "=", 0)) ;	
+    	$aTokenPool->add(new Token(T_WHITESPACE, " ", 0)) ;
+    	$aTokenPool->add(new Token(T_FUNCTION,'function',0)) ;	
+    	$aTokenPool->add($aAnonymousFunctionBArgvListStart) ;
+    	$aTokenPool->add(new Token(T_VARIABLE,'$arrArgv',0)) ;
+    	$aTokenPool->add(new Token(T_STRING,"=",0)) ;
+    	$aTokenPool->add(new Token(T_ARRAY,"array",0)) ;
+    	$aTokenPool->add(new Token(T_STRING,"(",0)) ;
+    	$aTokenPool->add(new Token(T_STRING,")",0)) ;
+    	$aTokenPool->add($aAnonymousFunctionBArgvListEnd) ;
+    	$aTokenPool->add($aAnonymousFunctionBBodyStart) ;
+    	$aTokenPool->add(new Token(T_WHITESPACE, "\r\n\t", 0)) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;    	
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add(new MockAnyTypeToken()) ;
+    	$aTokenPool->add($aAnonymousFunctionBBodyEnd) ;
+    	
     	
     	
     	// --------------------
@@ -227,8 +272,16 @@ class ClassNameA{
     	// 不支持在函数内定义的函数
     	$this->assertNull($aTokenPool->findFunction("globalFunctionNameA")) ;
     	
-    	// 做为参数的匿名函数（不支持在函数内定义的函数）
-    	$this->assertNull($aTokenPool->findFunction("")) ;
+    	// 全局匿名函数
+    	$aMethodToken = $aTokenPool->findFunction("") ;
+    	$this->assertNotNull($aMethodToken) ;
+    	$this->assertNull($aMethodToken->nameToken()) ;
+    	$this->assertTrue($aMethodToken->argListToken()===$aAnonymousFunctionBArgvListStart) ;
+    	$this->assertTrue($aMethodToken->bodyToken()===$aAnonymousFunctionBBodyStart) ;
+    	$this->assertNull($aMethodToken->accessToken()) ;
+    	$this->assertNull($aMethodToken->staticToken()) ;
+    	$this->assertNull($aMethodToken->abstractToken()) ;
+    	
     }
     
     
