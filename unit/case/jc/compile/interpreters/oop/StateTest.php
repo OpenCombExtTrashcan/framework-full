@@ -113,6 +113,10 @@ class StateTest extends \PHPUnit_Framework_TestCase
     	$this->aState->setCurrentClass( $aClassDefine ) ;
     	
     	$this->assertEquals($aClassDefine, $this->aState->currentClass()) ;
+    	
+    	// 清除状态
+    	$this->aState->setCurrentClass( null ) ;
+    	$this->assertNull($this->aState->currentClass()) ;
     }
 
     /**
@@ -125,6 +129,10 @@ class StateTest extends \PHPUnit_Framework_TestCase
     	$this->aState->setCurrentClass( $aClassDefine ) ;
     	
     	$this->assertEquals($aClassDefine, $this->aState->currentClass()) ;
+    	
+    	// 清除状态
+    	$this->aState->setCurrentClass( null ) ;
+    	$this->assertNull($this->aState->currentClass()) ;
     }
 
     /**
@@ -140,6 +148,10 @@ class StateTest extends \PHPUnit_Framework_TestCase
     	$this->aState->setCurrentFunction( $aFunctionDefine ) ;
     	
     	$this->assertEquals($aFunctionDefine, $this->aState->currentFunction()) ;
+    	
+    	// 清除状态
+    	$this->aState->setCurrentFunction( null ) ;
+    	$this->assertNull($this->aState->currentFunction()) ;
     }
 
     /**
@@ -152,6 +164,10 @@ class StateTest extends \PHPUnit_Framework_TestCase
     	$this->aState->setCurrentFunction( $aFunctionDefine ) ;
     	
     	$this->assertEquals($aFunctionDefine, $this->aState->currentFunction()) ;
+    	
+    	// 清除状态
+    	$this->aState->setCurrentFunction( null ) ;
+    	$this->assertNull($this->aState->currentFunction()) ;
     }
 }
 
