@@ -145,6 +145,9 @@ class TokenTest extends \PHPUnit_Framework_TestCase
     	$aNamespace = new NamespaceDeclare(new Token(T_NAMESPACE, 'namespace', 100)) ;
     	$aToken->setBelongsNamespace($aNamespace) ;
     	$this->assertTrue($aToken->belongsNamespace()===$aNamespace) ;
+    	
+    	$aToken->setBelongsNamespace(null) ;
+    	$this->assertNull($aToken->belongsNamespace()) ;
     }
 
     /**
@@ -166,6 +169,9 @@ class TokenTest extends \PHPUnit_Framework_TestCase
     	$aClassDefine = new ClassDefine(new Token(T_CLASS, 'class', 100)) ;
     	$aToken->setBelongsClass($aClassDefine) ;
     	$this->assertTrue($aToken->belongsClass()===$aClassDefine) ;
+    	
+    	$aToken->setBelongsClass(null) ;
+    	$this->assertNull($aToken->belongsClass()) ;
     }
 
     /**
@@ -187,6 +193,9 @@ class TokenTest extends \PHPUnit_Framework_TestCase
     	$aFunctionDefine = new FunctionDefine(new Token(T_FUNCTION, 'function', 100)) ;
     	$aToken->setBelongsFunction($aFunctionDefine) ;
     	$this->assertTrue($aToken->belongsFunction()===$aFunctionDefine) ;
+    	
+    	$aToken->setBelongsFunction(null) ;
+    	$this->assertNull($aToken->belongsFunction()) ;
     }
 
     /**
