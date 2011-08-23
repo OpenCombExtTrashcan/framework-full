@@ -6,18 +6,18 @@ use jc\compile\object\ClosureToken;
 use jc\compile\interpreters\oop\State;
 use jc\compile\object\Token;
 use jc\compile\object\TokenPool;
-use jc\compile\interpreters\oop\FunctionDefineParser ;
+use jc\compile\interpreters\oop\SyntaxScanner ;
 
 /**
- * Test class for jc\compile\interpreters\oop\FunctionDefineParser.
- * @for jc\compile\interpreters\oop\FunctionDefineParser
+ * Test class for jc\compile\interpreters\oop\SyntaxScanner.
+ * @for jc\compile\interpreters\oop\SyntaxScanner
  */
-class FunctionDefineParserTest extends \PHPUnit_Framework_TestCase
+class SyntaxScannerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\interpreters\oop\FunctionDefineParser
+     * @var jc\compile\interpreters\oop\SyntaxScanner
      */
-    protected $aFunctionDefineParser;
+    protected $aSyntaxScanner;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -25,7 +25,7 @@ class FunctionDefineParserTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->aFunctionDefineParser = new FunctionDefineParser ;
+        $this->aSyntaxScanner = new SyntaxScanner ;
     }
 
     /**
@@ -37,12 +37,15 @@ class FunctionDefineParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo Implement testParse().
+     * @todo Implement testAnalyze().
      */
-    public function testParse()
+    public function testAnalyze()
     {
     	// 添加一些mock token数据
 /*
+<?
+namespace package\name\aaa ;
+
 class ClassNameA{
 	static private function methodNameA($fnCallback=function($arrArgv=array()){
 		function globalFunctionNameA()
@@ -61,6 +64,7 @@ $fnCallback = function($arrArgv=array())
 {
 	...
 }
+?>
 */
     	// class body
     	$aClassBodyStart = new ClosureToken(new Token(Token::T_BRACE_OPEN, '{', 0)) ;
@@ -124,14 +128,27 @@ $fnCallback = function($arrArgv=array())
     	// 构造 mock
     	// ----------------------------
     	$aTokenPool = new TokenPool() ;
-    	$aTokenPool->add(new Token(T_CLASS, 'class', 0)) ;							// <<--- class define, 				position: 0
+    	$aTokenPool->add(new Token(T_OPEN_TAG, '<?', 0)) ;
+    	$aTokenPool->add(new Token(T_WHITESPACE, "\r\n", 0)) ;
+    	$aTokenPool->add(new Token(T_NAMESPACE, 'namespace', 0)) ;
+    	$aTokenPool->add(new Token(T_WHITESPACE, ' ', 0)) ;
+    	$aTokenPool->add(new Token(T_STRING, 'package', 0)) ;
+    	$aTokenPool->add(new Token(T_NS_SEPARATOR, '\\', 0)) ;
+    	$aTokenPool->add(new Token(T_STRING, 'name', 0)) ;
+    	$aTokenPool->add(new Token(T_NS_SEPARATOR, '\\', 0)) ;
+    	$aTokenPool->add(new Token(T_STRING, 'aaa', 0)) ;
+    	$aTokenPool->add(new Token(T_WHITESPACE, ' ', 0)) ;
+    	$aTokenPool->add(new Token(Token::T_SEMICOLON, ';', 0)) ;
+    	$aTokenPool->add(new Token(T_WHITESPACE, "\r\n", 0)) ;
+    	
+    	$aTokenPool->add(new Token(T_CLASS, 'class', 0)) ;							// <<--- class define, 				position: 
     	$aTokenPool->add(new Token(T_WHITESPACE, ' ', 0)) ;
     	$aTokenPool->add(new Token(T_STRING, 'ClassNameA', 0)) ;
-    	$aTokenPool->add($aClassBodyStart) ;										// <<--- class body start,				position: 3
+    	$aTokenPool->add($aClassBodyStart) ;										// <<--- class body start,				position: 
     	$aTokenPool->add(new Token(T_WHITESPACE, "\r\n\t", 0)) ;
 
 
-    	$aTokenPool->add(new Token(T_STATIC,'static',0)) ;							// 5
+    	$aTokenPool->add(new Token(T_STATIC,'static',0)) ;							// 
     	$aTokenPool->add(new Token(T_WHITESPACE," ",0)) ;
     	$aTokenPool->add(new Token(T_PRIVATE,'private',0)) ;
     	$aTokenPool->add(new Token(T_WHITESPACE," ",0)) ;
@@ -141,7 +158,7 @@ $fnCallback = function($arrArgv=array())
     	$aTokenPool->add($aMethodAArgvListStart) ;
     	$aTokenPool->add(new Token(T_VARIABLE,'$fnCallback',0)) ;
     	$aTokenPool->add(new Token(T_STRING,"=",0)) ;
-    	$aTokenPool->add(new Token(T_FUNCTION,'function',0)) ;						// 15
+    	$aTokenPool->add(new Token(T_FUNCTION,'function',0)) ;						// 
     	$aTokenPool->add($aAnonymousFunctionArgvListStart) ;
     	$aTokenPool->add(new Token(T_VARIABLE,'$arrArgv',0)) ;
     	$aTokenPool->add(new Token(T_STRING,"=",0)) ;
@@ -234,20 +251,19 @@ $fnCallback = function($arrArgv=array())
     	$aTokenPool->add(new MockAnyTypeToken()) ;
     	$aTokenPool->add($aAnonymousFunctionBBodyEnd) ;
     	
+    	$aTokenPool->add(new Token(T_WHITESPACE, "\r\n", 0)) ;
+    	$aTokenPool->add(new Token(T_CLOSE_TAG, "?>", 0)) ;
     	
     	
     	// --------------------
     	// 测试
-    	$aState = new State() ;
-    	$aTokenIter = $aTokenPool->iterator() ;
-    	foreach ($aTokenIter as $aToken)
-    	{
-    		// echo $aTokenIter->position(), "\r\n" ;
-    		$this->aFunctionDefineParser->parse($aTokenPool, $aTokenIter, $aState) ;
-    	}
+    	$this->aSyntaxScanner->analyze($aTokenPool) ;
     	
     	// 检验
-    	$aMethodToken = $aTokenPool->findFunction("methodNameA") ;
+    	$aClassToken = $aTokenPool->findClass("package\\name\\aaa\\ClassNameA") ;
+    	$this->assertNotNull($aClassToken) ;
+    	
+    	$aMethodToken = $aTokenPool->findFunction("methodNameA","package\\name\\aaa\\ClassNameA") ;
     	$this->assertNotNull($aMethodToken) ;
     	$this->assertEquals($aMethodToken->name(),"methodNameA") ;
     	$this->assertTrue($aMethodToken->argListToken()===$aMethodAArgvListStart) ;
@@ -257,10 +273,12 @@ $fnCallback = function($arrArgv=array())
     	$this->assertNotNull($aMethodToken->staticToken()) ;
     	$this->assertEquals($aMethodToken->staticToken()->tokenType(),T_STATIC) ;
     	$this->assertNull($aMethodToken->abstractToken()) ;
+    	$this->assertTrue($aMethodToken->belongsClass()===$aClassToken) ;
+    	$this->assertNotNull($aMethodToken->belongsNamespace()) ;
     	
-    	$aMethodToken = $aTokenPool->findFunction("methodNameB") ;
+    	$aMethodToken = $aTokenPool->findFunction("methodNameB","package\\name\\aaa\\ClassNameA") ;
     	$this->assertNotNull($aMethodToken) ;
-    	$this->assertEquals($aMethodToken->name(),"methodNameB") ;
+    	$this->assertEquals($aMethodToken->name(),"methodNameB","package\\name\\aaa\\ClassNameA") ;
     	$this->assertTrue($aMethodToken->argListToken()===$aMethodBArgvListStart) ;
     	$this->assertNull($aMethodToken->bodyToken()) ;
     	$this->assertNotNull($aMethodToken->accessToken()) ;
@@ -268,9 +286,8 @@ $fnCallback = function($arrArgv=array())
     	$this->assertNull($aMethodToken->staticToken()) ;
     	$this->assertNotNull($aMethodToken->abstractToken()) ;
     	$this->assertEquals($aMethodToken->abstractToken()->tokenType(),T_ABSTRACT) ;
-    	
-    	// 不支持在函数内定义的函数
-    	$this->assertNull($aTokenPool->findFunction("globalFunctionNameA")) ;
+    	$this->assertTrue($aMethodToken->belongsClass()===$aClassToken) ;
+    	$this->assertNotNull($aMethodToken->belongsNamespace()) ;
     	
     	// 全局匿名函数
     	$aMethodToken = $aTokenPool->findFunction("") ;
@@ -281,9 +298,6 @@ $fnCallback = function($arrArgv=array())
     	$this->assertNull($aMethodToken->accessToken()) ;
     	$this->assertNull($aMethodToken->staticToken()) ;
     	$this->assertNull($aMethodToken->abstractToken()) ;
-    	
     }
-    
-    
 }
 ?>
