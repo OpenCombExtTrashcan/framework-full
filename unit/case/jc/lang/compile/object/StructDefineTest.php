@@ -1,11 +1,11 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\object;
+namespace jc\test\unit\testcase\jc\lang\compile\object;
 
-use jc\compile\object\StructDefine;
-use jc\compile\ClassCompileException;
-use jc\compile\object\NamespaceDeclare;
-use jc\compile\object\Token;
-use jc\compile\object\ClosureToken;
+use jc\lang\compile\object\StructDefine;
+use jc\lang\compile\ClassCompileException;
+use jc\lang\compile\object\NamespaceDeclare;
+use jc\lang\compile\object\Token;
+use jc\lang\compile\object\ClosureToken;
 
 /**
  * Test class for StructDefine.
@@ -14,7 +14,7 @@ use jc\compile\object\ClosureToken;
 class StructDefineTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\object\StructDefine
+     * @var jc\lang\compile\object\StructDefine
      */
     protected $aStructDefine;
 

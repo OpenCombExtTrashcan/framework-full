@@ -1,10 +1,10 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\object;
+namespace jc\test\unit\testcase\jc\lang\compile\object;
 
-use jc\compile\object\FunctionDefine ;
-use jc\compile\object\ClosureToken;
-use jc\compile\object\Token;
-use jc\compile\ClassCompileException;
+use jc\lang\compile\object\FunctionDefine ;
+use jc\lang\compile\object\ClosureToken;
+use jc\lang\compile\object\Token;
+use jc\lang\compile\ClassCompileException;
 
 
 /**
@@ -14,7 +14,7 @@ use jc\compile\ClassCompileException;
 class FunctionDefineTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\object\FunctionDefine
+     * @var jc\lang\compile\object\FunctionDefine
      */
     protected $aFunctionDefine;
 

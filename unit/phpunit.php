@@ -15,7 +15,7 @@ include __DIR__.'/inc.init.php' ;
 $_SERVER['argv'][1] = '--skeleton-test' ;
 $_SERVER['argv'][2] = "jc\\fs\\FileSystem" ;
 */
-//$_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\fs\\FileSystem" ;
+//$_SERVER['argv'][1] = "jc\\compile\\interpreters\\oop\\SyntaxScanner" ;
 
 
 
@@ -73,6 +73,10 @@ if( !empty($_SERVER['argv'][1]) )
 			$_SERVER['argv'][2] = $aClassFile->localPath() ;
 		}
 	}
+}
+else 
+{
+	$_SERVER['argv'][1] = __DIR__.'/case/jc' ;
 }
 
 

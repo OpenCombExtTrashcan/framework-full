@@ -1,7 +1,7 @@
 <?php
-namespace jc\test\unit\testcase\jc\aop;
+namespace jc\test\unit\testcase\jc\lang\aop;
 
-use jc\aop\Pointcut ;
+use jc\lang\aop\Pointcut ;
 use jc\pattern\composite\IContainer;
 
 /**

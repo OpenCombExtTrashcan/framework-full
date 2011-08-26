@@ -1,20 +1,20 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\interpreters\oop;
+namespace jc\test\unit\testcase\jc\lang\compile\interpreters\oop;
 
 
-use jc\compile\object\Token;
-use jc\compile\object\TokenPool;
-use jc\compile\interpreters\oop\State;
-use jc\compile\interpreters\oop\NamespaceParser ;
+use jc\lang\compile\object\Token;
+use jc\lang\compile\object\TokenPool;
+use jc\lang\compile\interpreters\oop\State;
+use jc\lang\compile\interpreters\oop\NamespaceParser ;
 
 /**
- * Test class for jc\compile\interpreters\oop\NamespaceParser.
- * @for jc\compile\interpreters\oop\NamespaceParser
+ * Test class for jc\lang\compile\interpreters\oop\NamespaceParser.
+ * @for jc\lang\compile\interpreters\oop\NamespaceParser
  */
 class NamespaceParserTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\interpreters\oop\NamespaceParser
+     * @var jc\lang\compile\interpreters\oop\NamespaceParser
      */
     protected $aNamespaceParser;
 

@@ -1,21 +1,21 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\interpreters\oop;
+namespace jc\test\unit\testcase\jc\lang\compile\interpreters\oop;
 
 
-use jc\compile\object\ClosureToken;
-use jc\compile\interpreters\oop\State;
-use jc\compile\object\Token;
-use jc\compile\object\TokenPool;
-use jc\compile\interpreters\oop\SyntaxScanner ;
+use jc\lang\compile\object\ClosureToken;
+use jc\lang\compile\interpreters\oop\State;
+use jc\lang\compile\object\Token;
+use jc\lang\compile\object\TokenPool;
+use jc\lang\compile\interpreters\oop\SyntaxScanner ;
 
 /**
- * Test class for jc\compile\interpreters\oop\SyntaxScanner.
- * @for jc\compile\interpreters\oop\SyntaxScanner
+ * Test class for jc\lang\compile\interpreters\oop\SyntaxScanner.
+ * @for jc\lang\compile\interpreters\oop\SyntaxScanner
  */
 class SyntaxScannerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\interpreters\oop\SyntaxScanner
+     * @var jc\lang\compile\interpreters\oop\SyntaxScanner
      */
     protected $aSyntaxScanner;
 

@@ -1,7 +1,7 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\object;
+namespace jc\test\unit\testcase\jc\lang\compile\object;
 
-use jc\compile\object\AbstractObject ;
+use jc\lang\compile\object\AbstractObject ;
 
 /**
  * Test class for AbstractObject.
@@ -14,7 +14,7 @@ class AbstractObjectTest extends \PHPUnit_Framework_TestCase
 	const first_position = 15 ;
 	
     /**
-     * @var jc\compile\object\AbstractObject
+     * @var jc\lang\compile\object\AbstractObject
      */
     protected $aAbstractObject;
 

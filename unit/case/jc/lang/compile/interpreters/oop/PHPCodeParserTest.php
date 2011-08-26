@@ -1,10 +1,10 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\interpreters\oop;
+namespace jc\test\unit\testcase\jc\lang\compile\interpreters\oop;
 
-use jc\compile\interpreters\oop\PHPCodeParser ;
-use jc\compile\object\Token;
-use jc\compile\object\TokenPool;
-use jc\compile\interpreters\oop\State;
+use jc\lang\compile\interpreters\oop\PHPCodeParser ;
+use jc\lang\compile\object\Token;
+use jc\lang\compile\object\TokenPool;
+use jc\lang\compile\interpreters\oop\State;
 
 /**
  * Test class for PHPCodeParser.
@@ -13,7 +13,7 @@ use jc\compile\interpreters\oop\State;
 class PHPCodeParserTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\interpreters\oop\PHPCodeParser
+     * @var jc\lang\compile\interpreters\oop\PHPCodeParser
      */
     protected $aPHPCodeParser;
 

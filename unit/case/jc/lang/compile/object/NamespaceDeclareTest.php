@@ -1,9 +1,9 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\object;
+namespace jc\test\unit\testcase\jc\lang\compile\object;
 
-use jc\compile\ClassCompileException;
-use jc\compile\object\Token;
-use jc\compile\object\NamespaceDeclare ;
+use jc\lang\compile\ClassCompileException;
+use jc\lang\compile\object\Token;
+use jc\lang\compile\object\NamespaceDeclare ;
 
 /**
  * Test class for NamespaceDeclare.

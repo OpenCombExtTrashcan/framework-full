@@ -18,7 +18,7 @@ include PATH_JC_ROOT."/inc.entrance.php" ;
 $aApp = ApplicationFactory::singleton()->create(__DIR__) ;
 
 $aApp->fileSystem()->mount('/unitcase',new LocalFileSystem(__DIR__.'/case')) ;
-$aApp->classLoader()->addPackage('jc\\test\\unit\\testcase\\jc',null,'/unitcase/jc') ;
+$aApp->classLoader()->addPackage('jc\\test\\unit\\testcase\\jc','/unitcase/jc') ;
 
 return $aApp ;
 ?>

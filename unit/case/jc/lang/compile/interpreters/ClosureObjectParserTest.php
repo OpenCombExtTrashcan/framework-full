@@ -1,19 +1,19 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\interpreters;
+namespace jc\test\unit\testcase\jc\lang\compile\interpreters;
 
 
-use jc\compile\object\TokenPool;
-use jc\compile\object\Token;
-use jc\compile\interpreters\ClosureObjectParser ;
+use jc\lang\compile\object\TokenPool;
+use jc\lang\compile\object\Token;
+use jc\lang\compile\interpreters\ClosureObjectParser ;
 
 /**
- * Test class for jc\compile\interpreters\ClosureObjectParser.
- * @for jc\compile\interpreters\ClosureObjectParser
+ * Test class for jc\lang\compile\interpreters\ClosureObjectParser.
+ * @for jc\lang\compile\interpreters\ClosureObjectParser
  */
 class ClosureObjectParserTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\interpreters\ClosureObjectParser
+     * @var jc\lang\compile\interpreters\ClosureObjectParser
      */
     protected $aClosureObjectParser;
     

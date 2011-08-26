@@ -1,11 +1,11 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\object;
+namespace jc\test\unit\testcase\jc\lang\compile\object;
 
-use jc\compile\ClassCompileException;
-use jc\compile\object\NamespaceDeclare;
-use jc\compile\object\Token;
-use jc\compile\object\ClosureToken;
-use jc\compile\object\ClassDefine ;
+use jc\lang\compile\ClassCompileException;
+use jc\lang\compile\object\NamespaceDeclare;
+use jc\lang\compile\object\Token;
+use jc\lang\compile\object\ClosureToken;
+use jc\lang\compile\object\ClassDefine ;
 
 /**
  * Test class for ClassDefine.
@@ -14,7 +14,7 @@ use jc\compile\object\ClassDefine ;
 class ClassDefineTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\object\ClassDefine
+     * @var jc\lang\compile\object\ClassDefine
      */
     protected $aClassDefine;
 

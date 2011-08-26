@@ -1,9 +1,9 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\object;
+namespace jc\test\unit\testcase\jc\lang\compile\object;
 
-use jc\compile\object\TokenPool ;
-use jc\compile\object\FunctionDefine;
-use jc\compile\object\ClassDefine;
+use jc\lang\compile\object\TokenPool ;
+use jc\lang\compile\object\FunctionDefine;
+use jc\lang\compile\object\ClassDefine;
 
 /**
  * Test class for TokenPool.
@@ -12,7 +12,7 @@ use jc\compile\object\ClassDefine;
 class TokenPoolTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\object\TokenPool
+     * @var jc\lang\compile\object\TokenPool
      */
     protected $aTokenPool;
 

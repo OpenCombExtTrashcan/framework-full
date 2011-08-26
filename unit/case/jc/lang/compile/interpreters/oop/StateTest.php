@@ -1,7 +1,7 @@
 <?php
-namespace jc\test\unit\testcase\jc\compile\interpreters\oop;
+namespace jc\test\unit\testcase\jc\lang\compile\interpreters\oop;
 
-use jc\compile\interpreters\oop\State ;
+use jc\lang\compile\interpreters\oop\State ;
 
 /**
  * Test class for State.
@@ -10,7 +10,7 @@ use jc\compile\interpreters\oop\State ;
 class StateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\compile\interpreters\oop\State
+     * @var jc\lang\compile\interpreters\oop\State
      */
     protected $aState;
 
@@ -173,9 +173,9 @@ class StateTest extends \PHPUnit_Framework_TestCase
 
 
 
-use jc\compile\object\NamespaceDeclare;
-use jc\compile\object\ClassDefine;
-use jc\compile\object\FunctionDefine;
+use jc\lang\compile\object\NamespaceDeclare;
+use jc\lang\compile\object\ClassDefine;
+use jc\lang\compile\object\FunctionDefine;
 
 class MockNamespaceDeclare extends NamespaceDeclare
 {
