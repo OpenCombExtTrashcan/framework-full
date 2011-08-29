@@ -20,9 +20,7 @@ class DocCommentTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      */
     protected function setUp()
-    {
-        $this->aDocComment = new DocComment ;
-    }
+    {}
 
     /**
      * Tears down the fixture, for example, closes a network connection.
@@ -37,10 +35,17 @@ class DocCommentTest extends \PHPUnit_Framework_TestCase
      */
     public function testDescription()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+    	$aDocComment = new DocComment("
+		/**
+ 		 * this is description
+ 		 *  ...
+ 		 * *******************
+ 		 * @xxx ooo  
+ 		 *xxx
+ 		 *
+ 		 */
+") ;
+    	$this->assertEquals($aDocComment->description(),"this is description\r\n ...\r\n*******************\r\nxxx\r\n") ;
     }
 
     /**
@@ -48,10 +53,19 @@ class DocCommentTest extends \PHPUnit_Framework_TestCase
      */
     public function testItem()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+    	$aDocComment = new DocComment("
+		/**
+ 		 * this is description
+ 		 *  ...
+ 		 * @var		XXXX
+ 		 * @author xdxd
+ 		 * *******************
+ 		 * @var OOOO
+ 		 *
+ 		 */
+") ;
+    	$this->assertEquals($aDocComment->item('var'),"XXXX") ;
+    	$this->assertEquals($aDocComment->item('author'),"xdxd") ;
     }
 
     /**
@@ -59,10 +73,19 @@ class DocCommentTest extends \PHPUnit_Framework_TestCase
      */
     public function testItems()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+    	$aDocComment = new DocComment("
+		/**
+ 		 * this is description
+ 		 *  ...
+ 		 * @var		XXXX
+ 		 * @author xdxd
+ 		 * *******************
+ 		 * @var OOOO
+ 		 *
+ 		 */
+") ;
+    	$this->assertEquals($aDocComment->items('var'),array("XXXX","OOOO")) ;
+    	$this->assertEquals($aDocComment->items('author'),array("xdxd")) ;
     }
 
     /**
@@ -70,10 +93,23 @@ class DocCommentTest extends \PHPUnit_Framework_TestCase
      */
     public function testItemIterator()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+    	$aDocComment = new DocComment("
+		/**
+ 		 * this is description
+ 		 *  ...
+ 		 * @var		XXXX
+ 		 * @author xdxd
+ 		 * *******************
+ 		 * @var OOOO
+ 		 *
+ 		 */
+") ;
+    	$aIter = $aDocComment->itemIterator() ;
+    	$this->assertEquals($aIter->current(),"var") ;
+    	$aIter->next() ;
+    	$this->assertEquals($aIter->current(),"author") ;
+    	$aIter->next() ;
+    	$this->assertEquals($aIter->current(),null) ;
     }
 }
 ?>
