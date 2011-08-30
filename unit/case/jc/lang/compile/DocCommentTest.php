@@ -91,6 +91,30 @@ class DocCommentTest extends \PHPUnit_Framework_TestCase
     /**
      * @todo Implement testItemIterator().
      */
+    public function testItemNameIterator()
+    {
+    	$aDocComment = new DocComment("
+		/**
+ 		 * this is description
+ 		 *  ...
+ 		 * @var		XXXX
+ 		 * @author xdxd
+ 		 * *******************
+ 		 * @var OOOO
+ 		 *
+ 		 */
+") ;
+    	$aIter = $aDocComment->itemNameIterator() ;
+    	$this->assertEquals($aIter->current(),"var") ;
+    	$aIter->next() ;
+    	$this->assertEquals($aIter->current(),"author") ;
+    	$aIter->next() ;
+    	$this->assertEquals($aIter->current(),null) ;
+    }
+
+    /**
+     * @todo Implement testItemIterator().
+     */
     public function testItemIterator()
     {
     	$aDocComment = new DocComment("
@@ -104,12 +128,47 @@ class DocCommentTest extends \PHPUnit_Framework_TestCase
  		 *
  		 */
 ") ;
-    	$aIter = $aDocComment->itemIterator() ;
-    	$this->assertEquals($aIter->current(),"var") ;
+    	$aIter = $aDocComment->itemIterator("var") ;
+    	$this->assertEquals($aIter->current(),'XXXX') ;
     	$aIter->next() ;
-    	$this->assertEquals($aIter->current(),"author") ;
+    	$this->assertEquals($aIter->current(),"OOOO") ;
     	$aIter->next() ;
     	$this->assertEquals($aIter->current(),null) ;
+    	
+    	
+    	$aIter = $aDocComment->itemIterator("author") ;
+    	$this->assertEquals($aIter->current(),'xdxd') ;
+    	$aIter->next() ;
+    	$this->assertEquals($aIter->current(),null) ;
+    	
+    	
+    	// not exists
+    	$aIter = $aDocComment->itemIterator("paramter") ;
+    	$this->assertEquals($aIter->current(),null) ;
+    	
+    }
+
+    /**
+     * @todo Implement testItemIterator().
+     */
+    public function testHasItem()
+    {
+    	$aDocComment = new DocComment("
+		/**
+ 		 * this is description
+ 		 *  ...
+ 		 * @var		XXXX
+ 		 * @author xdxd
+ 		 * *******************
+ 		 * @var OOOO
+ 		 *
+ 		 */
+") ;
+    	$this->assertTrue($aDocComment->hasItem("var")) ;
+    	$this->assertTrue($aDocComment->hasItem("author")) ;
+    	
+    	// not exists
+    	$this->assertFalse($aDocComment->hasItem("return")) ;
     }
 }
 ?>
