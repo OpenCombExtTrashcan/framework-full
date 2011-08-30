@@ -21,7 +21,7 @@ class PointcutTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->aPointcut = new Pointcut;
+        $this->aPointcut = new Pointcut('OooXxx');
     }
 
     /**

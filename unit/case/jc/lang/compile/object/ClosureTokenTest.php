@@ -80,10 +80,12 @@ class ClosureTokenTest extends \PHPUnit_Framework_TestCase
      */
     public function testTheOther()
     {
-		foreach( ClosureToken::closureTokenPairs() as $openToken=>$closeToken )
+		foreach( ClosureToken::closureTokenPairs() as $arrPair )
 		{
-	    	$aOpenToken = new ClosureToken( new Token($openToken,'',100) ) ;
-	    	$aCloseToken = new ClosureToken( new Token($closeToken,'',100) ) ;
+			list($openToken,$closeToken) = $arrPair ;
+			
+	    	$aOpenToken = new ClosureToken( new Token($openToken,'(',100) ) ;
+	    	$aCloseToken = new ClosureToken( new Token($closeToken,')',100) ) ;
 	    	
 	    	$aOpenToken->setTheOther($aCloseToken) ;
 	    	
