@@ -173,34 +173,5 @@ class FunctionDefineTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($e) ;
         $this->assertTrue($this->aFunctionDefine->abstractToken()===$aAbstractToken) ;
     }
-
-    /**
-     * @todo Implement testSetDocToken().
-     */
-    public function testSetDocToken()
-    {
-    }
-
-    /**
-     * @todo Implement testDocToken().
-     */
-    public function testDocToken()
-    {
-        $this->assertNull($this->aFunctionDefine->docToken()) ;
-        
-        $aDocToken = new Token(T_DOC_COMMENT, '/**..**/', 120) ;
-        $this->aFunctionDefine->setDocToken($aDocToken) ;
-        $this->assertTrue($this->aFunctionDefine->docToken()===$aDocToken) ;
-        
-        // 非法的参数
-        $aToken = new Token(T_STATIC, 'static', 120) ;
-        try{
-        	$this->aFunctionDefine->setDocToken($aToken) ;
-        }
-        catch (ClassCompileException $e)
-        {}
-        $this->assertNotNull($e) ;
-        $this->assertTrue($this->aFunctionDefine->docToken()===$aDocToken) ;
-    }
 }
 ?>

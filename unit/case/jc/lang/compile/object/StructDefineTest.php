@@ -1,6 +1,7 @@
 <?php
 namespace jc\test\unit\testcase\jc\lang\compile\object;
 
+use jc\lang\compile\object\DocCommentDeclare;
 use jc\lang\compile\object\StructDefine;
 use jc\lang\compile\ClassCompileException;
 use jc\lang\compile\object\NamespaceDeclare;
@@ -118,6 +119,28 @@ class StructDefineTest extends \PHPUnit_Framework_TestCase
     public function testSetBodyToken()
     {
     	$this->testBodyToken() ;
+    }
+
+
+    /**
+     * @see self::testDocToken()
+     */
+    public function testSetDocToken()
+    {
+    	$this->testDocToken() ;
+    }
+
+    /**
+     * @todo Implement testDocToken().
+     */
+    public function testDocToken()
+    {
+        $this->assertNull($this->aStructDefine->docToken()) ;
+        
+        $aDocToken = new Token(T_DOC_COMMENT, '/**..*/', 120) ;
+        $aDocCommentDeclare = new DocCommentDeclare(($aDocToken)) ;
+        $this->aStructDefine->setDocToken($aDocCommentDeclare) ;
+        $this->assertTrue($this->aStructDefine->docToken()===$aDocCommentDeclare) ;
     }
 }
 
