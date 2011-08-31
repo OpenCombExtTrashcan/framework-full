@@ -2,6 +2,8 @@
 namespace jc\test\unit\testcase\jc\lang\aop;
 
 
+use jc\lang\aop\Advice;
+
 use jc\lang\compile\CompilerFactory;
 use jc\system\Application ;
 use jc\lang\aop\Aspect ;
@@ -37,13 +39,70 @@ class AspectTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateFromToken()
     {
-		$aClassFile = Application::singleton()->classLoader()->searchClass('jc\\test\\unit\\testcase\\jc\\lang\\aop\\mockup\\MockupAspectA') ;
+    	$sAspectNameA = 'jc\\test\\unit\\testcase\\jc\\lang\\aop\\mockup\\MockupAspectA' ;
+    	$sAspectNameB = 'jc\\test\\unit\\testcase\\jc\\lang\\aop\\mockup\\MockupAspectB' ;
+    	
+		$aAspectFileA = Application::singleton()->classLoader()->searchClass($sAspectNameA) ;
+		$aAspectFileB = Application::singleton()->classLoader()->searchClass($sAspectNameB) ;
 		
 		$aClassCompiler = CompilerFactory::singleton()->create() ;
-		$aTokenPool = $aClassCompiler->interpret( $aClassFile->openReader() ) ;
-
-		$aClassToken = $aTokenPool->findClass('jc\\test\\unit\\testcase\\jc\\lang\\aop\\mockup\\MockupAspectA') ;
-		Aspect::createFromToken($aClassToken) ;
+		$aTokenPoolForAspectA = $aClassCompiler->interpret( $aAspectFileA->openReader() ) ;
+		$aTokenPoolForAspectB = $aClassCompiler->interpret( $aAspectFileB->openReader() ) ;
+		
+		$aAspect = Aspect::createFromToken($aTokenPoolForAspectA->findClass($sAspectNameA)) ;
+		
+		// pointcuts and advices
+		// ---------------
+		$aPointcutIter = $aAspect->pointcuts()->iterator() ;
+		
+		// 第一项 pointcut ----------
+		$aPointcut = $aPointcutIter->current() ;
+		$this->assertEquals('someWorks',$aPointcut->name()) ;
+		//  插入了 2 个 advice。 注意， "log" 没有申明 advice ，所以没有被当作一个 Advice，实际编译过程中被编译器忽略 
+		$aAdviceIter = $aPointcut->advices()->iterator() ;
+		$aAdvice = $aAdviceIter->current() ;
+		$this->assertEquals('auth',$aAdvice->name()) ;
+		$this->assertEquals(Advice::after,$aAdvice->position()) ;
+		
+		$aAdviceIter->next() ;
+		$aAdvice = $aAdviceIter->current() ;
+		$this->assertEquals('codeCoverage',$aAdvice->name()) ;
+		$this->assertEquals(Advice::before,$aAdvice->position()) ;
+		
+		$aAdviceIter->next() ;
+		$aAdvice = $aAdviceIter->current() ;
+		$this->assertNull($aAdvice) ;
+		
+		
+		// 第二项 pointcut ----------
+		$aPointcutIter->next() ;
+		$aPointcut = $aPointcutIter->current() ;
+		$this->assertEquals('otherWorks',$aPointcut->name()) ;
+		//  没有插入 advice
+		$aAdviceIter = $aPointcut->advices()->iterator() ;
+		$aAdvice = $aAdviceIter->current() ;
+		$this->assertNull($aAdvice) ;
+		
+		
+		// 第三项 pointcut ----------
+		$aPointcutIter->next() ;
+		$aPointcut = $aPointcutIter->current() ;
+		$this->assertEquals('otherWorksA',$aPointcut->name()) ;
+		//  插入了 1 个 advice
+		$aAdviceIter = $aPointcut->advices()->iterator() ;
+		$aAdvice = $aAdviceIter->current() ;
+		$this->assertEquals('codeCoverage',$aAdvice->name()) ;
+		$this->assertEquals(Advice::before,$aAdvice->position()) ;
+		
+		$aAdviceIter->next() ;
+		$aAdvice = $aAdviceIter->current() ;
+		$this->assertNull($aAdvice) ;
+		
+		
+		// 没有了 ----------
+		$aPointcutIter->next() ;
+		$aPointcut = $aPointcutIter->current() ;
+		$this->assertNull($aPointcut) ;
 		
 		
     }
@@ -53,10 +112,9 @@ class AspectTest extends \PHPUnit_Framework_TestCase
      */
     public function testPointcuts()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+    	$aAspect = new Aspect ;
+    	
+    	$this->assertInstanceOf("jc\\pattern\\composite\\IContainer", $aAspect->pointcuts()) ;
     }
 }
 ?>
