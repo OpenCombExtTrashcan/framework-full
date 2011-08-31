@@ -1,8 +1,9 @@
 <?php
 namespace jc\test\unit\testcase\jc\lang\compile\object;
 
-use jc\lang\compile\object\DocCommentDeclare;
 use jc\lang\compile\object\StructDefine;
+use jc\lang\compile\object\TokenPool;
+use jc\lang\compile\object\DocCommentDeclare;
 use jc\lang\compile\ClassCompileException;
 use jc\lang\compile\object\NamespaceDeclare;
 use jc\lang\compile\object\Token;
@@ -32,12 +33,23 @@ class StructDefineTest extends \PHPUnit_Framework_TestCase
     	$this->aStructKeywordToken = new Token(T_CLASS, 'class', 100) ;
     	$this->aStructNameToken = new Token(T_STRING, 'SameClassName', 110) ;
     	$this->aStructBodyToken = new ClosureToken(new Token(Token::T_BRACE_OPEN, '{', 120)) ;
-    	
+    	$this->aStructBodyEndToken = new ClosureToken(new Token(Token::T_BRACE_CLOSE, '}', 120)) ;
+    	$this->aStructBodyToken->setTheOther($this->aStructBodyEndToken) ;
+    	    	
         $this->aStructDefine = new MockStructDefine(
         		$this->aStructKeywordToken
         		, $this->aStructNameToken
         		, $this->aStructBodyToken
         ) ;
+        
+    	$aTokenPool = new TokenPool() ;
+    	$aTokenPool->add($this->aStructKeywordToken) ;
+    	$aTokenPool->add($this->aStructDefine) ;
+    	$aTokenPool->add($this->aStructNameToken) ;
+    	$aTokenPool->add($this->aStructBodyToken) ;
+    	$aTokenPool->add(new Token(T_STRING, 'hi world', 120)) ;
+    	$aTokenPool->add(new Token(T_STRING, '~~~', 120)) ;
+    	$aTokenPool->add($this->aStructBodyEndToken) ;
     }
 
     /**
@@ -141,6 +153,17 @@ class StructDefineTest extends \PHPUnit_Framework_TestCase
         $aDocCommentDeclare = new DocCommentDeclare(($aDocToken)) ;
         $this->aStructDefine->setDocToken($aDocCommentDeclare) ;
         $this->assertTrue($this->aStructDefine->docToken()===$aDocCommentDeclare) ;
+    }
+
+    /**
+     * @todo Implement testBodySource().
+     */
+    public function testBodySource()
+    {
+    	$this->assertEquals(
+    	    	$this->aStructDefine->bodySource()
+    	    	, "hi world~~~"
+    	) ;
     }
 }
 
