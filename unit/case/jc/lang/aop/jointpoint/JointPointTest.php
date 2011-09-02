@@ -1,7 +1,7 @@
 <?php
-namespace jc\test\unit\testcase\jc\lang\aop;
+namespace jc\test\unit\testcase\jc\lang\aop\jointpoint;
 
-use jc\lang\aop\JointPoint ;
+use jc\lang\aop\jointpoint\JointPoint ;
 
 /**
  * Test class for JointPoint.

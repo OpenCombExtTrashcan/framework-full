@@ -1,11 +1,11 @@
 <?php
-namespace jc\test\unit\testcase\jc\lang\aop;
+namespace jc\test\unit\testcase\jc\lang\aop\jointpoint;
 
 
 use jc\lang\compile\CompilerFactory;
 use jc\io\InputStreamCache;
 use jc\lang\compile\object\ClassDefine;
-use jc\lang\aop\JointPointMethodDefine ;
+use jc\lang\aop\jointpoint\JointPointMethodDefine ;
 
 /**
  * Test class for jc\lang\aop\JointPointMethodDefine.
