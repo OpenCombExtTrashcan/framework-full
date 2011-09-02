@@ -120,9 +120,15 @@ class AOPTest extends \PHPUnit_Framework_TestCase
     	$aAOP->aspects()->add($as2);
     	
     	$aIterator = $aAOP->jointPointIterator();
-    	while($aJoint = $aIterator->next()){
-    		$this->assertType('jc\lang\aop\JointPoint', $aJoint);
-    	}
+    	$this->assertTrue($j1 === $aIterator->current());
+    	$aIterator->next();
+    	$this->assertTrue($j2 === $aIterator->current());
+    	$aIterator->next();
+    	$this->assertTrue($j3 === $aIterator->current());
+    	$aIterator->next();
+    	$this->assertTrue($j4 === $aIterator->current());
+    	$aIterator->next();
+    	$this->assertTrue($j5 === $aIterator->current());
     }
     
     public function testCreateClassCompiler(){
