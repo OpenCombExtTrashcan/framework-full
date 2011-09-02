@@ -1,7 +1,7 @@
 <?php
-namespace jc\test\unit\testcase\jc\aop;
+namespace jc\test\unit\testcase\jc\lang\aop;
 
-use jc\aop\JointPoint ;
+use jc\lang\aop\JointPoint ;
 
 /**
  * Test class for JointPoint.
@@ -28,30 +28,19 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {}
 
-    /**
-     * @todo Implement testCreateCallFunction().
-     */
-    public function testCreateCallFunction()
+    
+    public function testCreateDefineMethod()
     {
-    	
     	// 指定类方法
-    	$aJointPoint = JointPoint::createCallFunction('MethodNameBBB','ClassNameAAA') ;
+    	$aJointPoint = JointPoint::createDefineMethod('ClassNameAAA','MethodNameBBB') ;
     	
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("ClassNameAAA::MethodNameBBB()")
     			, 'sExecutionRegexp',$aJointPoint
     	) ;
-
-    	// 全局函数
-    	$aJointPoint = JointPoint::createCallFunction('FunctionNameAAA') ;
-    	
-    	$this->assertAttributeEquals(
-	    		JointPoint::transRegexp("::FunctionNameAAA()")
-	    		, 'sExecutionRegexp',$aJointPoint
-    	) ;
     	
     	// 指定类的所有方法
-    	$aJointPoint = JointPoint::createCallFunction('*','ClassNameAAA') ;
+    	$aJointPoint = JointPoint::createDefineMethod('ClassNameAAA','*') ;
     	
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("ClassNameAAA::*()")
@@ -59,72 +48,85 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     	) ;
     	
     	// 使用通配符
-    	$aJointPoint = JointPoint::createCallFunction('FunctionName*','ClassName*') ;
+    	$aJointPoint = JointPoint::createDefineMethod('ClassNameAAA','MethodName*') ;
     	
     	$this->assertAttributeEquals(
-    			JointPoint::transRegexp("ClassName*::FunctionName*()")
+    			JointPoint::transRegexp("ClassNameAAA::MethodName*()")
+    			, 'sExecutionRegexp',$aJointPoint
+    	) ;
+    }
+    
+    public function testCreateCallFunction()
+    {
+    	// 全局函数
+    	$aJointPoint = JointPoint::createCallFunction('FunctionNameAAA','WeaveClassName') ;
+    	
+    	$this->assertAttributeEquals(
+	    		JointPoint::transRegexp("FunctionNameAAA()")
+	    		, 'sExecutionRegexp',$aJointPoint
+    	) ;
+    	
+    	// 使用通配符
+    	$aJointPoint = JointPoint::createCallFunction('FunctionName*','WeaveClassName') ;
+    	
+    	$this->assertAttributeEquals(
+    			JointPoint::transRegexp("FunctionName*()")
     			, 'sExecutionRegexp',$aJointPoint
     	) ;
     	
     }
-
-    /**
-     * @todo Implement testCreateAccessProperty().
-     */
     public function testCreateAccessProperty()
     {
     	// 向一个属性赋值(set)
-    	$aJointPoint = JointPoint::createAccessProperty('ClassNameAAA','PropertyNameBBB',JointPoint::ACCESS_SET) ;
+    	$aJointPoint = JointPoint::createAccessProperty('PropertyNameBBB','WeaveClassName','WeaveMethodName',JointPoint::ACCESS_SET) ;
     	
     	$this->assertAttributeEquals(
-    			JointPoint::transRegexp("ClassNameAAA::\$PropertyNameBBB set")
+    			JointPoint::transRegexp("->\$PropertyNameBBB set")
     			, 'sExecutionRegexp',$aJointPoint
     	) ;
     	
     	// 访问一个属性(get)
-    	$aJointPoint = JointPoint::createAccessProperty('ClassNameAAA','PropertyNameBBB',JointPoint::ACCESS_GET) ;
+    	$aJointPoint = JointPoint::createAccessProperty('PropertyNameBBB','WeaveClassName','WeaveMethodName',JointPoint::ACCESS_GET) ;
     	
     	$this->assertAttributeEquals(
-    			JointPoint::transRegexp("ClassNameAAA::\$PropertyNameBBB get")
+    			JointPoint::transRegexp("->\$PropertyNameBBB get")
     			, 'sExecutionRegexp',$aJointPoint
     	) ;
     	
     	// 赋值或访问(set/get)
-    	$aJointPoint = JointPoint::createAccessProperty('ClassNameAAA','PropertyNameBBB',JointPoint::ACCESS_ANY) ;
+    	$aJointPoint = JointPoint::createAccessProperty('PropertyNameBBB','WeaveClassName','WeaveMethodName',JointPoint::ACCESS_ANY) ;
     	
     	$this->assertAttributeEquals(
-    			JointPoint::transRegexp("ClassNameAAA::\$PropertyNameBBB *")
+    			JointPoint::transRegexp("->\$PropertyNameBBB *")
     			, 'sExecutionRegexp',$aJointPoint
     	) ;
     	
     	// 使用通配符
-    	$aJointPoint = JointPoint::createAccessProperty('ClassName*','PropertyName*') ;
+    	$aJointPoint = JointPoint::createAccessProperty('PropertyName*','WeaveClassName*') ;
     	
     	$this->assertAttributeEquals(
-    			JointPoint::transRegexp("ClassName*::\$PropertyName* *")
+    			JointPoint::transRegexp("->\$PropertyName* *")
     			, 'sExecutionRegexp',$aJointPoint
     	) ;
     	
     	// 指定class的所有属性
-    	$aJointPoint = JointPoint::createAccessProperty('ClassNameAAA') ;
+    	$aJointPoint = JointPoint::createAccessProperty('*', 'ClassNameAAA' , 'WeaveClassName') ;
     	
     	$this->assertAttributeEquals(
-    			JointPoint::transRegexp("ClassNameAAA::\$* *")
+    			JointPoint::transRegexp("->\$* *")
     			, 'sExecutionRegexp',$aJointPoint
     	) ;
     	
     	// 错误的 $sAccess
 		$this->setExpectedException('jc\\lang\\Exception');
-		$aJointPoint = JointPoint::createAccessProperty('ClassNameAAA','PropertyNameBBB','setter') ;
+		$aJointPoint = JointPoint::createAccessProperty('PropertyNameBBB','WeaveClassName','WeaveMethodName' ,'setter') ;
+		
     }
-
-    /**
-     * @todo Implement testCreateThrowException().
-     */
+    
     public function testCreateThrowException()
     {
     	// 指定异常类
-    	$aJointPoint = JointPoint::createThrowException('ExceptionClassNameAAA') ;
+    	$aJointPoint = JointPoint::createThrowException('ExceptionClassNameAAA' , 'WeaveClassNameAAA') ;
     	
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("throw ExceptionClassNameAAA")
@@ -132,7 +134,7 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     	) ;
     	
     	// 任意异常类
-    	$aJointPoint = JointPoint::createThrowException() ;
+    	$aJointPoint = JointPoint::createThrowException( '*', 'WeaveClassNameAAA') ;
     	
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("throw *")
@@ -140,7 +142,7 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     	) ;
     	
     	// 使用通配符
-    	$aJointPoint = JointPoint::createThrowException('ExceptionClassName*') ;
+    	$aJointPoint = JointPoint::createThrowException('ExceptionClassName*', 'WeaveClassNameAAA') ;
     	
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("throw ExceptionClassName*")
@@ -148,13 +150,10 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     	) ;
     }
 
-    /**
-     * @todo Implement testCreateNewObject().
-     */
     public function testCreateNewObject()
     {
     	// 指定类
-    	$aJointPoint = JointPoint::createNewObject('ClassNameAAA') ;
+    	$aJointPoint = JointPoint::createNewObject('ClassNameAAA', 'WeaveClassNameAAA') ;
     	
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("new ClassNameAAA")
@@ -162,7 +161,7 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     	) ;
     	
     	// 任意类
-    	$aJointPoint = JointPoint::createNewObject() ;
+    	$aJointPoint = JointPoint::createNewObject('*', 'WeaveClassNameAAA') ;
     	
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("new *")
@@ -170,7 +169,7 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     	) ;
     	
     	// 使用通配符
-    	$aJointPoint = JointPoint::createNewObject('ClassName*') ;
+    	$aJointPoint = JointPoint::createNewObject('ClassName*', 'WeaveClassNameAAA') ;
     	
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("new ClassName*")
