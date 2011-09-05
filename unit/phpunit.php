@@ -15,7 +15,7 @@ include __DIR__.'/inc.init.php' ;
 $_SERVER['argv'][1] = '--skeleton-test' ;
 $_SERVER['argv'][2] = "jc\\fs\\FileSystem" ;
 */
-//$_SERVER['argv'][1] = "jc\\compile\\interpreters\\oop\\SyntaxScanner" ;
+//$_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\pattern\\iterate\\CallbackFilterIteratorTest" ;
 
 
 

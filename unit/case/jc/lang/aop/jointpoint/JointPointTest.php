@@ -31,7 +31,7 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     /**
      * @todo Implement testCreateCallFunction().
      */
-    public function testCreateCallFunction()
+    public function testCreateCallFunction2()
     {
     	
     	// 指定类方法
