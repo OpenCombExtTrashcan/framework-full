@@ -79,14 +79,14 @@ class ClosureObjectParserTest extends \PHPUnit_Framework_TestCase
     	
     	// 检验结果
     	
-    	$aOpenTag = $aTokenPool->getByName(1) ;
-    	$aBraceOpenA = $aTokenPool->getByName(6) ;
-    	$aBraceRoundOpenA = $aTokenPool->getByName(11) ;
-    	$aBraceRoundCloseA = $aTokenPool->getByName(15) ;
-    	$aBraceOpenB = $aTokenPool->getByName(17) ;
-    	$aBraceCloseB = $aTokenPool->getByName(23) ;
-    	$aBraceCloseA = $aTokenPool->getByName(25) ;
-    	$aCloseTag = $aTokenPool->getByName(27) ;
+    	$aOpenTag = $aTokenPool->getByPosition(1) ;
+    	$aBraceOpenA = $aTokenPool->getByPosition(6) ;
+    	$aBraceRoundOpenA = $aTokenPool->getByPosition(11) ;
+    	$aBraceRoundCloseA = $aTokenPool->getByPosition(15) ;
+    	$aBraceOpenB = $aTokenPool->getByPosition(17) ;
+    	$aBraceCloseB = $aTokenPool->getByPosition(23) ;
+    	$aBraceCloseA = $aTokenPool->getByPosition(25) ;
+    	$aCloseTag = $aTokenPool->getByPosition(27) ;
     	
     	$this->assertTrue($aOpenTag->theOther()===$aCloseTag) ;
     	$this->assertTrue($aCloseTag->theOther()===$aOpenTag) ;
