@@ -1,15 +1,13 @@
 <?php
 namespace jc\test\unit\testcase\jc\lang\aop;
 
+use jc\test\unit\testcase\jc\lang\aop\mockup\MockupJointPoint;
 use jc\lang\aop\Aspect;
-
 use jc\lang\aop\Advice;
-
 use jc\lang\aop\AOP ;
 use jc\pattern\composite\IContainer;
 use jc\lang\oop\ClassLoader;
 use jc\lang\aop\Pointcut;
-use jc\lang\aop\JointPoint;
 
 /**
  * Test class for AOP.
@@ -72,13 +70,13 @@ class AOPTest extends \PHPUnit_Framework_TestCase
     	$a0 = new Advice('a5', $sSource2);
     	
     	//准备一些JointPoint
-    	$j1 = new JointPoint();
-    	$j2 = new JointPoint();
-    	$j3 = new JointPoint();
-    	$j4 = new JointPoint();
-    	$j5 = new JointPoint();
-    	$j6 = new JointPoint();
-    	$j7 = new JointPoint();
+    	$j1 = new MockupJointPoint();
+    	$j2 = new MockupJointPoint();
+    	$j3 = new MockupJointPoint();
+    	$j4 = new MockupJointPoint();
+    	$j5 = new MockupJointPoint();
+    	$j6 = new MockupJointPoint();
+    	$j7 = new MockupJointPoint();
 
     	//准备4个pointcut
     	
