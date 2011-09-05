@@ -45,6 +45,9 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     	// 全局函数
     	$aJointPoint = JointPoint::createCallFunction('FunctionNameAAA') ;
     	
+    	// 指定类的所有方法
+    	$aJointPoint = JointPoint::createDefineMethod('ClassNameAAA','*') ;
+    	
     	$this->assertAttributeEquals(
 	    		JointPoint::transRegexp("::FunctionNameAAA()")
 	    		, 'sExecutionRegexp',$aJointPoint
@@ -56,6 +59,17 @@ class JointPointTest extends \PHPUnit_Framework_TestCase
     	$this->assertAttributeEquals(
     			JointPoint::transRegexp("ClassNameAAA::*()")
     			, 'sExecutionRegexp',$aJointPoint
+    	) ;
+    }
+    
+    public function testCreateCallFunction()
+    {
+    	// 全局函数
+    	$aJointPoint = JointPoint::createCallFunction('FunctionNameAAA','WeaveClassName') ;
+    	
+    	$this->assertAttributeEquals(
+	    		JointPoint::transRegexp("FunctionNameAAA()")
+	    		, 'sExecutionRegexp',$aJointPoint
     	) ;
     	
     	// 使用通配符
