@@ -39,27 +39,26 @@ class JointPointMethodDefineTest extends \PHPUnit_Framework_TestCase
     public function testMatchExecutionPoint()
     {
     	$sMockupCode = "<?php 
-namespace package\\name\\aaa ;
-
-class ClassNameA
-{
-	public function FunctionNameA()
-	{
-		
-	}
-	public function FunctionNameB()
-	{
-		
-	}
-}
-" ;
+			namespace package\\name\\aaa ;
+			
+			class ClassNameA
+			{
+				public function FunctionNameA()
+				{
+					
+				}
+				public function FunctionNameB()
+				{
+					
+				}
+			}
+			" ;
 		$aClassCompiler = CompilerFactory::singleton()->create() ;
 		$aCompilerInput = new InputStreamCache($sMockupCode) ;
 		
 		$aTokenPool = $aClassCompiler->scan( $aCompilerInput ) ;
 		$aClassCompiler->interpret( $aTokenPool ) ;
 
-		
     	$this->assertTrue(
     		JointPointMethodDefine::createInstance(array('package\\name\\aaa\\ClassNameA','FunctionNameA'))->matchExecutionPoint(
 				$aTokenPool->findFunction('FunctionNameA','package\\name\\aaa\\ClassNameA')
