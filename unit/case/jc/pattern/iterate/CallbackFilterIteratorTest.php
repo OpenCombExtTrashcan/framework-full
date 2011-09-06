@@ -45,6 +45,7 @@ class CallbackFilterIteratorTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals( 4 , $aCallbackFilterIterator->current());
     	$aCallbackFilterIterator->next();
     	$this->assertFalse($aCallbackFilterIterator->valid());
+    	$this->assertNull( $aCallbackFilterIterator->current() );
     	
     	//实现一个函数变量 , 函数的功能是不允许偶数
     	$noEven = function(\Iterator $aIterator){
@@ -57,6 +58,7 @@ class CallbackFilterIteratorTest extends \PHPUnit_Framework_TestCase
 		
     	$aCallbackFilterIterator->addCallback($noEven);
     	//现在2个过滤器把数组中所有数组都过滤掉了,迭代器应该没有符合条件的元素了
+    	$aCallbackFilterIterator->rewind() ;
     	$this->assertFalse($aCallbackFilterIterator->valid());
     	$aCallbackFilterIterator->next();
     	$this->assertFalse($aCallbackFilterIterator->valid());
@@ -70,9 +72,11 @@ class CallbackFilterIteratorTest extends \PHPUnit_Framework_TestCase
     	$this->assertFalse($aCallbackFilterIterator->valid());
     	$aCallbackFilterIterator->next();
     	$this->assertFalse($aCallbackFilterIterator->valid());
+    	$this->assertNull( $aCallbackFilterIterator->current() );
     	
     	//尝试删除一个callback函数
     	$aCallbackFilterIterator->removeCallback($noEven);
+    	$aCallbackFilterIterator->rewind() ;
     	$this->assertTrue($aCallbackFilterIterator->valid());
     	$this->assertEquals( 2 , $aCallbackFilterIterator->current());
     	$aCallbackFilterIterator->next();
@@ -80,11 +84,14 @@ class CallbackFilterIteratorTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals( 4 , $aCallbackFilterIterator->current());
     	$aCallbackFilterIterator->next();
     	$this->assertFalse($aCallbackFilterIterator->valid());
+    	$this->assertNull( $aCallbackFilterIterator->current() );
     	
+    	
+    	//测试clearcallback函数
+    	$aCallbackFilterIterator->rewind() ;
     	$this->assertTrue($aCallbackFilterIterator->valid());
     	$this->assertEquals( 2 , $aCallbackFilterIterator->current());
     	
-    	//测试clearcallback函数
     	$aCallbackFilterIterator->clearCallback();
     	
     	$aCallbackFilterIterator->next();
@@ -100,6 +107,7 @@ class CallbackFilterIteratorTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals( 5 , $aCallbackFilterIterator->current());
     	$aCallbackFilterIterator->next();
     	$this->assertFalse($aCallbackFilterIterator->valid());
+    	$this->assertNull( $aCallbackFilterIterator->current() );
     }
 }
 
