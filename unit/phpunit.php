@@ -9,15 +9,6 @@ use jc\system\Application;
 
 include __DIR__.'/inc.init.php' ;
 
-if( empty($argv) )
-{
-	$_SERVER['argv'] = $argv ;
-}
-if( empty($argc) )
-{
-	$_SERVER['argc'] = $argc ;
-}
-
 // mock
 // -------------
 /*
@@ -25,6 +16,7 @@ $_SERVER['argv'][1] = '--skeleton-test' ;
 $_SERVER['argv'][2] = "jc\\fs\\FileSystem" ;
 */
 //$_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\pattern\\iterate\\CallbackFilterIteratorTest" ;
+//$_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\lang\\aop\\jointpoint\\JointPointCallFunctionTest" ;
 
 
 

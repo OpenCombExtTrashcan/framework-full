@@ -172,28 +172,28 @@ class JointPointCallFunctionTest extends \PHPUnit_Framework_TestCase
 		
     }
 
-    /**
-     * @see testMatchExecutionPoint()
-     */
-    public function testSetWeaveMethodNamePattern()
-    {
-    	$this->testMatchExecutionPoint();
-    }
-
-    /**
-     * @see testMatchExecutionPoint()
-     */
-    public function testWeaveMethodNamePattern()
-    {
-    	$this->testMatchExecutionPoint();
-    }
-
-    /**
-     * @see testMatchExecutionPoint()
-     */
-    public function testWeaveMethodNameRegexp()
-    {
-    	$this->testMatchExecutionPoint();
-    }
+//    /**
+//     * @see testMatchExecutionPoint()
+//     */
+//    public function testSetWeaveMethodNamePattern()
+//    {
+//    	$this->testMatchExecutionPoint();
+//    }
+//
+//    /**
+//     * @see testMatchExecutionPoint()
+//     */
+//    public function testWeaveMethodNamePattern()
+//    {
+//    	$this->testMatchExecutionPoint();
+//    }
+//
+//    /**
+//     * @see testMatchExecutionPoint()
+//     */
+//    public function testWeaveMethodNameRegexp()
+//    {
+//    	$this->testMatchExecutionPoint();
+//    }
 }
 ?>
