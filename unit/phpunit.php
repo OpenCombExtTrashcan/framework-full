@@ -16,7 +16,6 @@ $_SERVER['argv'][1] = '--skeleton-test' ;
 $_SERVER['argv'][2] = "jc\\fs\\FileSystem" ;
 */
 //$_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\pattern\\iterate\\CallbackFilterIteratorTest" ;
-//$_SERVER['argv'][1] = "jc\\test\\unit\\testcase\\jc\\lang\\aop\\AOPTest" ;
 
 
 
