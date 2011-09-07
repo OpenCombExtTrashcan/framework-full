@@ -2,17 +2,17 @@
 namespace jc\test\unit\testcase\jc\pattern\iterate;
 
 use jc\pattern\iterate\ArrayIterator;
-use jc\pattern\iterate\ReveseIterator;
+use jc\pattern\iterate\ReverseIterator;
 
 /**
- * Test class for jc\pattern\iterate\ReveseIterator.
+ * Test class for jc\pattern\iterate\ReverseIterator.
  * @for jc\pattern\iterate\ReveseIterator
  */
 class ReveseIteratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @var jc\pattern\iterate\ReveseIterator
 	 */
-	protected $aReveseIterator;
+	protected $aReverseIterator;
 	
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -39,7 +39,7 @@ class ReveseIteratorTest extends \PHPUnit_Framework_TestCase {
 	
 	public function testNext() {
 		//创建测试用的ReveseIterator实例
-		$testNumReveseIterator = new ReveseIterator($this->testArrayNumIterator);
+		$testNumReveseIterator = new ReverseIterator($this->testArrayNumIterator);
 		$this->assertTrue( $testNumReveseIterator->valid());
 		$this->assertEquals( 1 , $testNumReveseIterator->current());
 		$testNumReveseIterator->rewind();
@@ -61,7 +61,7 @@ class ReveseIteratorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertfalse( $testNumReveseIterator->valid());
 		$this->assertNull($testNumReveseIterator->current());
 		
-		$testLetterReveseIterator = new ReveseIterator($this->testArrayLetterIterator);
+		$testLetterReveseIterator = new ReverseIterator($this->testArrayLetterIterator);
 		$this->assertTrue( $testLetterReveseIterator->valid());
 		$this->assertEquals( 'c' , $testLetterReveseIterator->current());
 		$testLetterReveseIterator->rewind();
@@ -87,7 +87,7 @@ class ReveseIteratorTest extends \PHPUnit_Framework_TestCase {
 	
 	public function testPrev() {
 		//创建测试用的ReveseIterator实例
-		$testNumReveseIterator = new ReveseIterator($this->testArrayNumIterator);
+		$testNumReveseIterator = new ReverseIterator($this->testArrayNumIterator);
 		$this->assertTrue( $testNumReveseIterator->valid());
 		$this->assertEquals( 1 , $testNumReveseIterator->current());
 		$testNumReveseIterator->prev() ;
@@ -112,7 +112,7 @@ class ReveseIteratorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertfalse( $testNumReveseIterator->valid());
 		$this->assertNull($testNumReveseIterator->current());
 		
-		$testLetterReveseIterator = new ReveseIterator($this->testArrayLetterIterator);
+		$testLetterReveseIterator = new ReverseIterator($this->testArrayLetterIterator);
 		$this->assertTrue( $testLetterReveseIterator->valid());
 		$this->assertEquals( 'c' , $testLetterReveseIterator->current());
 		$testLetterReveseIterator->prev() ;
