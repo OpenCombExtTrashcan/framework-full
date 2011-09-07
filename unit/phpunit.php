@@ -9,6 +9,15 @@ use jc\system\Application;
 
 include __DIR__.'/inc.init.php' ;
 
+if( empty($argv) )
+{
+	$_SERVER['argv'] = $argv ;
+}
+if( empty($argc) )
+{
+	$_SERVER['argc'] = $argc ;
+}
+
 // mock
 // -------------
 /*
