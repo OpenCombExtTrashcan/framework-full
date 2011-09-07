@@ -132,6 +132,90 @@ class AOPTest extends \PHPUnit_Framework_TestCase
     	$this->assertTrue($j5 === $aIterator->current());
     }
     
+    public function testPointcutIterator(){
+    	//准备一些Advice
+    	$sSource1 = "
+    		function testFun1(){
+    			echo 'testFun1';
+    		}
+    	";
+    	$sSource2 = "
+    		function testFun2(){
+    			echo 'testFun2';
+    		}
+    	";
+    	$a1 = new Advice('a1', $sSource1);
+    	$a2 = new Advice('a2', $sSource2);
+    	$a3 = new Advice('a3', $sSource2);
+    	$a4 = new Advice('a4', $sSource1);
+    	$a5 = new Advice('a5', $sSource2);
+    	$a6 = new Advice('a5', $sSource2);
+    	$a7 = new Advice('a5', $sSource1);
+    	$a8 = new Advice('a5', $sSource2);
+    	$a9 = new Advice('a5', $sSource1);
+    	$a0 = new Advice('a5', $sSource2);
+    	
+    	//准备一些JointPoint
+    	$j1 = new MockupJointPoint();
+    	$j2 = new MockupJointPoint();
+    	$j3 = new MockupJointPoint();
+    	$j4 = new MockupJointPoint();
+    	$j5 = new MockupJointPoint();
+    	$j6 = new MockupJointPoint();
+    	$j7 = new MockupJointPoint();
+
+    	//准备4个pointcut
+    	
+    	//有几个advice和jointpoint的Pointcut
+    	$p1 = new Pointcut();
+    	$p1->advices()->add($a1);
+    	$p1->advices()->add($a2);
+    	$p1->jointPoints()->add($j1);
+    	$p1->jointPoints()->add($j2);
+    	$p1->jointPoints()->add($j3);
+    	
+    	//只有一个jointpoint的Pointcut
+    	$p2 = new Pointcut();
+    	$p2->jointPoints()->add($j4);
+    	$p2->jointPoints()->add($j5);
+    	
+    	//只有一个advice的Pointcut
+    	$p3 = new Pointcut();
+    	$p3->advices()->add($a3);
+    	$p3->advices()->add($a4);
+    	$p3->advices()->add($a5);
+    	
+    	//一个什么也没添加的Pointcut
+    	$p4 = new Pointcut();
+    	
+    	
+    	//准备几个Aspect
+    	
+    	//一个有很多内容的Aspect
+    	$as1 = new Aspect();
+    	$as1->pointcuts()->add($p1);
+    	$as1->pointcuts()->add($p2);
+    	$as1->pointcuts()->add($p3);
+    	$as1->pointcuts()->add($p4);
+    	
+    	//一个什么也没有的Aspect
+    	$as2 = new Aspect();
+    	
+    	//创建一个AOP,把上面的资源都放进去
+    	$aAOP = new AOP();
+    	$aAOP->aspects()->add($as1);
+    	$aAOP->aspects()->add($as2);
+    	
+    	$aIterator = $aAOP->pointcutIterator();
+    	$this->assertTrue($p1 === $aIterator->current());
+    	$aIterator->next();
+    	$this->assertTrue($p2 === $aIterator->current());
+    	$aIterator->next();
+    	$this->assertTrue($p3 === $aIterator->current());
+    	$aIterator->next();
+    	$this->assertTrue($p4 === $aIterator->current());
+    }
+    
     public function testCreateClassCompiler(){
     	
     }
