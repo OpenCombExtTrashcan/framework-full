@@ -121,6 +121,7 @@ class AOPTest extends \PHPUnit_Framework_TestCase
     	$aAOP->aspects()->add($as2);
     	
     	$aIterator = $aAOP->jointPointIterator();
+    	var_dump($aIterator->current());exit;
     	$this->assertTrue($j1 === $aIterator->current());
     	$aIterator->next();
     	$this->assertTrue($j2 === $aIterator->current());
@@ -130,6 +131,10 @@ class AOPTest extends \PHPUnit_Framework_TestCase
     	$this->assertTrue($j4 === $aIterator->current());
     	$aIterator->next();
     	$this->assertTrue($j5 === $aIterator->current());
+    }
+    
+    public function testPointcutIterator(){
+    	
     }
     
     public function testCreateClassCompiler(){
