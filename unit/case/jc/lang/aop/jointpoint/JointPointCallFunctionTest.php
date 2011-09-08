@@ -69,7 +69,6 @@ class JointPointCallFunctionTest extends \PHPUnit_Framework_TestCase
 		$aTokenPool = $aClassCompiler->scan( $aCompilerInput ) ;
 		$aClassCompiler->interpret( $aTokenPool ) ;
 		
-		
 		$arrCallFucntionTokens = array();
 		foreach($aTokenPool->iterator() as $aToken)
 		{
@@ -117,56 +116,32 @@ class JointPointCallFunctionTest extends \PHPUnit_Framework_TestCase
 		// 使用通配符
 		
 		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionNameA','package\\name\\aaa\\ClassNameA','FunctionName*'))->matchExecutionPoint(
-    			$arrCallFucntionTokens[6]
-			)
-		) ;
-		
-		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionNameB','package\\name\\aaa\\ClassNameA','FunctionName*'))->matchExecutionPoint(
-    			$arrCallFucntionTokens[1]
-			)
-		) ;
-		
-		$this->assertTrue(
     		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionNameA'))->matchExecutionPoint(
-    			$arrCallFucntionTokens[1]
-			)
-		) ;
-		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionNameA'))->matchExecutionPoint(
-    			$arrCallFucntionTokens[3]
-			)
-		) ;
-		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionNameA'))->matchExecutionPoint(
-    			$arrCallFucntionTokens[5]
-			)
-		) ;
-		
-		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionName*'))->matchExecutionPoint(
     			$arrCallFucntionTokens[0]
 			)
 		) ;
+		
 		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionName*'))->matchExecutionPoint(
+    		JointPointCallFunction::createInstance(array('*','package\\name\\aaa\\ClassNameA','FunctionNameA'))->matchExecutionPoint(
+    			$arrCallFucntionTokens[1]
+			)
+		) ;
+		
+		$this->assertTrue(
+    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionNameA'))->matchExecutionPoint(
+    			$arrCallFucntionTokens[2]
+			)
+		) ;
+		
+		$this->assertTrue(
+    		JointPointCallFunction::createInstance(array('*','package\\name\\aaa\\ClassNameA','FunctionNameA'))->matchExecutionPoint(
+    			$arrCallFucntionTokens[3]
+			)
+		) ;
+		
+		$this->assertTrue(
+    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionNameA'))->matchExecutionPoint(
     			$arrCallFucntionTokens[4]
-			)
-		) ;
-		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionName*'))->matchExecutionPoint(
-    			$arrCallFucntionTokens[6]
-			)
-		) ;
-		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionName*'))->matchExecutionPoint(
-    			$arrCallFucntionTokens[7]
-			)
-		) ;
-		$this->assertTrue(
-    		JointPointCallFunction::createInstance(array('callFunctionName*','package\\name\\aaa\\ClassNameA','FunctionName*'))->matchExecutionPoint(
-    			$arrCallFucntionTokens[10]
 			)
 		) ;
 		

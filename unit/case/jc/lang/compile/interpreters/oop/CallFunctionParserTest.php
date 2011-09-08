@@ -73,6 +73,9 @@ class CallFunctionParserTest extends \PHPUnit_Framework_TestCase
 			$aCallFunctionParser->parse($this->aTokenPool , $aTokenPoolIter , new State());
     	}
     	
+    	$aClassDefineToken = $this->aTokenPool->findClass('package\\name\\aaa\\ClassNameA');
+    	$aFunctionDefineToken = $this->aTokenPool->findFunction('FunctionNameA' , 'package\\name\\aaa\\ClassNameA');
+    	
     	$aTokenPoolIter = $this->aTokenPool->iterator();
     	foreach( $aTokenPoolIter as $aToken)
     	{
@@ -97,6 +100,9 @@ class CallFunctionParserTest extends \PHPUnit_Framework_TestCase
 					
 					$this->assertTrue($aCallFunctionToken->classToken() === $aClassToken);
 					$this->assertTrue($aCallFunctionToken->accessToken() === $aAccessToken);
+					
+					$this->assertTrue($aCallFunctionToken->belongsClass() === $aClassDefineToken);
+					$this->assertTrue($aCallFunctionToken->belongsFunction() === $aFunctionDefineToken);
 				}
     		}
     	}
