@@ -3,35 +3,21 @@ namespace jc\test\unit\testcase\jc\lang\aop\compiler;
 
 
 use jc\io\OutputStreamBuffer;
-
-use jc\lang\aop\Advice;
-
 use jc\io\InputStreamCache;
-
-use jc\lang\aop\jointpoint\JointPointMethodDefine;
-
-use jc\lang\aop\Pointcut;
-
-use jc\lang\aop\Aspect;
-
-use jc\lang\aop\AOP;
-
 use jc\lang\compile\CompilerFactory;
-
-use jc\system\Application;
-
-use jc\lang\aop\compiler\FunctionDefineGenerator ;
+use jc\lang\aop\AOP;
+use jc\lang\aop\compiler\CallFunctionGenerator ;
 
 /**
- * Test class for jc\lang\aop\compiler\FunctionDefineGenerator.
- * @for jc\lang\aop\compiler\FunctionDefineGenerator
+ * Test class for jc\lang\aop\compiler\CallFunctionGenerator.
+ * @for jc\lang\aop\compiler\CallFunctionGenerator
  */
-class FunctionDefineGeneratorTest extends \PHPUnit_Framework_TestCase
+class CallFunctionGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\lang\aop\compiler\FunctionDefineGenerator
+     * @var jc\lang\aop\compiler\CallFunctionGenerator
      */
-    protected $aFunctionDefineGenerator;
+    protected $aCallFunctionGenerator;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -46,17 +32,18 @@ class FunctionDefineGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {}
-
+    
+    
     /**
      * @todo Implement testGenerateTargetCode().
      */
     public function testGenerateTargetCode()
     {
     	$aAop = new AOP() ;
-    	$aAop->register("jc\\test\\unit\\testcase\\jc\\lang\\aop\\compiler\\mockup\\MockupAspectForFunctionDefine") ;
-    			
+    	$aAop->register("jc\\test\\unit\\testcase\\jc\\lang\\aop\\compiler\\mockup\\MockupAspectForCallFunction") ;
+    		
 		
-    	$aFunctionDefineGenerator = new FunctionDefineGenerator() ;
+    	$aFunctionDefineGenerator = new CallFunctionGenerator() ;
     	$aFunctionDefineGenerator->setAop($aAop) ;
     	
     	$sClassDefine = "
@@ -67,19 +54,25 @@ class ClassA
 {
 	function someMethodA(\$argv1,array \$argv1=array())
 	{
-		echo __METHOD__ ;
+		callSomeFunctionA(\$argv1) ;
+		callSomeFunctionA() ;
 	}
 }
 
 ?>
 " ;
-
+    	
 		$aClassCompiler = CompilerFactory::singleton()->create() ;
 		$aTokenPool = $aClassCompiler->scan( new InputStreamCache($sClassDefine) ) ;
 		$aClassCompiler->interpret( $aTokenPool ) ;
     	
+		// 切入第1个 callSomeFunctionA
 		$aFunctionDefineGenerator->generateTargetCode(
-			$aTokenPool, $aTokenPool->findFunction('someMethodA','package\\name\\ClassA')
+			$aTokenPool, $aTokenPool->findTokenBySource('callSomeFunctionA')
+		) ;
+		// 切入第2个 callSomeFunctionA
+		$aFunctionDefineGenerator->generateTargetCode(
+			$aTokenPool, $aTokenPool->findTokenBySource('callSomeFunctionA')
 		) ;
 		
 
@@ -92,16 +85,6 @@ class ClassA
 		echo $aCompiledStream->bufferBytes() ;
     	
     }
-
-    /**
-     * @todo Implement testAop().
-     */
-    public function testAop()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+    
 }
 ?>

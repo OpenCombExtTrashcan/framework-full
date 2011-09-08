@@ -5,18 +5,18 @@ namespace jc\test\unit\testcase\jc\lang\compile\interpreters\oop;
 use jc\lang\compile\object\Token;
 use jc\lang\compile\object\TokenPool;
 use jc\lang\compile\interpreters\oop\State;
-use jc\lang\compile\interpreters\oop\NamespaceParser ;
+use jc\lang\compile\interpreters\oop\NamespaceDeclareParser ;
 
 /**
- * Test class for jc\lang\compile\interpreters\oop\NamespaceParser.
- * @for jc\lang\compile\interpreters\oop\NamespaceParser
+ * Test class for jc\lang\compile\interpreters\oop\NamespaceDeclareParser.
+ * @for jc\lang\compile\interpreters\oop\NamespaceDeclareParser
  */
-class NamespaceParserTest extends \PHPUnit_Framework_TestCase
+class NamespaceDeclareParserTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var jc\lang\compile\interpreters\oop\NamespaceParser
+     * @var jc\lang\compile\interpreters\oop\NamespaceDeclareParser
      */
-    protected $aNamespaceParser;
+    protected $aNamespaceDeclareParser;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -24,7 +24,7 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->aNamespaceParser = new NamespaceParser ;
+        $this->aNamespaceDeclareParser = new NamespaceDeclareParser ;
     }
 
     /**
@@ -102,7 +102,7 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     	// empty
     	for($i=0;$i<5;$i++)
     	{
-    		$this->aNamespaceParser->parse($aTokenPool, $aTokenIter, $aState) ;
+    		$this->aNamespaceDeclareParser->parse($aTokenPool, $aTokenIter, $aState) ;
     		$aTokenIter->next() ;
     		
     		$this->assertNull($aState->currentNamespace()) ;
@@ -111,7 +111,7 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     	}
     
     	// namespace for: package\name\aaa
-    	$this->aNamespaceParser->parse($aTokenPool, $aTokenIter, $aState) ;
+    	$this->aNamespaceDeclareParser->parse($aTokenPool, $aTokenIter, $aState) ;
     	$aTokenIter->next() ;
     		
     	$this->assertNotNull($aState->currentNamespace()) ;
@@ -120,7 +120,7 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     
     	for($i=0;$i<17;$i++)
     	{
-    		$this->aNamespaceParser->parse($aTokenPool, $aTokenIter, $aState) ;
+    		$this->aNamespaceDeclareParser->parse($aTokenPool, $aTokenIter, $aState) ;
     		$aTokenIter->next() ;
     		
     		$this->assertNotNull($aState->currentNamespace()) ;
@@ -130,7 +130,7 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     	}
     	
     	// namespace for: package\name\bbb
-    	$this->aNamespaceParser->parse($aTokenPool, $aTokenIter, $aState) ;
+    	$this->aNamespaceDeclareParser->parse($aTokenPool, $aTokenIter, $aState) ;
     	$aTokenIter->next() ;
     	
     	$this->assertNotNull($aState->currentNamespace()) ;
@@ -141,7 +141,7 @@ class NamespaceParserTest extends \PHPUnit_Framework_TestCase
     	{
     		$this->assertEquals($aTokenIter->position(), 24+$i) ; 	
     		
-    		$this->aNamespaceParser->parse($aTokenPool, $aTokenIter, $aState) ;
+    		$this->aNamespaceDeclareParser->parse($aTokenPool, $aTokenIter, $aState) ;
     		$aTokenIter->next() ;
     		
     		$this->assertNotNull($aState->currentNamespace()) ;
