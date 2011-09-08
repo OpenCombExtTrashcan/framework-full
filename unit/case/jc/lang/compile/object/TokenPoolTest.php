@@ -4,6 +4,10 @@ namespace jc\test\unit\testcase\jc\lang\compile\object;
 use jc\lang\compile\object\TokenPool ;
 use jc\lang\compile\object\FunctionDefine;
 use jc\lang\compile\object\ClassDefine;
+use jc\lang\compile\CompilerFactory;
+use jc\io\InputStreamCache;
+use jc\lang\compile\interpreters\oop\State;
+use jc\lang\compile\object\Token;
 
 /**
  * Test class for TokenPool.
@@ -41,9 +45,6 @@ class TokenPoolTest extends \PHPUnit_Framework_TestCase
     	$this->testFindClass() ;
     }
 
-    /**
-     * @todo Implement testFindClass().
-     */
     public function testFindClass()
     {
     	//
@@ -69,9 +70,6 @@ class TokenPoolTest extends \PHPUnit_Framework_TestCase
         $this->testFindFunction() ;
     }
 
-    /**
-     * @todo Implement testFindFunction().
-     */
     public function testFindFunction()
     {
     	//
@@ -95,6 +93,79 @@ class TokenPoolTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals($aMethodA,$this->aTokenPool->findFunction("MethodA",'NameA')) ;
     	$this->assertEquals($aMethodB,$this->aTokenPool->findFunction('MethodB','Some\\Class\\NameB')) ;
     	$this->assertEquals($aMethodC,$this->aTokenPool->findFunction('MethodC','Some\\Class\\NameB')) ;
+    }
+    
+    public function testFindTokenBySource()
+    {
+    	//
+    	$sMockupCode = '<?php 
+			namespace package\\name\\aaa ;
+			
+			class ClassNameA
+			{
+				public function FunctionNameA()
+				{
+					$sObjectName = "Object";
+					/*findBySource:1*/$aTestObject1 = new Object();
+					
+					/*findBySource:2*/$aTestObject2 = new Object("new fdsfds()" 
+											, new Object() 
+											, new $sObjectName("new Object()" , 2, true) 
+											,true);
+				}
+			}
+			
+			class Object{};
+			' ;
+    	
+		$aClassCompiler = CompilerFactory::singleton()->create() ;
+		$aCompilerInput = new InputStreamCache($sMockupCode) ;
+		
+		$aTokenPool = $aClassCompiler->scan( $aCompilerInput ) ;
+		$aClassCompiler->interpret( $aTokenPool ) ;
+		
+		$aTokenPoolIter = $aTokenPool->iterator();
+		
+		foreach( $aTokenPoolIter as $aToken)
+    	{
+			$sCommentSourceCode = $aToken->sourceCode();
+			if($sCommentSourceCode == '/*findBySource:1*/')
+			{
+				do{
+					$aTokenPoolIter->next();
+				}while(!$aToken = $aTokenPoolIter->current());
+				
+				//要找的token只出现一次的情况
+				$this->assertTrue($aToken === $aTokenPool->findTokenBySource('$aTestObject1'));
+			}else if($sCommentSourceCode == '/*findBySource:2*/')
+			{
+				$aTokenPoolIter = $aTokenPool->iterator();
+				do{
+					$aTokenPoolIter->next();
+				}while( $aToken = $aTokenPoolIter->current() and $aToken->tokenType() != T_NEW );
+				$aTokenPoolIter->next();
+				$aTokenPoolIter->next();
+				$aToken = $aTokenPoolIter->current();
+				
+				//要找的token多次出现而只需要第一次出现的情况
+				$aTokenFindBySource = $aTokenPool->findTokenBySource('Object');
+				
+				$this->assertEquals($aToken, $aTokenFindBySource);
+				
+				do{
+					$aTokenPoolIter->next();
+				}while( $aToken = $aTokenPoolIter->current() and $aToken->tokenType() != T_NEW );
+				
+				$aTokenPoolIter->next();
+				$aTokenPoolIter->next();
+				$aToken = $aTokenPoolIter->current();
+				
+				//要找的token多次出现而只需要指定的情况
+				$aTokenFindBySource = $aTokenPool->findTokenBySource('Object' , 1 );
+				
+				$this->assertEquals($aToken, $aTokenFindBySource);
+			}
+    	}
     }
 }
 
