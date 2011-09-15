@@ -1,0 +1,11 @@
+<p ss>
+	当前视图name：{=$theView->name()}
+</p>
+<msgqueue for="$theView" />
+<form id="theform" enctype="multipart/form-data" method='post'>
+	<widget id="fileupdate"/>
+	<input type='submit'/>
+</form>
+
+<views />
+<p>当前视图hash：{=spl_object_hash($theView)}</p>
