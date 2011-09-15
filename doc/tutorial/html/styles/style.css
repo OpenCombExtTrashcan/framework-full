@@ -1,0 +1,44 @@
+
+body {
+	font-size: 14px ;
+	line-height: 18px ;
+	background-color: #E9F1F4;
+}
+
+p {
+	display: block;
+	text-indent: 2em;
+	margin: 15px 0px;
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-bottom: 15px;
+	margin-left: 0px;
+}
+
+.wrapper {
+	background-color: #fff ;
+}
+
+.index {
+	-webkit-gradient(linear, 0% 0, 0% 100%, from(#FFFFF6), to(#FFFDE3));
+	background-color: #FFFDE3; 
+}
+
+blockquote{
+	display:block;
+	width:80%;
+	height:auto;
+	padding: 10px 20px;
+	border:1px #aaa solid;
+	background:#EEE;
+}
+
+/*
+ * 字 排版样式
+ */
+
+.tRed{color:red;}
+.tYellow{color:yellow;}
+.tGray{color:gray;}
+.tGreen{color:green;}
+.tBlue{color:blue;}
