@@ -1,0 +1,9 @@
+
+cd /home/local/d/project/jecat.cn/framework/test/unit/ ;
+
+if(( $# > 0 ));then
+	php5 phpunit.php 'jc\test\unit\testcase\'${1}'Test'
+else
+	php5 phpunit.php
+fi
+cd -

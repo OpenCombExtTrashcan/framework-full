@@ -1,0 +1,4 @@
+cd /home/local/d/project/jecat.cn/framework/test/unit/ ;
+
+php5 phpunit.php --skeleton-test ${1}
+cd -
