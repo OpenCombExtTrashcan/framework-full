@@ -52,6 +52,19 @@ class CriteriaTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals(' LIMIT 1,4', $aCriteria->limit());
     	
     	$this->assertEquals("`testR1` = 'testR1' AND testR2 = testR2  ORDER BY testAsc ASC,testDesc DESC  LIMIT 1,4" , $aCriteria->makeStatement() );
+    	
+    	//不设置limit的情况
+    	$aCriteria = new Criteria();
+        
+        //设置条件
+    	$aCriteria->restriction()->eq('testR1', 'testR1');
+    	$aCriteria->restriction()->expression('testR2 = testR2');
+    	
+    	//设置order
+    	$aCriteria->order()->addColumn('testAsc' );
+    	$aCriteria->order()->addColumn('testDesc' ,false);
+    	
+    	$this->assertEquals("`testR1` = 'testR1' AND testR2 = testR2  ORDER BY testAsc ASC,testDesc DESC  LIMIT 30" , $aCriteria->makeStatement() );
     }
 
 //    public function testCheckValid()
@@ -68,6 +81,11 @@ class CriteriaTest extends \PHPUnit_Framework_TestCase
 
     public function testSetLimit()
     {
+    	//limit的长度默认为30,这里设置limit长度为-1,这样可以去掉limit子句,即sql语句中没有limit部分
+    	$aCriteria = new Criteria();
+    	$aCriteria->setLimit(-1);
+    	$this->assertEquals('', $aCriteria->limit());
+    	
     	//只设置limit length 的情况
     	$aCriteria = new Criteria();
     	$aCriteria->setLimit(4);
@@ -119,7 +137,6 @@ class CriteriaTest extends \PHPUnit_Framework_TestCase
     	$aGotRestriction = $aCriteria->restriction();
     	
     	$this->assertTrue($aGotRestriction === $aRestriction);
-    	
     }
 
     /**
