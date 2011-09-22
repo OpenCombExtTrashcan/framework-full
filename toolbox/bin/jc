@@ -9,11 +9,11 @@ print_message()
  
  	- Agile Development -
 	\e[33mtest\e[0m			\e[36mts\e[0m			Test a class or all classes for project which in current folder
-	\e[33mtest-skeleton\e[0m		\e[36mts-s\e[0m			Create a test class skeleton for a class
+	\e[33mtest-skeleton\e[0m		\e[36mts-s\e[0m			Create a test skeleton for a class
 	
 	- Project Maintenance -
 	\e[33minit\e[0m						Create and initialize a new jecat project in current folder
-	\e[33mclear\e[0m						Clear compiled class and ui template file for a project which in current folder
+	\e[33mclear\e[0m						Clear compiled classes and ui template files for a project which in current folder
 	\e[33mcompile\e[0m						Compiling a class or all classes for project which in current folder
 	
 	- Util -
@@ -29,11 +29,10 @@ print_message()
 }
 
 
+source `dirname $0`/common ; 
 
+## Dispatch sub command ####################################
 
-
-
-## dispatch ##
 if [ "$#" -lt 1 ] ; then
 	print_message ;
 	exit ;
@@ -45,7 +44,42 @@ elif [ "$#" -gt 0 ] ; then
 		print_message ;
 		exit ;
 	
-	# Util
+	#### 敏捷开发 相关命令 ####
+	#  test
+	elif [ "$1" == "test" ] || [ "$1" == "ts" ] ; then
+		
+		# 检查当前目录
+		if [ "$opdir" == "" ] ; then
+			echo -e "you must run \"jc test\" under a jecat project path." ;
+			exit ;
+		fi  
+		
+		# 测试指定的类
+		if [ $2 ] ; then
+			
+			php5 $JCTOOLKITDIR/lib/phpunit/test.php "$opdir/$init_filename" ;
+		
+		# 测试所有类
+		else
+			echo no ;
+		fi
+		
+		exit ;
+	
+	#  test-skeleton
+	elif [ "$1" == "test-skeleton" ] || [ "$1" == "ts-s" ] ; then
+	
+		exit ;
+		
+		
+	#### 项目维护 相关命令 ####
+	#  init
+	elif [ "$1" == "init" ] ; then
+		source `dirname ${0}`/jc-init ;
+		exit ;
+	
+	
+	#### 其他命令嗯 ####
 	#  安装
 	elif [ "$1" == "install" ] ; then
 	

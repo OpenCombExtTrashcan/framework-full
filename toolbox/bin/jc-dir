@@ -1,8 +1,0 @@
-## 脚本所在目录 $JCTOOLKITDIR ##
-cd .						# 防止没有 $OLDPWD
-dir=`dirname ${0}` ;
-dir=`dirname $dir` ;
-cd $dir ;
-JCTOOLKITDIR=$PWD ;
-cd $OLDPWD ;
-

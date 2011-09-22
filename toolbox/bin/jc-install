@@ -1,4 +1,5 @@
-source `dirname $0`/jc-dir
+source `dirname $0`/common ; 
+
 
 testing=$(cat ~/.bashrc|grep "## setup JeCat PHP Framework Toolkit Box ##") ;
 if [ "$testing" == "" ] ; then
@@ -21,7 +22,7 @@ fi
 " >> ~/.bashrc
 
 	
-	echo "install done, and execute under command to enable JeCat PHP Framework Toolkit Box at this shell:" ;
+	echo "install done, and run under command to activate JeCat PHP Framework Toolkit Box for current shell env:" ;
 	echo -e "	\e[37msource ~/.bashrc\e[0m"
 	
 	
