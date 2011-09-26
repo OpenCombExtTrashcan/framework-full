@@ -1,0 +1,63 @@
+source `dirname $0`/common ; 
+
+if [ -s "$opdir/$init_filename" ] ; then
+
+	echo -e "\e[37mpath $opdir has a exists JeCat project, nothing to do.\e[0m" ;
+	exit ;
+fi
+
+# 用目录名称作为项目的命名空间
+project_namespace=`basename $PWD` ;
+
+## 创建各个目录
+new_folders=(
+	setting
+	
+	data
+	
+	class
+	class/source
+	class/compiled
+	
+	ui
+	ui/template
+	ui/style
+	ui/js
+	
+	framework
+) ;
+for foldername in ${new_folders[@]}  
+do  
+    echo -e "create folder:		\e[33m$foldername/\e[0m " ;
+    mkdir $foldername ;  
+    chmod 775 $foldername
+done  
+
+
+# 初始化 framework 
+cd framework ;
+echo -e "copy framework files" ;
+git clone $JCTOOLKITDIR/../framework . ;
+cd .. ;
+chmod 775 framework/src/template ;
+
+
+# 创建 index.php 和 jc.init.php 文件
+echo -e "create file:		\e[36m$init_filename\e[0m" ;
+cat $JCTOOLKITDIR/template/$init_filename>$init_filename 
+sed -i "s/%namespace%/$project_namespace/" $init_filename ; 
+
+echo -e "create file:		\e[36mindex.php\e[0m" ;
+cat $JCTOOLKITDIR/template/index.php>  index.php ;
+sed -i "s/%namespace%/$project_namespace/" index.php ;  
+
+# 初始化 版本仓库
+testing=`type git | grep '^git is '` ;
+if [ "$testing" != "" ] ; then
+	echo -e "init git repos for new project ..." ;
+	git init ;
+fi
+
+echo -e "
+
+done." ;

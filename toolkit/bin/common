@@ -1,0 +1,31 @@
+## 检查 php5  ####################################
+testing=`type php5 | grep "^php5 is "`
+if [ "$testing" == "" ] ; then
+	echo -e "not found php5 in this computer" ;
+	exit ;
+fi
+
+## 脚本所在目录 $JCTOOLKITDIR  ####################################
+if [ "$JCTOOLKITDIR" == "" ] ; then
+	cd .						# 防止没有 $OLDPWD
+	dir=`dirname ${0}` ;
+	dir=`dirname $dir` ;
+	cd $dir ;
+	JCTOOLKITDIR=$PWD ;
+	cd $OLDPWD ;
+fi
+
+
+
+## 搜索 JeCat 项目根目录 ####################################
+init_filename="jc.init.php" ;
+opdir=$PWD ;
+
+while [ "$opdir" != "" ] && [ ! -s "$opdir/$init_filename" ]
+do
+	if [ "$opdir" == "/" ] ; then
+		opdir="" ;
+	else
+		opdir=`dirname $dir` ;
+	fi
+done

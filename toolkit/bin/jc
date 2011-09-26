@@ -1,0 +1,100 @@
+print_message()
+{
+	echo -e "\
+#####################################################
+ Welcome to use JeCat Framework Toolbox
+ JeCat PHP Framework is a php framework, and this is a toolkit box for development under JeCat PHP Framework. That all.
+
+ secondary commands:
+ 
+ 	- Agile Development -
+	\e[33mtest\e[0m			\e[36mts\e[0m			Test a class or all classes for project which in current folder
+	\e[33mtest-skeleton\e[0m		\e[36mts-s\e[0m			Create a test skeleton for a class
+	
+	- Project Maintenance -
+	\e[33minit\e[0m						Create and initialize a new jecat project in current folder
+	\e[33mclear\e[0m						Clear compiled classes and ui template files for a project which in current folder
+	\e[33mcompile\e[0m						Compiling a class or all classes for project which in current folder
+	
+	- Util -
+	\e[33minstall\e[0m						Install this toolkit for current user
+	\e[33mhelp\e[0m			\e[36mh, ?\e[0m			Print this message
+	
+	
+ global argvs:
+ 
+ 	-p <path>, --project=<path>			Specify a project folder which will be operated
+" 
+
+}
+
+
+source `dirname $0`/common ; 
+
+## Dispatch sub command ####################################
+
+if [ "$#" -lt 1 ] ; then
+	print_message ;
+	exit ;
+	
+elif [ "$#" -gt 0 ] ; then
+
+	# 查看帮助
+	if [ "$1" == "help" ] || [ "$1" == "h" ] || [ "$1" == "?" ] ; then
+		print_message ;
+		exit ;
+	
+	#### 敏捷开发 相关命令 ####
+	#  test
+	elif [ "$1" == "test" ] || [ "$1" == "ts" ] ; then
+		
+		# 检查当前目录
+		if [ "$opdir" == "" ] ; then
+			echo -e "you must run \"jc test\" under a jecat project path." ;
+			exit ;
+		fi  
+		
+		# 测试指定的类
+		if [ $2 ] ; then
+			
+			php5 $JCTOOLKITDIR/lib/phpunit/test.php "$opdir/$init_filename" ;
+		
+		# 测试所有类
+		else
+			echo no ;
+		fi
+		
+		exit ;
+	
+	#  test-skeleton
+	elif [ "$1" == "test-skeleton" ] || [ "$1" == "ts-s" ] ; then
+	
+		exit ;
+		
+		
+	#### 项目维护 相关命令 ####
+	#  init
+	elif [ "$1" == "init" ] ; then
+		source `dirname ${0}`/jc-init ;
+		exit ;
+	
+	
+	#### 其他命令嗯 ####
+	#  安装
+	elif [ "$1" == "install" ] ; then
+	
+		source `dirname ${0}`/jc-install ;
+		exit ;
+	
+	else
+	
+		echo -e "\e[35mer... You have inputed some invalid argvs ..." ;
+		echo -e "Here is the help, please read it:" ;
+		echo -e "\e[0m" ;
+		print_message ;
+		exit ;
+
+	fi
+fi
+
+
