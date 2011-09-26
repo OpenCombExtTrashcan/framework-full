@@ -1,7 +1,7 @@
 <?php
 namespace jc\test\unit\testcase\jc\setting;
 
-use jc\setting\Setting ;
+use jc\setting\Setting;
 use jc\test\unit\testcase\jc\setting\KeyClassForTest;
 
 /**
@@ -12,25 +12,32 @@ use jc\test\unit\testcase\jc\setting\KeyClassForTest;
 
 class SettingClassForTest extends Setting
 {
-	private $aTestPathKey ;
+	private $arrKeys;
 	
 	public function __construct()
 	{
-		$this->aTestPathKey = new KeyClassForTest();
+		$this->arrKeys ['testPath'] = new KeyClassForTest ();
 	}
 	
-	public function key($sPath) 
+	public function key($sPath)
 	{
-		if($sPath === '/testPath')
-		{
-			return $this->aTestPathKey;
-		}
-		return null;
+		
+		return $this->arrKeys [$sPath];
 	}
 	
-	public function createKey($sPath) {}
+	public function createKey($sPath)
+	{
+		
+		$this->arrKeys [$sPath] = new KeyClassForTest ();
+	}
 	
-	public function hasKey($sPath) {}
+	public function hasKey($sPath)
+	{
+		
+	}
 	
-	public function deleteKey($sPath) {}
+	public function deleteKey($sPath)
+	{
+		
+	}
 }
