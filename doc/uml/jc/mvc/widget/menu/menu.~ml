@@ -88,7 +88,7 @@
 <XPD:ATTR name="Left" type="integer">496</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">192</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">191</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">199</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">173</XPD:ATTR>
 <XPD:REF name="Model">nJes+s9OUUS0gnybUMH3pwAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="sXnanWGnqU+Swa964PXQxgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="qE8fmobDu0qPQkJe0Z9iqgAA">
@@ -142,7 +142,7 @@
 <XPD:OBJ name="OwnedViews[4]" type="UMLGeneralizationView" guid="vanpiDqsPUW9MNLj07lQ0QAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">557,192;516,74</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">560,192;517,74</XPD:ATTR>
 <XPD:REF name="Model">Dr2LdkiNl0+Z3cqLbhQtSwAA</XPD:REF>
 <XPD:REF name="Head">TsVhRwZ6qU2TfwLYX0kcpQAA</XPD:REF>
 <XPD:REF name="Tail">3ii2NinveEyo3bjiENVDhAAA</XPD:REF>
@@ -226,7 +226,7 @@
 <XPD:REF name="Views[3]">6cy5anqmfUqZfDBSWkeyjwAA</XPD:REF>
 <XPD:ATTR name="#Generalizations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Generalizations[0]">Dr2LdkiNl0+Z3cqLbhQtSwAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">12</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">10</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="nbsf2hSdzkC8M0I1kbHskQAA">
 <XPD:ATTR name="Name" type="string">text</XPD:ATTR>
 <XPD:REF name="Owner">nJes+s9OUUS0gnybUMH3pwAA</XPD:REF>
@@ -271,14 +271,6 @@
 </XPD:OBJ>
 <XPD:OBJ name="Operations[9]" type="UMLOperation" guid="nSFru/7tBEShAZ+hY5WJugAA">
 <XPD:ATTR name="Name" type="string">setSelected</XPD:ATTR>
-<XPD:REF name="Owner">nJes+s9OUUS0gnybUMH3pwAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="Operations[10]" type="UMLOperation" guid="tahUUqiIVkOkANvhvc9MNgAA">
-<XPD:ATTR name="Name" type="string">isHide</XPD:ATTR>
-<XPD:REF name="Owner">nJes+s9OUUS0gnybUMH3pwAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="Operations[11]" type="UMLOperation" guid="7YuJz+Isf0GiCS5MbeypgAAA">
-<XPD:ATTR name="Name" type="string">setV</XPD:ATTR>
 <XPD:REF name="Owner">nJes+s9OUUS0gnybUMH3pwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
