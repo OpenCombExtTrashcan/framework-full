@@ -3,3 +3,4 @@
 .project
 .settings/
 doc/tutorial/builder/template/compileds/
+test/integration/templates/compileds
