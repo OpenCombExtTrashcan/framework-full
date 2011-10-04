@@ -46,8 +46,6 @@ class FsSettingTest extends \PHPUnit_Framework_TestCase
 		$aKey = $aFsSetting->createKey ( '/testCreateKey' );
 		
 		$this->assertEquals ( $aKey, $aFsSetting->key ( '/testCreateKey' ) );
-	
-
 	//key存在 item.php 不存在的情况
 	
 
