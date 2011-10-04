@@ -1,9 +1,15 @@
+
+
+toolkitdir=$(dirname `dirname $0`) ;
+php5 $toolkitdir/lib/toolkit.php $* ; 
+exit ;
+
 print_message()
 {
 	echo -e "\
 #####################################################
- Welcome to use JeCat Framework Toolbox
- JeCat PHP Framework is a php framework, and this is a toolkit box for development under JeCat PHP Framework. That all.
+ Welcome to use JeCat Framework Toolkit
+ JeCat PHP Framework is a php framework, and this is a toolkit for development under JeCat PHP Framework. That all.
 
  secondary commands:
  
@@ -16,10 +22,16 @@ print_message()
 	\e[33mclear\e[0m						Clear compiled classes and ui template files for a project which in current folder
 	\e[33mcompile\e[0m						Compiling a class or all classes for project which in current folder
 	
+	- Coding -
+	\e[33msweep-use\e[0m					Sweep invalid \"use\" expression in the top for classes, 
+							and remove empty lines between in \"use\" expressions.
+	\e[33minsert-license\e[0m					Insert the license text in the top for all source files.  
+							
+	
 	- Util -
 	\e[33minstall\e[0m						Install this toolkit for current user
 	\e[33mhelp\e[0m			\e[36mh, ?\e[0m			Print this message
-	
+		
 	
  global argvs:
  
