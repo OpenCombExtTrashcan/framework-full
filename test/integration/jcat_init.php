@@ -21,7 +21,7 @@ UIFactory::singleton()->sourceFileManager()->addFolder($aApp->fileSystem()->find
 //UIFactory::singleton()->sourceFileManager()->setForceCompile(true) ;
 
 // 数据库
-DB::singleton()->setDriver( new PDODriver("mysql:host=192.168.1.1;dbname=oc",'root','1',array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'")) ) ;
+//DB::singleton()->setDriver( new PDODriver("mysql:host=192.168.1.28;dbname=oc",'root','123456',array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'")) ) ;
 
 // 会话
 $aSession = new OriginalSession() ;
