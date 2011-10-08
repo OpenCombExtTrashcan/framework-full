@@ -1,7 +1,10 @@
 <?php
 namespace jc\test\unit\testcase\jc\db\reflecter;
 
+use jc\test\unit\testcase\jc\db\reflecter\mock\MockDriver;
 
+use jc\db\DB;
+use jc\db\reflecter\MySQLDBReflecter;
 use jc\db\reflecter\MySQLReflecterFactory ;
 
 /**
@@ -34,7 +37,12 @@ class MySQLReflecterFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateDBReflecter()
     {
-    	$aMySQLReflecter = new MySQLReflecterFactory();
+    	$aDB = new DB();
+    	$aDB->setDriver(new MockDriver('test', 'test', 'test'));
+    	$aMySQLReflecterFactory = new MySQLReflecterFactory($aDB);
+    	$aMySQLReflecter = $aMySQLReflecterFactory->createDBReflecter('testDB');
+    	
+    	$this->assertType(MySQLDBReflecter, $aMySQLReflecter);
     }
 
     /**
