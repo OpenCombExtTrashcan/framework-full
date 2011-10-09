@@ -129,7 +129,7 @@ ui/template/compiled/*"
 		// first commit for project
 		`git add .` ;
 		$this->response()->output(`git commit -m "create project by jecat toolkit
-http://www.jecat.cn
+power by http://www.jecat.cn
 "`) ;
 		
 		//-- done --
