@@ -1,7 +1,7 @@
 #####################################################
  Welcome to use JeCat Framework Toolkit
  JeCat PHP Framework is a php framework, and this is a toolkit for development under JeCat PHP Framework. That all.
-\nn
+
  secondary commands:
  
  	- Agile Development -
