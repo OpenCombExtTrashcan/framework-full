@@ -42,6 +42,13 @@ class InitProject extends Controller
 		}
 		$sProjectDirSafe = addcslashes($sProjectDir,'"') ;
 		
+		//-- 检查目录 --
+		if( is_file($sProjectDir.'/jc.init.php') )
+		{
+			$this->response()->output("\r\nThe specified directory has a JeCat Project \\e[35malready\\e[0m.   Nothing to do.\r\n") ;
+			return ;
+		}
+		
 		//-- 进入项目目录 --
 		`cd "{$sProjectDirSafe}"` ;
 		
@@ -86,7 +93,7 @@ class InitProject extends Controller
 		//-- namespace --
 		$sProjectNamespace = basename($sProjectDir) ;
 		$aInput = new ShellInputStream() ;
-		$this->response()->output("please input Namespace of this project(default is \"{$sProjectNamespace}\"):") ;
+		$this->response()->printer()->printfont("please input Namespace of this project(default is \"{$sProjectNamespace}\"):",ShellPrintStream::normal,ShellPrintStream::color_yellow) ;
 		$sProjectNamespaceInput = trim($aInput->read()) ;
 		
 		$sProjectNamespace = $sProjectNamespaceInput?: $sProjectNamespace ;
