@@ -1,0 +1,87 @@
+系统 ==================
+
+jc.init.php文件 -----------
+jc.init.php文件是 JeCat PHP 项目的初始化文件，toolkit 新建项目时会在项目根目录自动创建 jc.init.php 文件。
+JeCat 框架的重要子系统大都是在 jc.init.php 文件中完成初始化的。因此，你的所有 php 文件都应该在文件的开头包含 jc.init.php 以便引入JeCat框架的支持：
+require_once "jc.init.php" ; 
+
+
+
+
+应用程序对象 -----------
+JeCat项目通过一个 Application对象来维护整个系统，Application对象在 jc.init.php 创建。
+可以在系统中可以通过该类的静态方法 Application::singleton() 取得 Application 类的单件实例：
+
+// 将 Application 类引入到当前命名空间 
+use jc\system\Application ;
+
+$aApp = Application::singleton() ;
+
+jc.init.php 文件直接返回 Application对象，所以也可以在 require_once "jc.init.php" 时取得 Application 对象：
+$aApp = require_once "jc.init.php" ; 
+
+这两种方式访问的是同一个 Application 对象。
+
+类、包 ------------
+
+JeCat将目录视作“包”，目录内的子目录被视作“子包”，子目录的名称就是子包的名称。
+toolkit 自动生成jc.init.php 文件时，已经将项目目录下的 class/source 目录作为一个包添加系统中了：
+
+$aApplication->classLoader()->addPackage("project\\name","/class/source","/class/compiled") ;
+
+addPackage() 函数的第一个参数是包的命名空间（在php5.3中，命名空间的分隔符是'\',在字符串中需要转义写做'\\'），目录内所有类的命名空间都必须和包一致。
+"/class/source"就是项目根目录下的 class/source 目录，该目录下的所有 ".php" 后缀的文件都会被JeCat 视作类文件，且一个类文件中只应该定义一个类，类名和文件名保持完全一致。
+class/source 目录下的子目录会被自动视作子包。
+
+class/source 目录被做为 包 project\name 添加到了系统中 ;
+class/source/ClassA.php 是定义 project\name\ClassA 类的文件
+class/source/aaa 目录就是包 project\name\aaa ;
+class/source/aaa/ClassB.php 是定义 project\name\aaa\ClassB 类的文件
+
+
+
+
+自动加载类 -----------
+
+只要符合 JeCat 的包、类规范，并且将包添加到系统中，系统就可以自动加载类，不再需要 include/require 相关文件。
+
+
+
+文件 class/source/aaa/bbb/AAA.php 
+-----------------------------------
+<?php
+// 声明当前文件的命名空间
+namespace class/source/aaa/bbb ;
+
+// 定义类
+class AAA
+{
+	// some code here
+}
+
+?>
+
+
+其他文件中
+------------------------------------
+// 引入类到当前命名空间
+use project\name\aaa\bbb\AAA ;
+
+// 创建 AAA类 的实例，而不需要 include/require 定义 AAA 类的文件
+$aAAA = new AAA() ;
+
+
+当访问 project\name\aaa\bbb\AAA 类的时候，系统会自动找到并载入 class/source/aaa/bbb/AAA.php 
+你可向项目添加更多的包。
+
+
+
+
+统一入口 -------------
+
+
+常量
+jc.init.php文件中定义了以下常量：
+jc\VERSION			JeCat Framework 的版本
+jc\PATH				JeCat Framework 的路径
+

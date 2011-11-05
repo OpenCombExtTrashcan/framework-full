@@ -1,0 +1,34 @@
+文件系统 =====
+
+创建文件系统对象
+
+文件操作
+	新建文件
+	取得已有文件对象
+	读取文件内容
+	向文件写入内容
+	文件各项属性
+
+目录操作
+	新建目录(递归)
+	遍历目录
+
+挂载文件系统
+
+JeCat项目的目录结构
+	/framework
+	/class
+	/class/source
+	/class/compiled
+	/ui
+	/ui/style
+	/ui/js
+	/ui/template
+	/ui/template/compiled
+	/cache
+	/setting
+
+
+				
+		
+	
