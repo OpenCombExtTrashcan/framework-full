@@ -2,10 +2,9 @@
 namespace jc\test\unit\testcase\jc\db\reflecter;
 
 use jc\test\unit\testcase\jc\db\reflecter\mock\MockDriver;
-
 use jc\db\DB;
-use jc\db\reflecter\MySQLDBReflecter;
-use jc\db\reflecter\MySQLReflecterFactory ;
+use jc\db\reflecter\imp\MySQLDBReflecter;
+use jc\db\reflecter\imp\MySQLReflecterFactory ;
 
 /**
  * Test class for jc\db\reflecter\MySQLReflecterFactory.
