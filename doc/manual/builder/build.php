@@ -19,6 +19,8 @@ $arrChapters = array(
 	'manual_template_file.html' ,
 	'manual_macro.html',
 	'manual_tag.html',
+	'manual_template_io.html',
+	'manual_custom_macro_and_tag.html',
 ) ;
 
 $aUI = UIFactory::singleton()->create() ;
