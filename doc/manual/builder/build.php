@@ -7,7 +7,7 @@ use jc\system\ApplicationFactory;
 use jc\fs\imp\LocalFileSystem;
 use jc\system\Application;
 use jc\ui\xhtml\UIFactory;
-use jc\fs\FSO ;
+use jc\fs\FSO;
 
 include_once __DIR__.'/../../../framework/inc.entrance.php' ;
 $aApp = ApplicationFactory::singleton()->create(__DIR__) ;
@@ -16,9 +16,9 @@ $aApp->classLoader()->addPackage(__NAMESPACE__,null,'/') ;
 UIFactory::singleton()->sourceFileManager()->addFolder( $aApp->fileSystem ()->findFolder('/template/') ) ;
 
 $arrChapters = array(
-	'chapter01_hello-world.html' ,
-	'api_template_file.html' ,
-	'chapter03.html'
+	'manual_template_file.html' ,
+	'manual_macro.html',
+	'manual_tag.html',
 ) ;
 
 $aUI = UIFactory::singleton()->create() ;

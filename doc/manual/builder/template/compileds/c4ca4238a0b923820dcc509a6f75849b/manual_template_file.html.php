@@ -34,14 +34,20 @@ $aDevice->write(<<<OUTPUT
 	</code>
 </pre>
 <blockquote class="prepare">
-	由于Jecat的标签和HTML的标签混合编写,所以代码的可读性非常重要,上面的代码缩进整齐合理,就降低了维护时的复杂程度,哪怕你正在开发只有自己才会使用的项目,也一定要注意这些代码的格式
+	由于Jecat的标签和HTML的标签混合编写,所以代码的可读性非常重要,上面的代码缩进整齐合理,就降低了维护时的复杂程度,哪怕你正在开发只有自己才会维护的项目,也一定要注意这些代码的格式
 </blockquote>
 <h2>模板文件的位置</h2>
 <p>一般情况下,模板文件会被放置在名为template的文件夹下,而这个文件夹一般都放在项目或模块或插件的根目录下.当然你可以在自己的项目中修改这些文件和文件夹的位置,不过还是建议你采取通用的做法.</p>
 <h2>模板文件的加载</h2>
-<p>fdsfs</p>
-
-
+<p>首先要让Jecat知道去哪里寻找模板文件,下面的代码就是这个作用,它告诉UIFactory类:项目根目录(/)下的"template"文件夹就是模板存放的地址.</p>
+<pre class='code'>
+	<code class='php'>
+use jc\\ui\\xhtml\\UIFactory;
+	...
+UIFactory::singleton()->sourceFileManager()->addFolder( \$aApp->fileSystem ()->findFolder('/template/') ) ;
+	</code>
+</pre>
+<p>这样在使用这些模板的地方就可以轻松的加载template文件夹里面的模板文件了,甚至不需要编写特定的代码.比如MVC中的视图类就可以根据视图的名字自动找到对应的模板文件并加载.</p>
 </div>
 OUTPUT
 ) ;
